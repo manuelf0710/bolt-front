@@ -16,7 +16,7 @@
 
 .arrow {
   color: $septenary-grey;
-  margin-top: 2px;
+  margin-top: 4px;
   font-size: 16px !important;
   transition: all 0.4s;
 }
@@ -98,10 +98,18 @@
     relative
   );
 }
+.tableau-md {
+  @include img-background(
+    url('/assets/icon/tableau-big.svg'),
+    24px,
+    24px,
+    relative
+  );
+}
 // fav item icons big
 .tableau-big {
   @include img-background(
-    url('/assets/icon/dash-big.svg'),
+    url('/assets/icon/tableau-big.svg'),
     33px,
     33px,
     absolute

@@ -28,6 +28,17 @@ export class ProjectsService {
     );
   }
 
+  getProjectsAssignByUserRol(): Observable<any>{
+    return this.httpService
+      .get(environment.serverUrl + environment.projects.menuByUser)
+      .pipe(
+        map((lista: any) => {
+          const projectsAssignedToUser = lista.body;
+          return projectsAssignedToUser;
+        })
+      );
+  }
+
   getProjectsAssignByRol(rol: string) {
     return this.httpService
       .get(environment.serverUrl + environment.projects.menuByRole + '/' + rol)
@@ -35,17 +46,6 @@ export class ProjectsService {
         map((lista: any) => {
           const projectsAssignedToRole = lista.body;
           return projectsAssignedToRole;
-        })
-      );
-  }
-
-  getProjectsAssignByUserRol() {
-    return this.httpService
-      .get(environment.serverUrl + environment.projects.menuByUser)
-      .pipe(
-        map((lista: any) => {
-          const projectsAssignedToUser = lista.body;
-          return projectsAssignedToUser;
         })
       );
   }
@@ -60,7 +60,6 @@ export class ProjectsService {
             response.body.forEach((projects) => {
               this._simpleProjects.push(projects);
             });
-            console.log(this._simpleProjects);
 
             this._simpleProjectsSbj.next(this._simpleProjects);
           } else {

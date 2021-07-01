@@ -34,7 +34,7 @@
         <span class="material-icons icon menu-icon" id="iconEf">
           star
         </span>
-        <div *ngIf="!sideStatus">
+        <div *ngIf="!sideStatus" class="option-name">
           {{ lang == 'Esp' ? 'Favoritos' : 'Favorites' }}
         </div>
       </mat-expansion-panel-header>
@@ -85,7 +85,7 @@
         <span class="material-icons icon menu-icon" id="iconEa">
           manage_accounts
         </span>
-        <div *ngIf="!sideStatus">
+        <div *ngIf="!sideStatus" class="option-name">
           {{ lang == 'Esp' ? 'Administrador' : 'Manager' }}
         </div>
       </mat-expansion-panel-header>
@@ -262,6 +262,7 @@
   </h2>  
 
   <!-- projects section -->
+
   <mat-accordion *ngIf="prop.length > 0" multi="false">
     <mat-expansion-panel
       *ngFor="let project of prop; let id = index"
@@ -285,7 +286,7 @@
         <span class="material-icons icon menu-icon" [id]="'iconH' + id">
           {{ project.icon }}
         </span>
-        <span *ngIf="!sideStatus">
+        <span *ngIf="!sideStatus" class="option-name">
           {{ lang == 'Esp' ? project.name_es : project.name_en }}
         </span>
       </mat-expansion-panel-header>

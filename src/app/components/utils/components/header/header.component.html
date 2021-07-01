@@ -1,0 +1,33 @@
+<mat-toolbar class="back-nav" [ngSwitch]="lang">
+  <span class="bolt-icon" (click)="routerHome()"></span>
+  <span class="separator"></span>
+  <div class="back-nav__options">
+    <p *ngSwitchCase="'Esp'" class="greeting title-header">
+      <span class="material-icons menu-icon">
+        bolt
+      </span>
+      Hola {{ this.userName }}!
+    </p>
+    <p *ngSwitchCase="'Eng'" class="greeting title-header">
+      <span class="material-icons menu-icon">
+        bolt
+      </span>
+      Hi {{ this.userName }}!
+    </p>
+    <button mat-button [disableRipple]="true" (click)="logout()">
+      <span class="material-icons">
+        logout
+      </span>
+    </button>
+    <mat-form-field appearance="outlined">
+      <mat-select (selectionChange)="changeLang($event)" [value]="lang">
+        <mat-option value="Esp">
+          Esp
+        </mat-option>
+        <mat-option value="Eng">
+          Eng
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</mat-toolbar>

@@ -1,0 +1,38 @@
+::ng-deep.mat-form-field-flex {
+  max-height: 50px !important;
+}
+mat-select-trigger {
+  .row {
+    justify-content: flex-start;
+    height: fit-content;
+    max-height: 30px;
+    p {
+      margin-left: 10px;
+    }
+  }
+}
+mat-option {
+  .row {
+    justify-content: flex-start;
+    height: fit-content;
+    max-height: 30px;
+    p {
+      margin-left: 10px;
+    }
+  }
+}
+.form-advice {
+  margin-bottom: 20px;
+  .separator {
+    height: 2px;
+    width: 100%;
+    background-color: #e21d47;
+    margin: 0 auto;
+  }
+  .form-title {
+    border-bottom: none;
+    font-size: 16px;
+    line-height: 30px;
+    margin: 10px 0;
+  }
+}

@@ -1,0 +1,23 @@
+<div class="dialog-alert" [ngSwitch]="lang">
+  <span
+    mat-button
+    mat-dialog-close
+    class="x-icon"
+    (click)="closeModal()"
+  ></span>
+  <div class="icon-forbiden"></div>
+  <p class="dialog-alert__content" *ngSwitchCase="'Esp'">
+    No tiene un rol asignado
+    <br />
+    Debe solicitar un Rol en la aplicación.
+  </p>
+  <p class="dialog-alert__content" *ngSwitchCase="'Eng'">
+    Has no role assigned
+    <br />
+    You must request a Role in the application.
+  </p>
+  <button mat-button class="alert-btn" (click)="openForm()">
+    <span *ngSwitchCase="'Esp'">Solicitar</span>
+    <span *ngSwitchCase="'Eng'">Apply</span>
+  </button>
+</div>

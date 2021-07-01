@@ -1,0 +1,325 @@
+<app-header></app-header>
+<div class="container" [ngSwitch]="lang">
+  <button mat-button class="btn-back" (click)="goBack()">
+    <span class="material-icons">
+      arrow_back
+    </span>
+    <span *ngSwitchCase="'Esp'">
+      volver
+    </span>
+    <span *ngSwitchCase="'Eng'">
+      back
+    </span>
+  </button>
+  <!-- sub menu data -->
+  <div class="inner-section section__1">
+    <h1 class="underline-title">Sub menú - {{ submenu_data_name }}</h1>
+
+    <form
+      [formGroup]="createSubmenuForm"
+      class="form-section"
+      autocomplete="off"
+    >
+      <div class="row row__1">
+        <div class="col">
+          <mat-form-field
+            hideRequiredMarker="true"
+            appearance="outline"
+            floatLabel="auto"
+            class="fullInput input-bolt"
+          >
+            <mat-label *ngSwitchCase="'Esp'">
+              Nombre sub menú(Español)
+            </mat-label>
+            <mat-label *ngSwitchCase="'Eng'">Sub menu name(Spanish)</mat-label>
+
+            <input
+              matInput
+              id="submenu_name_es"
+              formControlName="submenu_name_es"
+              type="text"
+              maxlength="30"
+              required
+            />
+            <span matSuffix class="material-icons menu-icon">
+              edit
+            </span>
+            <mat-error
+              *ngIf="createSubmenuForm.controls.submenu_name_es.errors"
+            >
+              {{ getMessageform('submenu_name_es') }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field
+            id="disabled2"
+            hideRequiredMarker="true"
+            appearance="outline"
+            floatLabel="auto"
+            class="fullInput input-bolt"
+          >
+            <mat-label *ngSwitchCase="'Esp'">Creado</mat-label>
+            <mat-label *ngSwitchCase="'Eng'">Created</mat-label>
+
+            <input
+              matInput
+              id="created_by"
+              formControlName="created_by"
+              type="text"
+              disabled
+            />
+
+            <mat-error *ngIf="createSubmenuForm.controls.created_by.errors">
+              {{ getMessageform('created_by') }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field
+            hideRequiredMarker="true"
+            appearance="outline"
+            floatLabel="auto"
+            class="fullInput"
+          >
+            <mat-label *ngSwitchCase="'Esp'">
+              Nombre sub menú (Ingles)
+            </mat-label>
+            <mat-label *ngSwitchCase="'Eng'">Sub menu name(English)</mat-label>
+
+            <input
+              matInput
+              id="submenu_name_en"
+              formControlName="submenu_name_en"
+              type="text"
+              required
+              maxlength="30"
+            />
+            <span matSuffix class="material-icons menu-icon">
+              edit
+            </span>
+            <mat-error
+              *ngIf="createSubmenuForm.controls.submenu_name_en.errors"
+            >
+              {{ getMessageform('submenu_name_en') }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field
+            id="disabled2"
+            hideRequiredMarker="true"
+            appearance="outline"
+            floatLabel="auto"
+            class="fullInput input-bolt"
+          >
+            <mat-label *ngSwitchCase="'Esp'">Ultima modificación</mat-label>
+            <mat-label *ngSwitchCase="'Eng'">Last update</mat-label>
+
+            <input
+              matInput
+              id="last_update"
+              formControlName="last_update"
+              type="text"
+              disable
+            />
+
+            <mat-error *ngIf="createSubmenuForm.controls.last_update.errors">
+              {{ getMessageform('last_update') }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row row__2">
+        <button
+          class="bolt-btn-outline"
+          (click)="
+            showConfirmation(
+              submenu_data,
+              'deletedSubmenu',
+              'eliminar',
+              'delete'
+            )
+          "
+        >
+          <span *ngSwitchCase="'Esp'">Eliminar</span>
+          <span *ngSwitchCase="'Eng'">Delete</span>
+        </button>
+        <button
+          (click)="
+            showConfirmation(submenu_data, 'updateSubmenu', 'guardar', 'save')
+          "
+          class="bolt-btn-filled"
+          [disabled]="!this.createSubmenuForm.dirty"
+        >
+          <span *ngSwitchCase="'Esp'">Guardar cambios</span>
+          <span *ngSwitchCase="'Eng'">Save changes</span>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- apps assoc section -->
+  <div class="inner-section section__2">
+    <div class="row">
+      <h2 *ngSwitchCase="'Esp'" class="form-title">App asociadas</h2>
+      <h2 *ngSwitchCase="'Eng'" class="form-title">Associated app</h2>
+      <button class="bolt-btn-filled" (click)="updateAppAssoc()">
+        <span *ngSwitchCase="'Esp'">Añadir app asociada</span>
+        <span *ngSwitchCase="'Eng'">Add associated app</span>
+      </button>
+    </div>
+    <div class="grid">
+      <div class="grid-header">
+        <div class="grid-header__title">
+          <span>App</span>
+        </div>
+        <div class="grid-header__title">
+          <span *ngSwitchCase="'Esp'">Creado</span>
+          <span *ngSwitchCase="'Eng'">Created</span>
+        </div>
+        <div class="grid-header__title">
+          <span *ngSwitchCase="'Esp'">Ultima modificación</span>
+          <span *ngSwitchCase="'Eng'">last update</span>
+        </div>
+        <div class="grid-header__title">
+          <span *ngSwitchCase="'Esp'">Tipo de aplicación</span>
+          <span *ngSwitchCase="'Eng'">Aplication type</span>
+        </div>
+        <div class="grid-header__title">
+          <span>Link</span>
+        </div>
+        <div class="grid-header__title">
+          <span *ngSwitchCase="'Esp'">Usuario</span>
+          <span *ngSwitchCase="'Eng'">User</span>
+        </div>
+        <div class="grid-header__title">
+          <span *ngSwitchCase="'Esp'">Contraseña</span>
+          <span *ngSwitchCase="'Eng'">password</span>
+        </div>
+        <div class="grid-header__title" style="text-align: center;">
+          <span *ngSwitchCase="'Esp'">Acciones</span>
+          <span *ngSwitchCase="'Eng'">Actions</span>
+        </div>
+      </div>
+      <p class="grid-content__name" *ngIf="app_list.length == 0">
+        {{
+          lang == 'Esp'
+            ? 'Aun no has asignado aplicaciones a este menú'
+            : 'You have not yet assigned apps to this menu'
+        }}
+      </p>
+      <div *ngFor="let app of app_list; let id = index">
+        <div class="grid-content">
+          <p class="grid-content__name" style="text-align: left;">
+            {{ lang == 'Esp' ? app.name_es : app.name_en }}
+          </p>
+          <div class="col">
+            <p class="grid-content__name">
+              {{ app.user_created?.name }} {{ app.user_created?.last_name }}
+            </p>
+            <p class="grid-content__name">
+              ID: {{ app.user_created?.employee_code }}
+            </p>
+            <p class="grid-content__name">
+              {{ app.created_at | date: 'shortDate' }}
+              {{ app.created_at | date: 'mediumTime' }}
+            </p>
+          </div>
+
+          <div class="col">
+            <p class="grid-content__name">
+              {{ app.user_update?.name }} {{ app.user_update?.last_name }}
+            </p>
+            <p class="grid-content__name">
+              ID: {{ app.user_update?.employee_code }}
+            </p>
+            <p class="grid-content__name">
+              {{ app.updated_at | date: 'shortDate' }}
+              {{ app.updated_at | date: 'mediumTime' }}
+            </p>
+          </div>
+
+          <div class="row">
+            <div
+              [class]="app.type.name.split(' ')[0].toLowerCase() + '-md'"
+            ></div>
+            <p
+              class="grid-content__name"
+              style="margin-left: 10px; text-transform: capitalize;"
+            >
+              {{ app.type.name }}
+            </p>
+          </div>
+          <div>
+            <p
+              [title]="app.url"
+              class="grid-content__description"
+              style="color: #e21d47;"
+            >
+              {{ app.url }}
+            </p>
+          </div>
+          <p class="grid-content__name" style="text-align: left;">
+            {{ app.username }}
+          </p>
+          <input
+            mat-input
+            class="grid-content__name"
+            type="password"
+            [value]="app.password"
+            disabled
+            style="text-align: left;"
+          />
+          <div class="grid-content__action">
+            <div class="col">
+              <mat-slide-toggle
+                [id]="app.id"
+                class="enable-toogle"
+                (change)="
+                  showConfirmation(
+                    app,
+                    'updateAppStatus',
+                    'habilitar',
+                    'enable'
+                  )
+                "
+                [checked]="app.status == 1"
+              ></mat-slide-toggle>
+              <p class="toggle-text" *ngSwitchCase="'Esp'">
+                {{ app.status == 1 ? 'Deshabilitar' : 'Habilitar' }}
+              </p>
+              <p class="toggle-text" *ngSwitchCase="'Eng'">
+                {{ app.status == 1 ? 'Disable' : 'Enable' }}
+              </p>
+            </div>
+
+            <button mat-button class="action-btn" (click)="updateAppAssoc(app)">
+              <span class="material-icons menu-icon">
+                edit
+              </span>
+              <span class="action-text" *ngSwitchCase="'Esp'">
+                editar
+              </span>
+              <span class="action-text" *ngSwitchCase="'Eng'">
+                edit
+              </span>
+            </button>
+
+            <button mat-button class="action-btn" (click)="deleteApp(app)">
+              <span class="material-icons menu-icon">
+                delete_forever
+              </span>
+              <span class="action-text" *ngSwitchCase="'Esp'">
+                Eliminar
+              </span>
+              <span class="action-text" *ngSwitchCase="'Eng'">
+                Delete
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,256 @@
+<app-header></app-header>
+<div class="container" [ngSwitch]="lang">
+  <!-- search bar -->
+  <div class="inner-section section__1">
+    <h1 class="underline-title" *ngSwitchCase="'Esp'">Modificar Usuario</h1>
+    <h1 class="underline-title" *ngSwitchCase="'Eng'">Edit user</h1>
+
+    <form [formGroup]="searchForm" class="form-section" autocomplete="off">
+      <h2 class="form-title" *ngSwitchCase="'Esp'">Búsqueda</h2>
+      <h2 class="form-title" *ngSwitchCase="'Eng'">Search</h2>
+      <div class="row">
+        <mat-form-field
+          hideRequiredMarker="true"
+          appearance="outline"
+          floatLabel="auto"
+          class="fullInput input-bolt"
+          style="margin-left: 0;"
+        >
+          <mat-label *ngSwitchCase="'Esp'">
+            Nombre
+          </mat-label>
+          <mat-label *ngSwitchCase="'Eng'">Name</mat-label>
+
+          <input
+            matInput
+            id="user_name"
+            formControlName="user_name"
+            type="text"
+            maxlength="30"
+          />
+        </mat-form-field>
+
+        <mat-form-field
+          hideRequiredMarker="true"
+          appearance="outline"
+          floatLabel="auto"
+          class="fullInput input-bolt"
+        >
+          <mat-label>ID</mat-label>
+
+          <input
+            matInput
+            id="user_id"
+            formControlName="user_id"
+            type="text"
+            maxlength="30"
+          />
+        </mat-form-field>
+
+        <mat-form-field
+          appearance="outline"
+          hideRequiredMarker="true"
+          floatLabel="auto"
+          class="fullInput"
+        >
+          <mat-label *ngSwitchCase="'Esp'">País</mat-label>
+          <mat-label *ngSwitchCase="'Eng'">Country</mat-label>
+
+          <mat-select [formControl]="searchForm.controls.country">
+            <mat-option
+              *ngFor="
+              let option of [
+                'Colombia',
+                'México',
+                'Ecuador',
+                'Peru',
+                'Argentina',
+                'Chile',
+                'Brasil',
+              ]
+            "
+              [value]="option"
+            >
+              {{ option }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="row row__2">
+        <button (click)="searchUser()" class="bolt-btn-filled">
+          <span *ngSwitchCase="'Esp'">Buscar</span>
+          <span *ngSwitchCase="'Eng'">Search</span>
+        </button>
+      </div>
+    </form>
+  </div>
+  <!-- search results -->
+  <div class="inner-section section__2">
+    <div class="row">
+      <h2 *ngSwitchCase="'Esp'" class="form-title">Resúltados de busqueda</h2>
+      <h2 *ngSwitchCase="'Eng'" class="form-title">Search results</h2>
+    </div>
+
+    <div class="grid">
+      <div class="grid-header">
+        <div class="grid-header__title" style="margin-left: 30px;">
+          <span>{{ lang == 'Esp' ? 'Usuario' : 'User' }}</span>
+        </div>
+        <div class="grid-header__title">
+          <span>ID</span>
+        </div>
+        <div class="grid-header__title">
+          <span>
+            {{ lang == 'Esp' ? 'Roles registrados' : 'Assigned roles' }}
+          </span>
+        </div>
+        <div class="grid-header__title">
+          <span>{{ lang == 'Esp' ? 'Creado' : 'Created' }}</span>
+        </div>
+        <div class="grid-header__title">
+          <span>
+            {{ lang == 'Esp' ? 'Última modificación' : 'Last modification' }}
+          </span>
+        </div>
+        <div class="grid-header__title" style="text-align: center;">
+          <span>{{ lang == 'Esp' ? 'Acciones' : 'Actions' }}</span>
+        </div>
+      </div>
+
+      <p *ngIf="users.length == 0" class="grid-content__name">
+        {{
+          lang == 'Esp' ? 'No se encontraron resultados' : 'No results found'
+        }}
+      </p>
+
+      <div *ngFor="let user of users; let id = index">
+        <div class="grid-content">
+          <p
+            class="grid-content__name"
+            style="padding-left: 30px; text-align: left;"
+          >
+            {{ user.name + ' ' + user.last_name }}
+          </p>
+          <p class="grid-content__name">{{ user.employee_code }}</p>
+          <div class="col">
+            <p class="grid-content__description">
+              <i *ngFor="let rol of user.roles">
+                {{ lang == 'Esp' ? rol.name_es : rol.name_en }}/
+              </i>
+            </p>
+          </div>
+
+          <div class="col">
+            <p class="grid-content__name"  *ngIf="user.user_created != null">
+              {{ user.user_created.name + ' ' + user.user_created.last_name }}
+            </p>
+            <p class="grid-content__name"  *ngIf="user.user_created != null">
+              ID: {{ user.user_created.employee_code }}
+            </p>
+            <p class="grid-content__name">
+              {{ user.created_at | date: 'shortDate' }}
+              {{ user.created_at | date: 'mediumTime' }}
+            </p>
+          </div>
+          <div class="col">
+            <p class="grid-content__name" *ngIf="user.user_update != null">
+              {{ user.user_update.name + ' ' + user.user_update.last_name }}
+            </p>
+            <p class="grid-content__name"  *ngIf="user.user_update != null">
+              ID: {{ user.user_update.employee_code }}
+            </p>
+            <p class="grid-content__name">
+              {{ user.updated_at | date: 'shortDate' }}-
+              {{ user.updated_at | date: 'mediumTime' }}
+            </p>
+          </div>
+
+          <div class="grid-content__action">
+            <div class="col">
+              <mat-slide-toggle
+                [id]="user.id"
+                class="enable-toogle"
+                (change)="showConfirmation(user, 'habilitar', 'enable', $event)"
+                [checked]="user.status == 1"
+              ></mat-slide-toggle>
+              <p class="toggle-text" *ngSwitchCase="'Esp'">
+                {{ user.status == 1 ? 'Deshabilitar' : 'Habilitar' }}
+              </p>
+              <p class="toggle-text" *ngSwitchCase="'Eng'">
+                {{ user.status == 1 ? 'Disable' : 'Enable' }}
+              </p>
+            </div>
+
+            <button mat-button class="action-btn" (click)="addNewRol(user)">
+              <span class="plus-icon"></span>
+
+              <span
+                class="action-text"
+                style="margin-top: 5px;"
+                *ngSwitchCase="'Esp'"
+              >
+                Añadir nuevo rol
+              </span>
+              <span
+                class="action-text"
+                style="margin-top: 5px;"
+                *ngSwitchCase="'Eng'"
+              >
+                add new rol
+              </span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="paginator row" *ngIf="pages">
+      <button
+        mat-button
+        class="paginator-button"
+        (click)="updatePage('start', true)"
+        [disabled]="active_count == 1"
+      >
+        <span style="transform: rotate(180deg);" class="material-icons">
+          double_arrow
+        </span>
+      </button>
+      <button
+        mat-button
+        class="paginator-button"
+        (click)="updatePage('prev', true)"
+        [disabled]="active_count == 1"
+      >
+        <span style="transform: rotate(180deg);" class="material-icons">
+          play_arrow
+        </span>
+      </button>
+      <p *ngSwitchCase="'Esp'">
+        Mostrando {{ users.length }} de {{ total_items }} resultados
+      </p>
+      <p *ngSwitchCase="'Eng'">
+        Showing {{ users.length }} of {{ total_items }} results
+      </p>
+      <button
+        mat-button
+        class="paginator-button"
+        (click)="updatePage('next', true)"
+        [disabled]="active_count == pages"
+      >
+        <span class="material-icons">
+          play_arrow
+        </span>
+      </button>
+      <button
+        mat-button
+        class="paginator-button"
+        (click)="updatePage('last', true)"
+        [disabled]="active_count == pages"
+      >
+        <span class="material-icons">
+          double_arrow
+        </span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,75 @@
+<footer [ngSwitch]="lang" class="footer">
+  <div class="row">
+    <div class="custom-col">
+      <div class="brew-icon"></div>
+    </div>
+    <div class="custom-col">
+      <p *ngSwitchCase="'Esp'" class="footer__title">
+        Solicitud acceso nuevo proyecto
+      </p>
+      <p *ngSwitchCase="'Eng'" class="footer__title">
+        Request new project access
+      </p>
+      <ul>
+        <li class="footer__text">
+          <p
+            *ngSwitchCase="'Esp'"
+            (click)="openForm()"
+            style="text-decoration: underline;"
+            class="generar-solicitud"
+          >
+            Generar solicitud
+          </p>
+          <p
+            *ngSwitchCase="'Eng'"
+            (click)="openForm()"
+            style="text-decoration: underline;"
+            class="generar-solicitud"
+          >
+            Generate request
+          </p>
+        </li>
+      </ul>
+    </div>
+    <div class="custom-col">
+      <p *ngSwitchCase="'Esp'" class="footer__title">Contacto soporte</p>
+      <p *ngSwitchCase="'Eng'" class="footer__title">Support contact</p>
+      <ul>
+        <li>
+          <span class="material-icons icon">
+            mail
+          </span>
+          <a
+            href="mailto:name@email.com"
+            class="footer__text"
+            rel="noreferrer noopener"
+            style="text-decoration: none;"
+          >
+            correo@ejmplousuario.com
+          </a>
+        </li>
+        <li>
+          <span class="material-icons icon">
+            call
+          </span>
+          <a
+            href="tel:+57316467987"
+            class="footer__text"
+            rel="noreferrer noopener"
+            style="text-decoration: none;"
+          >
+            +57 316-467 987
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="custom-col">
+      <div class="row">
+        <div class="abinbev-icon"></div>
+        <div class="vertical-divider"></div>
+        <div class="analytics-icon"></div>
+      </div>
+    </div>
+  </div>
+  <div class="redSpace"></div>
+</footer>

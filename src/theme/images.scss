@@ -1,0 +1,263 @@
+/*import colors*/
+@import './variables.scss';
+
+/* background images*/
+@mixin img-background($img, $width, $height, $position) {
+  background: $img;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: $width;
+  height: $height;
+  position: $position;
+}
+
+/* icons */
+
+.arrow {
+  color: $septenary-grey;
+  margin-top: 2px;
+  font-size: 16px !important;
+  transition: all 0.4s;
+}
+.arrowDown {
+  color: #fff;
+  transform: rotate(90deg);
+}
+.arrowUp {
+  transform: rotate(0deg);
+}
+.icon {
+  font-size: 24px;
+  line-height: 24px;
+  margin: 0 6px;
+}
+.icon-md {
+  font-size: 30px;
+  line-height: 30px;
+  margin: 0;
+}
+.icon-lg {
+  font-size: 41px;
+  line-height: 41px;
+  margin: 0;
+}
+.menu-icon {
+  color: $primary-red;
+}
+
+// brand icons  for menu
+.tableau {
+  @include img-background(url('/assets/icon/dash.svg'), 20px, 20px, relative);
+}
+
+.power {
+  @include img-background(url('/assets/icon/power.svg'), 20px, 20px, relative);
+}
+
+.shiny {
+  @include img-background(url('/assets/icon/shiny.svg'), 20px, 20px, relative);
+}
+.dash {
+  @include img-background(url('/assets/icon/dash.svg'), 20px, 20px, relative);
+}
+
+// brand icons  for sub menu view
+.tableau-md {
+  @include img-background(
+    url('/assets/icon/dash-big.svg'),
+    24px,
+    24px,
+    relative
+  );
+}
+
+.power-md {
+  @include img-background(
+    url('/assets/icon/power-big.svg'),
+    24px,
+    24px,
+    relative
+  );
+}
+
+.shiny-md {
+  @include img-background(
+    url('/assets/icon/shiny-big.svg'),
+    24px,
+    24px,
+    relative
+  );
+}
+
+.dash-md {
+  @include img-background(
+    url('/assets/icon/dash-big.svg'),
+    24px,
+    24px,
+    relative
+  );
+}
+// fav item icons big
+.tableau-big {
+  @include img-background(
+    url('/assets/icon/dash-big.svg'),
+    33px,
+    33px,
+    absolute
+  );
+}
+.card-pattern {
+  @include img-background(
+    url('/assets/icon/card-pattern.svg'),
+    100%,
+    60px,
+    relative
+  );
+}
+
+.power-big {
+  @include img-background(
+    url('/assets/icon/power-big.svg'),
+    33px,
+    33px,
+    absolute
+  );
+}
+
+.shiny-big {
+  @include img-background(
+    url('/assets/icon/shiny-big.svg'),
+    33px,
+    33px,
+    absolute
+  );
+}
+
+.dash-big {
+  @include img-background(
+    url('/assets/icon/dash-big.svg'),
+    33px,
+    33px,
+    absolute
+  );
+}
+
+.empty-fav {
+  @include img-background(
+    url('/assets/images/empty-fav.png'),
+    195px,
+    147px,
+    relative
+  );
+  margin-top: 101px;
+}
+
+// access forbiden
+
+.icon-forbiden {
+  @include img-background(
+    url('/assets/icon/access-forbiden.svg'),
+    60px,
+    48px,
+    relative
+  );
+}
+// close icon
+.x-icon {
+  @include img-background(
+    url('/assets/icon/close-x.svg'),
+    20px,
+    20px,
+    absolute
+  );
+}
+// check icon
+.check-icon {
+  @include img-background(
+    url('/assets/icon/check-circle.svg'),
+    48px,
+    48px,
+    relative
+  );
+}
+//riase-hand icon
+.raise-hand {
+  @include img-background(
+    url('/assets/icon/hand-sparkles.svg'),
+    60px,
+    48px,
+    relative
+  );
+}
+// next step icon for button
+.next-step {
+  @include img-background(
+    url('/assets/icon/arrow-alt-circle-right.svg'),
+    23px,
+    28px,
+    absolute
+  );
+  top: 2px;
+  right: 20px;
+}
+// arrow pointer icon
+.arrow-pointer {
+  @include img-background(
+    url('/assets/icon/arrow-pointer.svg'),
+    35px,
+    47px,
+    absolute
+  );
+}
+// exclamation icon
+.exclamation-icon {
+  @include img-background(
+    url('/assets/icon/exclamation-triangle.svg'),
+    54px,
+    48px,
+    relative
+  );
+}
+
+// footer
+.bolt-icon {
+  @include img-background(url('/assets/icon/bolt.svg'), 215px, 79px, relative);
+}
+
+.brew-icon {
+  @include img-background(
+    url('/assets/icon/brewTech.svg'),
+    100px,
+    79px,
+    relative
+  );
+}
+.abinbev-icon {
+  @include img-background(
+    url('/assets/icon/abinbev.svg'),
+    132px,
+    27px,
+    relative
+  );
+}
+
+.analytics-icon {
+  @include img-background(
+    url('/assets/icon/analytics.svg'),
+    129px,
+    61px,
+    relative
+  );
+}
+
+/* admin icon styles*/
+//projects
+.plus-icon {
+  @include img-background(
+    url('/assets/icon/plus-circle.svg'),
+    18px,
+    18px,
+    relative
+  );
+}

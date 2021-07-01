@@ -1,0 +1,130 @@
+<div class="dialog-form" [ngSwitch]="lang">
+  <div mat-dialog-actions class="dialog-form__header">
+    <span
+      mat-button
+      mat-dialog-close
+      class="x-icon"
+      (click)="closeModal()"
+    ></span>
+  </div>
+
+  <h2 class="form-title" *ngSwitchCase="'Esp'">Solicitud asignación de rol</h2>
+  <h2 class="form-title" *ngSwitchCase="'Eng'">Role assignment request</h2>
+
+  <form [formGroup]="userRolForm" class="form-section" autocomplete="off">
+    <mat-form-field
+      hideRequiredMarker="true"
+      appearance="outline"
+      floatLabel="auto"
+      class="fullInput input-bolt"
+    >
+      <mat-label *ngSwitchCase="'Esp'">usuario</mat-label>
+      <mat-label *ngSwitchCase="'Eng'">user</mat-label>
+
+      <span matPrefix class="material-icons">
+        person
+      </span>
+      <input
+        matInput
+        id="user"
+        formControlName="user"
+        type="text"
+        required
+        maxlength="15"
+      />
+
+    </mat-form-field>
+
+    <mat-form-field
+      hideRequiredMarker="true"
+      appearance="outline"
+      floatLabel="auto"
+      class="fullInput"
+    >
+      <mat-label *ngSwitchCase="'Esp'">ID de red- VDI</mat-label>
+      <mat-label *ngSwitchCase="'Eng'">network ID- VDI</mat-label>
+
+      <span matPrefix class="material-icons">
+        assignment_ind
+      </span>
+      <input
+        matInput
+        id="id"
+        formControlName="id"
+        type="text"
+        required
+        maxlength="30"
+      />
+
+
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="outline"
+      hideRequiredMarker="true"
+      floatLabel="auto"
+      class="fullInput"
+    >
+      <mat-label *ngSwitchCase="'Esp'">
+        Proyecto al que necesita acceso
+      </mat-label>
+      <mat-label *ngSwitchCase="'Eng'">Project you need access to</mat-label>
+
+      <span matPrefix class="material-icons">
+        vpn_key
+      </span>
+      <mat-select [formControl]="userRolForm.controls.project">
+        <mat-option
+          *ngFor="let project of projects"
+          [value]="lang == 'Esp' ? project.name_es : project.name_en"
+        >
+          {{ lang == 'Esp' ? project.name_es : project.name_en }}
+        </mat-option>
+      </mat-select>
+
+   
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="outline"
+      hideRequiredMarker="true"
+      floatLabel="auto"
+      class="fullInput"
+    >
+      <mat-label *ngSwitchCase="'Esp'">País</mat-label>
+      <mat-label *ngSwitchCase="'Eng'">country</mat-label>
+
+      <span matPrefix class="material-icons">
+        public
+      </span>
+      <mat-select [formControl]="userRolForm.controls.country">
+        <mat-option value="Argentina">Argentina</mat-option>
+        <mat-option value="Colombia">Colombia</mat-option>
+        <mat-option value="Ecuador">Ecuador</mat-option>
+        <mat-option value="Perú">Perú</mat-option>
+        <mat-option value="Chile">Chile</mat-option>
+        <mat-option value="México">México</mat-option>
+        <mat-option value="Brasil">Brasil</mat-option>
+        <mat-option value="España">
+          {{ lang == 'Esp' ? 'España' : 'Spain' }}
+        </mat-option>
+        <mat-option value="Usa">
+          {{ lang == 'Esp' ? 'Estados unidos' : 'United States' }}
+        </mat-option>
+      </mat-select>
+
+    
+    </mat-form-field>
+
+    <button
+      class="btn-submit-rol"
+      style="margin-top: 20px;"
+      (click)="loginUser()"
+      block="block"
+      [ngClass]="{ 'button-disabled': userRolForm.invalid }"
+    >
+      <span *ngSwitchCase="'Esp'">Enviar</span>
+      <span *ngSwitchCase="'Eng'">Send</span>
+    </button>
+  </form>
+</div>

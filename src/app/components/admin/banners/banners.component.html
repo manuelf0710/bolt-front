@@ -1,0 +1,389 @@
+<app-header></app-header>
+<div class="container" [ngSwitch]="lang">
+  <div class="row row__1">
+    <h1 class="underline-title">Banners</h1>
+    <button
+      mat-button
+      class="bolt-btn-filled"
+      style="width: 180px;"
+      (click)="openBannerForm()"
+    >
+      {{ lang == 'Esp' ? 'Crear nuevo banner' : 'Create new banner' }}
+    </button>
+  </div>
+
+  <div style="width: 100%; max-width: 1440px; margin-top: 10px;">
+    <div class="banners-container row">
+      <mat-card class="card" *ngFor="let banner of banner_list; let id = index">
+        <img  [src]="assetUrl+''+banner.image_info?.full_path" [alt]="banner.name_en" />
+        <mat-slide-toggle
+          class="enable-toogle"
+          (change)="showConfirmation(banner, 'update', $event)"
+          [checked]="banner.status == 1"
+        ></mat-slide-toggle>
+        <mat-card-content>
+          <div class="col" style="margin-bottom: 10px;">
+            <p class="card__body__message menu-icon">
+              {{ lang == 'Esp' ? 'Nombre: ' : 'Name: ' }}
+            </p>
+            <p class="card__body__message">
+              {{ lang == 'Esp' ? banner.name_es : banner.name_en }}
+            </p>
+          </div>
+          <div class="col">
+            <p class="card__body__message menu-icon">
+              {{ lang == 'Esp' ? 'Estado: ' : 'State: ' }}
+            </p>
+            <p class="card__body__message">
+              {{
+                lang == 'Esp'
+                  ? banner.status == 1
+                    ? ' Activa'
+                    : ' inactiva'
+                  : banner.status == 1
+                  ? 'Active'
+                  : 'inactive'
+              }}
+            </p>
+          </div>
+        </mat-card-content>
+        <mat-card-actions class="row">
+          <button mat-button class="menu-icon" (click)="openBannerForm(banner)">
+            <span class="material-icons">
+              edit
+            </span>
+          </button>
+          <button
+            mat-button
+            class="menu-icon"
+            (click)="showConfirmation(banner, 'delete')"
+          >
+            <span class="material-icons">
+              delete
+            </span>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+
+  <div class="inner-section" *ngIf="open_form">
+    <div class="row row__1">
+      <h2 class="form-title">{{ BannerName }}</h2>
+    </div>
+    <form [formGroup]="bannerForm" class="form-section" autocomplete="off">
+      <div class="row row__1">
+        <div class="col col__1">
+          <mat-form-field
+            hideRequiredMarker="true"
+            appearance="outline"
+            floatLabel="auto"
+            class="fullInput input-bolt"
+          >
+            <mat-label *ngSwitchCase="'Esp'">Nombre (Español)</mat-label>
+            <mat-label *ngSwitchCase="'Eng'">Name (Spanish)</mat-label>
+
+            <input
+              matInput
+              id="banner_name_es"
+              formControlName="banner_name_es"
+              type="text"
+              minlength="3"
+              maxlength="30"
+            />
+            <mat-error *ngIf="bannerForm.controls.banner_name_es.errors">
+              {{ getMessageform('banner_name_es') }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field
+            hideRequiredMarker="true"
+            appearance="outline"
+            floatLabel="auto"
+            class="fullInput input-bolt"
+          >
+            <mat-label *ngSwitchCase="'Esp'">
+              Texto del botón (Español)
+            </mat-label>
+            <mat-label *ngSwitchCase="'Eng'">
+              Button text (Spanish)
+            </mat-label>
+
+            <input
+              matInput
+              id="button_text_es"
+              formControlName="button_text_es"
+              type="text"
+              minlength="3"
+              maxlength="30"
+            />
+            <mat-error *ngIf="bannerForm.controls.button_text_es.errors">
+              {{ getMessageform('button_text_es') }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-radio-button
+            [checked]="urlAction"
+            labelPosition="before"
+            (change)="disableField()"
+          >
+            {{ lang == 'Esp' ? 'Dirigirá a una URL' : 'Redirect to URL' }}
+          </mat-radio-button>
+
+          <mat-form-field
+            hideRequiredMarker="true"
+            appearance="outline"
+            floatLabel="auto"
+            class="fullInput input-bolt"
+          >
+            <mat-label *ngSwitchCase="'Esp'">
+              Escribe la URL
+            </mat-label>
+            <mat-label *ngSwitchCase="'Eng'">
+              Type the URL
+            </mat-label>
+
+            <input
+              matInput
+              id="url_exter"
+              formControlName="url_exter"
+              type="text"
+              minlength="10"
+              maxlength="150"
+              [required]="urlAction"
+            />
+            <mat-error *ngIf="bannerForm.controls.url_exter.errors">
+              {{ getMessageform('url_exter') }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field
+            appearance="outline"
+            hideRequiredMarker="true"
+            floatLabel="auto"
+            class="fullInput"
+          >
+            <mat-label *ngSwitchCase="'Esp'">
+              Mensaje (Español)
+            </mat-label>
+            <mat-label *ngSwitchCase="'Eng'">Message (Spanish)</mat-label>
+
+            <textarea
+              #text1
+              matInput
+              formControlName="message_es"
+              minlength="3"
+              maxlength="30"
+              rows="2"
+            ></textarea>
+            <mat-hint align="end">{{ text1.value?.length || 0 }}/30</mat-hint>
+
+            <mat-error *ngIf="bannerForm.controls.message_es.errors">
+              {{ getMessageform('message_es') }}
+            </mat-error>
+          </mat-form-field>
+
+          <div class="position-relative input-file-container">
+            <p>
+              {{ lang == 'Esp' ? 'Imagen del banner' : 'Banner image' }}
+            </p>
+
+            <div class="fullInput row bolt-input-btn-outline">
+              <input
+                mat-input
+                style="display: none;"
+                type="file"
+                (change)="loadFile($event.target.files)"
+                accept="image/png, image/jpeg,"
+                #hiddenfileinput
+                required
+              />
+              <span class="btn-text" *ngIf="urlImagBanner != '' && !sizeError">
+                {{ this.urlImagBanner }}
+              </span>
+              <span class="btn-text" *ngIf="!urlImagBanner || sizeError">
+                {{ urlImagBanner }}
+              </span>
+              <button
+                mat-button
+                class="btn-action"
+                (click)="hiddenfileinput.click($event.preventDefault())"
+              >
+                <span>
+                  {{ lang == 'Esp' ? 'Adjuntar' : 'Attach' }}
+                </span>
+              </button>
+            </div>
+            <mat-error class="position-absolute" *ngIf="sizeError">
+              *
+              {{
+                lang == 'Esp'
+                  ? 'El archivo no es válido máx 500KB'
+                  : 'Invalid file max 500KB'
+              }}
+            </mat-error>
+          </div>
+        </div>
+
+        <div class="col">
+          <mat-form-field
+            hideRequiredMarker="true"
+            appearance="outline"
+            floatLabel="auto"
+            class="fullInput input-bolt"
+          >
+            <mat-label *ngSwitchCase="'Esp'">
+              Nombre (inglés)
+            </mat-label>
+            <mat-label *ngSwitchCase="'Eng'">Name (English)</mat-label>
+
+            <input
+              matInput
+              id="banner_name_en"
+              formControlName="banner_name_en"
+              type="text"
+              minlength="3"
+              maxlength="30"
+            />
+            <mat-error *ngIf="bannerForm.controls.banner_name_en.errors">
+              {{ getMessageform('banner_name_en') }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field
+            hideRequiredMarker="true"
+            appearance="outline"
+            floatLabel="auto"
+            class="fullInput input-bolt"
+          >
+            <mat-label *ngSwitchCase="'Esp'">
+              Texto del botón (inglés)
+            </mat-label>
+            <mat-label *ngSwitchCase="'Eng'">
+              Button text(English)
+            </mat-label>
+
+            <input
+              matInput
+              id="button_text_en"
+              formControlName="button_text_en"
+              type="text"
+              minlength="3"
+              maxlength="30"
+            />
+            <mat-error *ngIf="bannerForm.controls.button_text_en.errors">
+              {{ getMessageform('button_text_en') }}
+            </mat-error>
+          </mat-form-field>
+
+          <mat-radio-button
+            [checked]="!urlAction"
+            labelPosition="before"
+            (change)="disableField()"
+          >
+            {{ lang == 'Esp' ? 'Descargara un PDF' : 'Donwload a PDF' }}
+          </mat-radio-button>
+
+          <div class="position-relative input-file-container">
+            <div class="fullInput row btn-file">
+              <input
+                mat-input
+                style="display: none;"
+                type="file"
+                (change)="loadFile($event.target.files)"
+                accept="application/pdf"
+                value="banner.url_redirection"
+                #hiddenfileinput2
+              />
+              <span
+                class="btn-text"
+                *ngIf="urlPdfBanner != '' && !sizeErrorPdf"
+              >
+                {{ this.urlPdfBanner }}
+              </span>
+
+              <span class="btn-text" *ngIf="!urlPdfBanner || sizeErrorPdf">
+                <span *ngIf="!urlPdfBanner">
+                  {{
+                    lang == 'Esp'
+                      ? 'Seleccionar archivo pdf (máx 500KB)'
+                      : 'Select a pdf file (max 500KB)'
+                  }}
+                </span>
+                <span *ngIf="urlPdfBanner && !urlAction">
+                  {{ urlPdfBanner }}
+                </span>
+              </span>
+              <button
+                mat-button
+                class="btn-action"
+                (click)="hiddenfileinput2.click($event.preventDefault())"
+                [disabled]="urlAction"
+              >
+                <span
+                  class="material-icons check"
+                  *ngIf="urlPdfBanner != '' && !sizeErrorPdf"
+                >
+                  check_circle
+                </span>
+                <span class="material-icons cancel" *ngIf="sizeErrorPdf">
+                  cancel
+                </span>
+                <span *ngIf="urlPdfBanner == '' && !sizeErrorPdf">
+                  Adjuntar
+                </span>
+              </button>
+            </div>
+            <mat-error class="position-absolute" *ngIf="sizeErrorPdf">
+              {{
+                lang == 'Esp'
+                  ? 'El archivo no es válido máx 500KB'
+                  : 'Invalid file max 500KB'
+              }}
+            </mat-error>
+          </div>
+
+          <mat-form-field
+            appearance="outline"
+            hideRequiredMarker="true"
+            floatLabel="auto"
+            class="fullInput"
+          >
+            <mat-label *ngSwitchCase="'Esp'">
+              Mensaje (Inglés)
+            </mat-label>
+            <mat-label *ngSwitchCase="'Eng'">Message (English)</mat-label>
+
+            <textarea
+              #text2
+              matInput
+              formControlName="message_en"
+              minlength="3"
+              maxlength="30"
+              rows="2"
+            ></textarea>
+            <mat-hint align="end">{{ text2.value?.length || 0 }}/30</mat-hint>
+            <mat-error *ngIf="bannerForm.controls.message_en.errors">
+              {{ getMessageform('message_en') }}
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row row__2">
+        <button
+          class="bolt-btn-filled"
+          (click)="!edit_form ? updateBanner('post') : updateBanner('put')"
+          style="margin-right: 20px !important;"
+        >
+          <span *ngSwitchCase="'Esp'">Guardar Banner</span>
+          <span *ngSwitchCase="'Eng'">Save Banner</span>
+        </button>
+        <button class="bolt-btn-filled" (click)="cancel()">
+          <span *ngSwitchCase="'Esp'">cancelar</span>
+          <span *ngSwitchCase="'Eng'">Cancel</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

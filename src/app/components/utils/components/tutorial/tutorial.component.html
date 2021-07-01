@@ -1,0 +1,145 @@
+<div [ngSwitch]="step">
+  <div *ngSwitchCase="1" class="step-1">
+    <span
+      mat-button
+      mat-dialog-close
+      class="x-icon"
+      (click)="closeTutorial()"
+    ></span>
+    <div class="raise-hand"></div>
+    <p class="tutorial__content" *ngIf="lang == 'Esp'">
+      Bienvenido, a continuación encontrara información importante para la
+      navegación en Bolt
+    </p>
+    <p class="tutorial__content" *ngIf="lang == 'Eng'">
+      Welcome, below you will find important information for the navigation in
+      Bolt
+    </p>
+
+    <div class="row">
+      <button mat-button class="bolt-btn-outline" (click)="save()">
+        <span *ngIf="lang == 'Esp'">Omitir</span>
+        <span *ngIf="lang == 'Eng'">Skip</span>
+      </button>
+      <button mat-button class="bolt-btn-filled" (click)="next()">
+        <span *ngIf="lang == 'Esp'">Continuar</span>
+        <span *ngIf="lang == 'Eng'">Continue</span>
+      </button>
+    </div>
+  </div>
+
+  <div *ngSwitchCase="2" class="step-2">
+    <span class="arrow-pointer"></span>
+    <p class="tutorial__content" *ngIf="lang == 'Esp'">
+      Ajuste el idioma dando clic en el botón rojo
+    </p>
+    <p class="tutorial__content" *ngIf="lang == 'Eng'">
+      Adjust the language by clicking the red button
+    </p>
+    <button mat-button class="transparent-btn" (click)="next()">
+      <span *ngIf="lang == 'Esp'">siguiente</span>
+      <span *ngIf="lang == 'Eng'">next</span>
+      <span class="next-step"></span>
+    </button>
+  </div>
+
+  <div *ngSwitchCase="3" class="step-3">
+    <span class="arrow-pointer"></span>
+    <p class="tutorial__content" *ngIf="lang == 'Esp'">
+      En esta opción encontrarás la lista de tus dashboards favoritos
+    </p>
+    <p class="tutorial__content" *ngIf="lang == 'Eng'">
+      In this option you will find the list of your favorite dashboards
+    </p>
+    <button mat-button class="transparent-btn" (click)="next()">
+      <span *ngIf="lang == 'Esp'">siguiente</span>
+      <span *ngIf="lang == 'Eng'">next</span>
+      <span class="next-step"></span>
+    </button>
+  </div>
+
+  <div *ngSwitchCase="4" class="step-4">
+    <span class="arrow-pointer"></span>
+    <p class="tutorial__content" *ngIf="lang == 'Esp'">
+      En barra encontrarás las opciones del menú que se te han asignado
+    </p>
+    <p class="tutorial__content" *ngIf="lang == 'Eng'">
+      In bar you will find the menu options that have been assigned to you
+    </p>
+    <button mat-button class="transparent-btn" (click)="next()">
+      <span *ngIf="lang == 'Esp'">siguiente</span>
+      <span *ngIf="lang == 'Eng'">next</span>
+      <span class="next-step"></span>
+    </button>
+  </div>
+
+  <div *ngIf="admin">
+    <div *ngSwitchCase="5" class="step-5">
+      <span class="arrow-pointer"></span>
+      <p class="tutorial__content" *ngIf="lang == 'Esp'">
+        Ya que eres administrador podrás ver las opciones de este rol reflejadas
+        en esta opción
+      </p>
+      <p class="tutorial__content" *ngIf="lang == 'Eng'">
+        Since you are administrator you will see the options of this role
+        reflected in this option
+      </p>
+      <button mat-button class="transparent-btn" (click)="next()">
+        <span *ngIf="lang == 'Esp'">siguiente</span>
+        <span *ngIf="lang == 'Eng'">next</span>
+        <span class="next-step"></span>
+      </button>
+    </div>
+  </div>
+
+  <div *ngSwitchCase="6" class="step-6">
+    <span class="arrow-pointer"></span>
+    <p class="tutorial__content" *ngIf="lang == 'Esp'">
+      Para desplegar / replegar el menú a la derecha, basta con dar clic en el
+      botón y este aparecerá / desaparecerá automáticamente
+    </p>
+    <p class="tutorial__content" *ngIf="lang == 'Eng'">
+      To display / fold the menu to the right, just click on the button and it
+      will appear / will automatically disappear
+    </p>
+    <button mat-button class="transparent-btn" (click)="next()">
+      <span *ngIf="lang == 'Esp'">siguiente</span>
+      <span *ngIf="lang == 'Eng'">next</span>
+      <span class="next-step"></span>
+    </button>
+  </div>
+
+  <div *ngSwitchCase="7" class="step-7">
+    <span class="arrow-pointer"></span>
+    <p class="tutorial__content" *ngIf="lang == 'Esp'">
+      Si deseas agregar un dashboard en tus favoritos puedes dar click en la
+      estrella que aparece en la parte derecha del título de la aplicación y
+      automáticamente será guardada
+    </p>
+    <p class="tutorial__content" *ngIf="lang == 'Eng'">
+      If you want to add a dashboard in your favorites you can click on the star
+      appearing on the right side of the application title and will
+      automatically be saved
+    </p>
+    <button mat-button class="transparent-btn" (click)="next()">
+      <span *ngIf="lang == 'Esp'">siguiente</span>
+      <span *ngIf="lang == 'Eng'">next</span>
+      <span class="next-step"></span>
+    </button>
+  </div>
+
+  <div *ngSwitchCase="8" class="step-8">
+    <span class="arrow-pointer"></span>
+    <p class="tutorial__content" *ngIf="lang == 'Esp'">
+      En el home podrás encontrar una sección de favoritos para acceder de forma
+      rápida
+    </p>
+    <p class="tutorial__content" *ngIf="lang == 'Eng'">
+      In the home you will find a section of favorites to access quickly
+    </p>
+    <button mat-button class="bolt-btn-filled" (click)="save()">
+      <span *ngIf="lang == 'Esp'">terminar</span>
+      <span *ngIf="lang == 'Eng'">finish</span>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,243 @@
+/*import colors*/
+@import './variables.scss';
+
+/* flex styles */
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.flex1 {
+  display: flex;
+  flex: 1;
+  align-items: center;
+}
+
+.separator {
+  flex: 1 1 auto;
+}
+
+/* divider styles */
+mat-divider {
+  width: 85%;
+  margin: 20px auto !important;
+  border-top-color: $quinary-black !important;
+}
+
+.box-shadow {
+  box-shadow: 1px 6px 4px rgba(0, 0, 0, 0.25) inset;
+  -webkit-box-shadow: 1px 6px 4px rgba(0, 0, 0, 0.25) inset;
+  -moz-box-shadow: 1px 6px 4px rgba(0, 0, 0, 0.25) inset;
+}
+// set dialog styles
+.mat-dialog-container {
+  background-color: $primary-white;
+  padding: 10px 0px !important;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px !important;
+}
+
+.backdrop {
+  background: rgba(0, 0, 0, 0.32);
+  @supports (backdrop-filter: blur(20px)) {
+    backdrop-filter: blur(20px);
+  }
+}
+.no-backdrop {
+  background: rgba(0, 0, 0, 0.32);
+}
+@mixin dialog($width, $height, $bgColor, $color) {
+  width: $width;
+  height: $height;
+  background-color: $bgColor;
+  color: $color;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+.dialog-alert,
+.dialog-notification {
+  @include dialog(100%, 240px, $primary-white, #707782);
+  &__content {
+    text-align: center;
+    max-width: 85%;
+  }
+}
+.dialog-form {
+  @include dialog(496px, auto, $primary-white, #707782);
+  max-height: 95vh;
+  overflow-y: auto;
+  .material-icons {
+    font-size: 18px;
+    margin-right: 5px;
+  }
+  .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float
+    .mat-form-field-outline-gap {
+    padding-right: 10px;
+  }
+}
+
+.x-icon {
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
+  &:hover {
+    transform: scale(0.85);
+  }
+}
+
+.mat-dialog-actions {
+  min-height: 35px !important;
+  height: fit-content;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  width: 80%;
+  max-width: 420px;
+}
+
+.loading-modal {
+  .mat-dialog-container {
+    background-color: transparent;
+    width: auto;
+    height: auto;
+    box-shadow: none;
+    overflow: hidden;
+  }
+}
+
+/* snackbar error alerts */
+.snack-alert {
+  width: 587px;
+  height: 75px;
+  top: 80px !important;
+  max-width: 60vw !important;
+  background: $primary-white;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px !important;
+  border-left: 10px solid $senary-red;
+
+  span {
+    font-family: 'Gotham';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+    color: #707782;
+    max-height: 50px;
+    overflow-y: auto;
+  }
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #c7c6c6;
+    border-radius: 8px;
+    background-clip: padding-box;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #e21d47;
+    border-radius: 8px;
+    background-clip: padding-box;
+  }
+
+  .mat-button-wrapper {
+    font-size: 25px;
+    font-family: 'Gotham';
+    color: $senary-red;
+  }
+}
+
+/* admin styles */
+// projects
+.container {
+  width: 94%;
+  height: 800px;
+  margin-left: 80px;
+  box-sizing: border-box;
+  padding: 40px 20px;
+  background-color: $quaternary-white;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.inner-section {
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  padding: 20px;
+  background: $primary-white;
+  box-shadow: 4px 4px 10px 1px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.grid {
+  overflow: hidden;
+  &-header {
+    display: grid;
+    grid-template-columns: 20% 42% 10% 25%;
+    grid-gap: 10px;
+    border-bottom: 1px solid $octonary-white;
+    &__title {
+      padding: 10px 0;
+    }
+  }
+
+  &-content {
+    display: grid;
+    grid-template-columns: 20% 42% 10% 25%;
+    grid-gap: 10px;
+    margin: 10px 0;
+    &__icon,
+    &__action {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: flex-start;
+      .col {
+        min-width: 60px;
+      }
+    }
+  }
+  .project-submenus {
+    display: none;
+    box-sizing: border-box;
+    padding: 20px 0;
+    .col {
+      align-items: flex-start;
+    }
+  }
+}
+
+.paginator {
+  align-self: flex-end;
+  margin-top: 10px;
+}

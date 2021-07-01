@@ -1,0 +1,15 @@
+<div class="dialog-notification" [ngSwitch]="lang">
+  <span
+    mat-button
+    mat-dialog-close
+    class="x-icon"
+    (click)="closeModal()"
+  ></span>
+  <div class="check-icon"></div>
+  <p class="dialog-alert__content" *ngSwitchCase="'Esp'">
+    {{ data.message_es }}
+  </p>
+  <p class="dialog-alert__content" *ngSwitchCase="'Eng'">
+    {{ data.message_en }}
+  </p>
+</div>

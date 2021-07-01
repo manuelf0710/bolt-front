@@ -1,0 +1,125 @@
+<div class="dialog-alert" [ngSwitch]="lang">
+  <span
+    mat-button
+    mat-dialog-close
+    class="x-icon"
+    (click)="closeModal()"
+  ></span>
+  <div class="exclamation-icon"></div>
+  <!-- view for project -->
+  <div class="dialog-alert__content" *ngIf="data.project_name">
+    <p *ngSwitchCase="'Esp'">
+      ¿Desea {{ data.message_action_es }} el proyecto
+      <strong>{{ data.project_name }}</strong>
+      ?
+    </p>
+    <p *ngSwitchCase="'Eng'">
+      Do you want to {{ data.message_action_en }} the project
+      <strong>{{ data.project_name }}</strong>
+      ?
+    </p>
+  </div>
+  <!-- view for sub menu -->
+  <div class="dialog-alert__content" *ngIf="data.submenu_name">
+    <p *ngSwitchCase="'Esp'">
+      ¿Desea {{ data.message_action_es }} el sub menú
+      <strong>{{ data.submenu_name }}</strong>
+      ?
+    </p>
+    <p *ngSwitchCase="'Eng'">
+      ¿ Do you want to {{ data.message_action_en }} the sub menu
+      <strong>{{ data.submenu_name }}</strong>
+      ?
+    </p>
+  </div>
+  <!-- view for app -->
+  <div class="dialog-alert__content" *ngIf="data.app_name">
+    <p *ngSwitchCase="'Esp'">
+      ¿Desea {{ data.message_action_es }} la aplicación
+      <strong>{{ data.app_name }}</strong>
+      ?
+    </p>
+    <p *ngSwitchCase="'Eng'">
+      ¿ Do you want to {{ data.message_action_en }} the app
+      <strong>{{ data.app_name }}</strong>
+      ?
+    </p>
+  </div>
+  <!-- view for user -->
+  <div class="dialog-alert__content" *ngIf="data.user_name">
+    <p *ngSwitchCase="'Esp'">
+      ¿Desea {{ data.message_action_es }} al usuario
+      <strong>{{ data.user_name }}</strong>
+      ?
+    </p>
+    <p *ngSwitchCase="'Eng'">
+      ¿ Do you want to {{ data.message_action_en }} the user
+      <strong>{{ data.user_name }}</strong>
+      ?
+    </p>
+  </div>
+  <!-- view for role -->
+  <div class="dialog-alert__content" *ngIf="data.role_name">
+    <p *ngSwitchCase="'Esp'">
+      ¿Desea {{ data.message_action_es }} el rol
+      <strong>{{ data.role_name }}</strong>
+      ?
+    </p>
+    <p *ngSwitchCase="'Eng'">
+      ¿ Do you want to {{ data.message_action_en }} the role
+      <strong>{{ data.role_name }}</strong>
+      ?
+    </p>
+  </div>
+  <!-- view for fav item -->
+  <div class="dialog-alert__content" *ngIf="data.fav_name">
+    <p *ngSwitchCase="'Esp'">
+      ¿Desea {{ data.message_action_es }} la aplicacion
+      <strong>{{ data.fav_name }}</strong>
+      en su lista de favoritos ?
+    </p>
+    <p *ngSwitchCase="'Eng'">
+      ¿ Do you want to {{ data.message_action_en }} the role
+      <strong>{{ data.fav_name }}</strong>
+      in your favorite list ?
+    </p>
+  </div>
+  <!-- view for banners -->
+  <div class="dialog-alert__content" *ngIf="data.banner_name">
+    <p *ngSwitchCase="'Esp'">
+      ¿Desea {{ data.message_action_es }} el banner
+      <strong>{{ data.banner_name }}</strong>
+      ?
+    </p>
+    <p *ngSwitchCase="'Eng'">
+      ¿ Do you want to {{ data.message_action_en }} the banner
+      <strong>{{ data.banner_name }}</strong>
+      ?
+    </p>
+  </div>
+
+  <!-- view for re start session -->
+  <div class="dialog-alert__content" *ngIf="data.session">
+    <p *ngSwitchCase="'Esp'">
+      ¿Desea volver a iniciar sesión?
+    </p>
+    <p *ngSwitchCase="'Eng'">
+      Would you like to log in again?
+    </p>
+  </div>
+
+  <div class="row">
+    <button
+      mat-button
+      class="bolt-btn-outline"
+      [mat-dialog-close]="data.permission"
+    >
+      <span *ngSwitchCase="'Esp'">{{ data.message_action_es }}</span>
+      <span *ngSwitchCase="'Eng'">{{ data.message_action_en }}</span>
+    </button>
+    <button mat-button class="alert-btn" (click)="closeModal()">
+      <span *ngSwitchCase="'Esp'">Cancelar</span>
+      <span *ngSwitchCase="'Eng'">Cancel</span>
+    </button>
+  </div>
+</div>

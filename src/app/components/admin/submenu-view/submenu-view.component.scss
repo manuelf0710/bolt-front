@@ -1,0 +1,116 @@
+.container {
+  padding: 20px;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #c7c6c6;
+  border-radius: 8px;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e21d47;
+  border-radius: 8px;
+  background-clip: padding-box;
+}
+.btn-back {
+  width: fit-content;
+  color: #e21d47;
+  .material-icons {
+    font-size: 18px;
+  }
+}
+.section {
+  &__1 {
+    margin-bottom: 25px;
+    .form-section {
+      width: 100%;
+      max-width: 95%;
+      .row {
+        &__1 {
+          width: 100%;
+          .col {
+            width: 45%;
+          }
+        }
+
+        &__2 {
+          align-self: flex-end;
+
+          .bolt-btn-outline {
+            width: 100px;
+            margin-right: 25px;
+          }
+          .bolt-btn-filled {
+            width: 160px;
+            text-transform: capitalize;
+          }
+        }
+      }
+      .mat-input-element:disabled {
+        color: #4f4f4f !important;
+      }
+    }
+  }
+  &__2 {
+    .row {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 0 20px;
+      justify-content: flex-start;
+      .bolt-btn-filled {
+        width: 180px;
+      }
+      .form-title {
+        border-bottom: none;
+      }
+    }
+    .grid {
+      overflow: hidden;
+      width: 100%;
+      &-header {
+        display: grid;
+        grid-template-columns: 10% 12% 12% 11% 17% 8% 8% 16%;
+        grid-gap: 10px;
+        border-bottom: 1px solid #c4c4c4;
+        &__title {
+          padding: 10px 0;
+        }
+      }
+
+      &-content {
+        display: grid;
+        grid-template-columns: 10% 12% 12% 11% 17% 8% 8% 16%;
+        grid-gap: 10px;
+        margin: 10px 0;
+        border-bottom: 1px solid #c4c4c4;
+        input {
+          background: transparent;
+          border: none;
+        }
+        .col {
+          justify-content: flex-start;
+          align-items: flex-start;
+          .grid-content__name {
+            margin: 0;
+            text-align: left;
+          }
+        }
+        &__description {
+          width: 100%;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+        &__action {
+          .col {
+            align-items: center;
+          }
+        }
+      }
+    }
+  }
+}

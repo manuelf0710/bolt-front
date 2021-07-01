@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 24.3.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 164 164" style="enable-background:new 0 0 164 164;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#ADADAD;}
+	.st1{fill:#FFFFFF;}
+	.st2{fill:#DDDDDD;}
+	.st3{fill:#A0A0A0;}
+</style>
+<g>
+	<path class="st0" d="M150.44,164H13.56C6.07,164,0,157.93,0,150.44V13.56C0,6.07,6.07,0,13.56,0h136.88
+		C157.93,0,164,6.07,164,13.56v136.88C164,157.93,157.93,164,150.44,164z"/>
+	<path class="st1" d="M61.99,80H30.01C26.14,80,23,76.86,23,72.99V41.01c0-3.87,3.14-7.01,7.01-7.01h31.97
+		c3.87,0,7.01,3.14,7.01,7.01v31.97C69,76.86,65.86,80,61.99,80z"/>
+	<path class="st2" d="M45.9,47h12.61c0.93,0,1.51,1.01,1.05,1.81l-6.31,10.92l-6.31,10.92c-0.46,0.81-1.63,0.81-2.09,0l-6.31-10.92
+		l-6.31-10.92C31.78,48.01,32.36,47,33.29,47H45.9z"/>
+	<circle class="st1" cx="105" cy="57" r="23"/>
+	<circle class="st2" cx="122" cy="57" r="23"/>
+	<circle class="st1" cx="121.75" cy="121.75" r="23"/>
+	<circle class="st3" cx="121.75" cy="121.75" r="13.5"/>
+	<path class="st1" d="M74,128H22c-3.31,0-6-2.69-6-6v0c0-3.31,2.69-6,6-6h52c3.31,0,6,2.69,6,6v0C80,125.31,77.31,128,74,128z"/>
+	<ellipse class="st2" cx="47.5" cy="112.27" rx="12.5" ry="9.27"/>
+	<ellipse class="st2" cx="47.5" cy="134.05" rx="12.5" ry="9.27"/>
+	<rect x="35" y="112.68" class="st2" width="25" height="21.77"/>
+</g>
+</svg>

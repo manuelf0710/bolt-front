@@ -1,0 +1,114 @@
+/* sidebar component styles */
+#arrowSide{
+  margin-right: .5em;
+}
+.flex-column {
+  position: absolute;
+  top: 80px;
+  left: 0;
+  width: 267px;
+  height: 800px;
+  box-sizing: border-box;
+  background-color: #e3e3e3;
+  transition: all 0.4s;
+  z-index: 1000;
+}
+
+mat-accordion {
+  max-width: 267px;
+}
+.mat-expansion-panel {
+  max-width: 267px;
+  background: transparent;
+  border-radius: 0 !important;
+  color: #000;
+  box-shadow: none;
+}
+
+.bg-black-panel {
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0.91;
+  backdrop-filter: blur(4px);
+  color: #fff;
+}
+
+::ng-deep .mat-expansion-panel-header {
+  height: 40px !important;
+  flex-direction: row-reverse !important;
+}
+::ng-deep .mat-expansion-panel-header:hover {
+  background: rgba(0, 0, 0, 0.04) !important;
+  cursor:pointer;
+}
+::ng-deep .mat-expansion-panel-body {
+  padding-left: 57px !important;
+}
+
+::ng-deep .mat-expansion-panel-header.mat-expanded:focus,
+::ng-deep .mat-expansion-panel-header.mat-expanded:hover {
+  background: transparent !important;
+}
+
+::ng-deep .mat-expansion-indicator::after {
+  color: #fff !important;
+  height: 4px;
+  width: 4px;
+  transform: rotate(-45deg) !important;
+}
+
+.mat-expansion-panel-spacing {
+  margin: 0 !important;
+}
+
+.left-line {
+  border-left: 1px solid #fff;
+}
+
+.highlight-item {
+  border-left: 4px solid #fff;
+  border-radius: 0;
+  transform: translateX(-2.5px);
+}
+
+.colapsable-menu {
+  height: 35px;
+  line-height: 35px;
+}
+
+::ng-deep .mat-menu-panel {
+  width: 261px;
+  min-height: 50px !important;
+  border-radius: 0 !important;
+  background: rgba(0, 0, 0, 0.7);
+  opacity: 0.91;
+  backdrop-filter: blur(4px);
+  box-shadow: none;
+  color: #fff;
+}
+::ng-deep .mat-menu-content:not(:empty) {
+  padding: 4px 0 !important;
+}
+.mat-menu-item {
+  display: flex !important;
+  line-height: 44px;
+  height: 44px;
+}
+
+.mat-menu-item:hover:not([disabled]),
+.mat-menu-item.cdk-program-focused:not([disabled]),
+.mat-menu-item.cdk-keyboard-focused:not([disabled]),
+.mat-menu-item-highlighted:not([disabled]) {
+  background: transparent;
+}
+
+::ng-deep .mat-menu-content button {
+  color: #fff !important;
+  width: 90%;
+}
+
+.no-padding ::ng-deep .mat-expansion-panel-body {
+  padding-left: 0 !important;
+  .row {
+    justify-content: center;
+  }
+}

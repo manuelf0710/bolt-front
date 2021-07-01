@@ -1,0 +1,93 @@
+<div class="dialog-form" [ngSwitch]="lang">
+  <div mat-dialog-actions class="dialog-form__header">
+    <span
+      mat-button
+      mat-dialog-close
+      class="x-icon"
+      (click)="closeModal()"
+    ></span>
+  </div>
+
+  <div style="width: 100%;">
+    <h2 class="form-title" *ngSwitchCase="'Esp'">Añadir nuevo rol</h2>
+    <h2 class="form-title" *ngSwitchCase="'Eng'">Add new rol</h2>
+  </div>
+
+  <form [formGroup]="addNewRolForm" class="form-section" autocomplete="off">
+    <mat-form-field
+      hideRequiredMarker="true"
+      appearance="outline"
+      floatLabel="auto"
+      class="fullInput input-bolt"
+    >
+      <mat-label *ngSwitchCase="'Esp'">Usuario</mat-label>
+      <mat-label *ngSwitchCase="'Eng'">User</mat-label>
+
+      <input
+        matInput
+        id="user_name"
+        formControlName="user_name"
+        type="text"
+        disabled
+      />
+    </mat-form-field>
+
+    <mat-form-field
+      hideRequiredMarker="true"
+      appearance="outline"
+      floatLabel="auto"
+      class="fullInput input-bolt"
+    >
+      <mat-label>ID</mat-label>
+
+      <input
+        matInput
+        id="user_id"
+        formControlName="user_id"
+        type="text"
+        disabled
+      />
+    </mat-form-field>
+
+    <mat-form-field
+      hideRequiredMarker="true"
+      appearance="outline"
+      floatLabel="auto"
+      class="fullInput input-bolt"
+    >
+      <mat-label>{{ lang == 'Esp' ? 'País' : 'Country' }}</mat-label>
+
+      <input
+        matInput
+        id="user_country"
+        formControlName="user_country"
+        type="text"
+        disabled
+      />
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="outline"
+      hideRequiredMarker="true"
+      floatLabel="auto"
+      class="fullInput"
+    >
+      <mat-label>Roles</mat-label>
+
+      <mat-select [formControl]="addNewRolForm.controls.user_roles" multiple>
+        <mat-option *ngFor="let option of role_list" [value]="option.id">
+          {{ lang == 'Esp' ? option.name_es : option.name_en }}
+        </mat-option>
+      </mat-select>
+
+      <mat-error *ngIf="addNewRolForm.controls.user_roles.errors">
+        {{ getMessageform('user_roles') }}
+      </mat-error>
+    </mat-form-field>
+
+    <button class="btn-submit-rol" (click)="saveRoles()">
+      <span *ngSwitchCase="'Esp'">Actualizar roles</span>
+      <span *ngSwitchCase="'Eng'">Update roles</span>
+    </button>
+  </form>
+</div>

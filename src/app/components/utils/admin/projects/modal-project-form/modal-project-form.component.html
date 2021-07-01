@@ -1,0 +1,148 @@
+<div class="dialog-form" [ngSwitch]="lang">
+  <div mat-dialog-actions class="dialog-form__header">
+    <span
+      mat-button
+      mat-dialog-close
+      class="x-icon"
+      (click)="closeModal()"
+    ></span>
+  </div>
+  <div style="width: 100%;" *ngIf="!this.data">
+    <h2 class="form-title" *ngSwitchCase="'Esp'">Crear un nuevo proyecto</h2>
+    <h2 class="form-title" *ngSwitchCase="'Eng'">Create a new project</h2>
+  </div>
+  <div style="width: 100%;" *ngIf="this.data">
+    <h2 class="form-title" *ngSwitchCase="'Esp'">Editar proyecto</h2>
+    <h2 class="form-title" *ngSwitchCase="'Eng'">Edit project</h2>
+  </div>
+
+  <form [formGroup]="createProjectForm" class="form-section" autocomplete="off">
+    <mat-form-field
+      hideRequiredMarker="true"
+      appearance="outline"
+      floatLabel="auto"
+      class="fullInput input-bolt"
+    >
+      <mat-label *ngSwitchCase="'Esp'">Nombre Proyecto(Español)</mat-label>
+      <mat-label *ngSwitchCase="'Eng'">Project name(Spanish)</mat-label>
+
+      <input
+        matInput
+        id="project_name_es"
+        formControlName="project_name_es"
+        type="text"
+        required
+        maxlength="30"
+      />
+
+      <mat-error *ngIf="createProjectForm.controls.project_name_es.errors">
+        {{ getMessageform('project_name_es') }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      hideRequiredMarker="true"
+      appearance="outline"
+      floatLabel="auto"
+      class="fullInput"
+    >
+      <mat-label *ngSwitchCase="'Esp'">Nombre Proyecto(Inglés)</mat-label>
+      <mat-label *ngSwitchCase="'Eng'">Project name(English)</mat-label>
+
+      <input
+        matInput
+        id="project_name_en"
+        formControlName="project_name_en"
+        type="text"
+        required
+        maxlength="30"
+      />
+
+      <mat-error *ngIf="createProjectForm.controls.project_name_en.errors">
+        {{ getMessageform('project_name_en') }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="outline"
+      hideRequiredMarker="true"
+      floatLabel="auto"
+      class="fullInput"
+    >
+      <mat-label *ngSwitchCase="'Esp'">
+        Descripción (Español)
+      </mat-label>
+      <mat-label *ngSwitchCase="'Eng'">Description (Spanish)</mat-label>
+
+      <textarea
+        matInput
+        formControlName="description_es"
+        minlength="6"
+        maxlength="100"
+      ></textarea>
+
+      <mat-error *ngIf="createProjectForm.controls.description_es.errors">
+        {{ getMessageform('description_es') }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="outline"
+      hideRequiredMarker="true"
+      floatLabel="auto"
+      class="fullInput"
+    >
+      <mat-label *ngSwitchCase="'Esp'">
+        Descripción (Ingles)
+      </mat-label>
+      <mat-label *ngSwitchCase="'Eng'">Description (English)</mat-label>
+
+      <textarea
+        matInput
+        formControlName="description_en"
+        minlength="6"
+        maxlength="100"
+      ></textarea>
+
+      <mat-error *ngIf="createProjectForm.controls.description_en.errors">
+        {{ getMessageform('description_en') }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="outline"
+      hideRequiredMarker="true"
+      floatLabel="auto"
+      class="fullInput"
+    >
+      <mat-label *ngSwitchCase="'Esp'">icono</mat-label>
+      <mat-label *ngSwitchCase="'Eng'">icon</mat-label>
+
+      <mat-select [formControl]="createProjectForm.controls.icon">
+        <mat-select-trigger>
+          <span class="material-icons">
+            {{ this.createProjectForm.controls.icon.value }}
+          </span>
+        </mat-select-trigger>
+        <mat-option *ngFor="let option of icons" [value]="option">
+          <span class="material-icons">
+            {{ option }}
+          </span>
+        </mat-option>
+      </mat-select>
+
+      <mat-error *ngIf="createProjectForm.controls.icon.errors">
+        {{ getMessageform('icon') }}
+      </mat-error>
+    </mat-form-field>
+
+    <button class="btn-submit-rol" (click)="saveProject()">
+      <span *ngSwitchCase="'Esp'">
+        {{ !this.data ? 'Crear proyecto' : 'Guardar cambios' }}
+      </span>
+      <span *ngSwitchCase="'Eng'">
+        {{ !this.data ? 'Create proyect' : 'Save changes' }}
+      </span>
+    </button>
+  </form>
+</div>

@@ -1,0 +1,238 @@
+/*import colors*/
+@import './variables.scss';
+
+/* button styles */
+.flex-column .mat-button {
+  width: 100%;
+  text-align: left;
+}
+@mixin btn(
+  $width,
+  $height,
+  $bgColor,
+  $color,
+  $fontFamily,
+  $fontSize,
+  $lineHeight
+) {
+  width: $width;
+  height: $height;
+  background: $bgColor;
+  color: $color;
+  font-family: $fontFamily;
+  font-size: $fontSize;
+  line-height: $lineHeight;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 10px !important;
+  border: none;
+  outline: none;
+  transition: all 0.2s;
+  cursor: pointer;
+  font-style: normal;
+  font-weight: bold;
+
+  &:active {
+    background-color: $septenary-red;
+  }
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+// pop up buttons
+.alert-btn {
+  @include btn(96px, 36px, $octonary-red, $primary-white, Arial, 14px, 16px);
+}
+// rol form button
+.btn-submit-rol {
+  @include btn(203px, 36px, $octonary-red, $primary-white, Arial, 14px, 16px);
+  margin-top: 20px;
+}
+// sidebar
+.rounded {
+  @include btn(
+    100% !important,
+    36px,
+    $nonary-white,
+    $primary-white,
+    Arial,
+    14px,
+    16px
+  );
+
+  border-radius: 0 !important;
+  text-align: right !important;
+  padding-right: 0px !important;
+  transition: left 0.4s;
+
+  &:hover,
+  &:active {
+    background-color: $nonary-white;
+    transform: scale(1);
+  }
+  .icon {
+    transform: rotate(180deg);
+  }
+}
+
+.banner__btn {
+  @include btn(152px, 36px, $octonary-red, $primary-white, Arial, 14px, 16px);
+  margin-top: 25px !important;
+}
+
+.bolt-btn-outline {
+  @include btn(
+    86px,
+    33px,
+    transparent,
+    #e21d47,
+    'Gotham',
+    14px,
+    13px !important
+  );
+
+  border: 2px solid #e21d47 !important;
+  box-sizing: border-box !important;
+  text-transform: capitalize;
+  &:active {
+    background-color: $septenary-red;
+    color: $primary-white;
+  }
+}
+
+.bolt-btn-filled {
+  @include btn(
+    107px,
+    36px,
+    $octonary-red,
+    $primary-white,
+    'Gotham',
+    14px,
+    13px !important
+  );
+}
+
+.transparent-btn {
+  @include btn(
+    192px,
+    30px,
+    transparent,
+    #e31e44,
+    'Gotham',
+    18px,
+    17px !important
+  );
+  font-weight: 500;
+  text-transform: capitalize;
+  box-shadow: none;
+  &:active {
+    background-color: transparent;
+  }
+}
+
+// admin styles
+// projects table toogle
+@mixin toogle($font-size, $line-height, $color) {
+  font-family: 'Gotham';
+  font-style: normal;
+  font-weight: normal;
+  font-size: $font-size;
+  line-height: $line-height;
+  /* or 300% */
+
+  display: flex;
+  align-items: center;
+
+  color: $color;
+  .mat-slide-toggle-bar {
+    border: 2px solid #e21d47;
+    width: 24px;
+  }
+  .mat-slide-toggle-thumb-container {
+    width: 15px;
+    height: 15px;
+    top: -1px;
+  }
+
+  .mat-slide-toggle-thumb {
+    width: 12px;
+    height: 12px;
+    background-color: $primary-white;
+    border: 1px solid #e21d47;
+    margin-top:1px;
+  }
+}
+.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+  background-color: $primary-white;
+}
+.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb-container {
+  transform: translate3d(9px, 0, 0) !important;
+}
+.mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+  background-color: #e21d47;
+}
+.enable-toogle {
+  @include toogle(10px, 30px, #e21d47);
+}
+
+.sub-toogle {
+  @include toogle(14px, 16px, #e21d47);
+  font-family: 'Roboto';
+  text-decoration-line: underline;
+}
+.project-btn {
+  justify-content: flex-start !important;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left !important;
+  .arrow {
+    margin-right: 10px;
+  }
+}
+.action-btn {
+  background: transparent;
+  .mat-button-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+.paginator-button {
+  background: transparent;
+  min-width: 20px !important;
+  .material-icons {
+    color: #212121;
+    font-size: 16px;
+    line-height: 16px;
+  }
+}
+
+// paginator buttons
+.mat-button.mat-button-disabled,
+.mat-icon-button.mat-button-disabled,
+.mat-stroked-button.mat-button-disabled,
+.mat-flat-button.mat-button-disabled {
+  opacity: 0.3;
+}
+
+// mat tradio button styles
+.mat-radio-container {
+  width: 15px !important;
+  height: 15px !important;
+}
+.mat-radio-outer-circle {
+  border-color: #e21d47;
+  width: 15px !important;
+  height: 15px !important;
+}
+.mat-radio-inner-circle {
+  width: 15px !important;
+  height: 15px !important;
+}
+.mat-radio-button.mat-accent .mat-radio-inner-circle {
+  background: #e21d47;
+}
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  border-color: #e21d47;
+}

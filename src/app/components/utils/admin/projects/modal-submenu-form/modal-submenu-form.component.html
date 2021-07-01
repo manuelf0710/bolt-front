@@ -1,0 +1,114 @@
+<div class="dialog-form" [ngSwitch]="lang">
+  <div mat-dialog-actions class="dialog-form__header">
+    <span
+      mat-button
+      mat-dialog-close
+      class="x-icon"
+      (click)="closeModal()"
+    ></span>
+  </div>
+
+  <div style="width: 100%;">
+    <h2 class="form-title" *ngSwitchCase="'Esp'">Añadir Sub menú</h2>
+    <h2 class="form-title" *ngSwitchCase="'Eng'">Add sub menu</h2>
+  </div>
+
+  <form [formGroup]="createSubMenuForm" class="form-section" autocomplete="off">
+    <mat-form-field
+      hideRequiredMarker="true"
+      appearance="outline"
+      floatLabel="auto"
+      class="fullInput input-bolt"
+    >
+      <mat-label *ngSwitchCase="'Esp'">Nombre sub menú(Español)</mat-label>
+      <mat-label *ngSwitchCase="'Eng'">Sub menu name(Spanish)</mat-label>
+
+      <input
+        matInput
+        id="submenu_name_es"
+        formControlName="submenu_name_es"
+        type="text"
+        required
+        maxlength="30"
+      />
+
+      <mat-error *ngIf="createSubMenuForm.controls.submenu_name_es.errors">
+        {{ getMessageform('submenu_name_es') }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      hideRequiredMarker="true"
+      appearance="outline"
+      floatLabel="auto"
+      class="fullInput"
+    >
+      <mat-label *ngSwitchCase="'Esp'">Nombre sub menú(Inglés)</mat-label>
+      <mat-label *ngSwitchCase="'Eng'">Sub menu name(English)</mat-label>
+
+      <input
+        matInput
+        id="submenu_name_en"
+        formControlName="submenu_name_en"
+        type="text"
+        required
+        maxlength="30"
+      />
+
+      <mat-error *ngIf="createSubMenuForm.controls.submenu_name_en.errors">
+        {{ getMessageform('submenu_name_en') }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="outline"
+      hideRequiredMarker="true"
+      floatLabel="auto"
+      class="fullInput"
+    >
+      <mat-label *ngSwitchCase="'Esp'">
+        Descripción (Español)
+      </mat-label>
+      <mat-label *ngSwitchCase="'Eng'">Description (Spanish)</mat-label>
+
+      <textarea
+        matInput
+        formControlName="description_es"
+        minlength="6"
+        maxlength="100"
+      ></textarea>
+
+      <mat-error *ngIf="createSubMenuForm.controls.description_es.errors">
+        {{ getMessageform('description_es') }}
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field
+      appearance="outline"
+      hideRequiredMarker="true"
+      floatLabel="auto"
+      class="fullInput"
+    >
+      <mat-label *ngSwitchCase="'Esp'">
+        Descripción (Inglés)
+      </mat-label>
+      <mat-label *ngSwitchCase="'Eng'">Description (English)</mat-label>
+
+      <textarea
+        matInput
+        formControlName="description_en"
+        minlength="6"
+        maxlength="100"
+      ></textarea>
+
+      <mat-error *ngIf="createSubMenuForm.controls.description_en.errors">
+        {{ getMessageform('description_en') }}
+      </mat-error>
+    </mat-form-field>
+
+    <button class="btn-submit-rol" (click)="saveProject()">
+      <span *ngSwitchCase="'Esp'">Añadir Sub menú</span>
+      <span *ngSwitchCase="'Eng'">Add Sub Menu</span>
+    </button>
+  </form>
+</div>

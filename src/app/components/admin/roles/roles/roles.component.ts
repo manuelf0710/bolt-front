@@ -5,20 +5,18 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 
+import { forkJoin } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 
 import { ModalConfirmationComponent } from 'src/app/components/utils/pop up/modal-confirmation/modal-confirmation.component';
-import { MockProjectsByRole } from 'src/app/mocks/projects-by-role-mock';
 
 import { UiService } from 'src/app/services/ui.service';
-
 import { HttpService } from 'src/app/services/http.service';
-import { forkJoin } from 'rxjs';
 import { RolesService } from 'src/app/services/roles.service';
 import { ProjectsService } from 'src/app/services/projects.service';
-import { MockProjects } from 'src/app/mocks/projects-mock';
+
 import { Projects } from 'src/app/model/Projects.model';
 import { Roles } from 'src/app/model/roles.model';
 
@@ -275,7 +273,6 @@ export class RolesComponent implements OnInit {
     this.ui.showLoading();
     this.projectService.getProjectsAssignByRol(target.id).subscribe(
       (res: any[]) => {
-        //console.log('project names ', this.projectNames);
         this.ui.dismissLoading();
         this.create = false;
         this.showForm = true;

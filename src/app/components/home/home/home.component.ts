@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MockProjects } from 'src/app/mocks/projects-mock';
 import { Router } from '@angular/router';
 
 import { ModalAlertComponent } from '../../utils/pop up/modal-alert/modal-alert.component';
@@ -9,8 +8,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Banner } from 'src/app/model/banner.model';
 import { BannersService } from 'src/app/services/banners.service';
 import { forkJoin, Subscription } from 'rxjs';
-import { ProjectsService } from 'src/app/services/projects.service';
-import { User } from 'src/app/model/User.model';
 import { FavoritesService } from 'src/app/services/favorites.service';
 import { environment } from 'src/environments/environment';
 
@@ -23,7 +20,6 @@ export class HomeComponent implements OnInit {
   public projSubs: Subscription;
   public bannerSubs: Subscription;
   public user_id: string;
-  public prop = MockProjects;
   public banners: Banner[] = [];
   public bannerList: any = [];
   public lang: string;

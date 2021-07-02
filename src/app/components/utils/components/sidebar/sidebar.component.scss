@@ -1,6 +1,6 @@
 /* sidebar component styles */
-#arrowSide{
-  margin-right: .5em;
+#arrowSide {
+  margin-right: 0.5em;
 }
 .flex-column {
   position: absolute;
@@ -13,7 +13,13 @@
   transition: all 0.4s;
   z-index: 1000;
 }
-
+.wrap {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100%;
+  text-align: left;
+}
 mat-accordion {
   max-width: 267px;
 }
@@ -38,7 +44,7 @@ mat-accordion {
 }
 ::ng-deep .mat-expansion-panel-header:hover {
   background: rgba(0, 0, 0, 0.04) !important;
-  cursor:pointer;
+  cursor: pointer;
 }
 ::ng-deep .mat-expansion-panel-body {
   padding-left: 57px !important;
@@ -60,7 +66,7 @@ mat-accordion {
   margin: 0 !important;
 }
 
-.option-name{
+.option-name {
   padding-top: 3px;
 }
 

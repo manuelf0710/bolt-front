@@ -34,22 +34,9 @@ export class SidebarComponent implements OnInit {
   clickout(event) {
     if (this.eRef.nativeElement.contains(event.target)) {
     } else {
-      if (this.collapseAll == true) {
-        let innerArrow = document.querySelector('#arrowSide');
-        let sidebar = document.querySelector('#sidebar');
-        let separator = document.querySelector('#separatorsidebar');
-        let panel =  document.querySelector('.mat-menu-panel');
-
-        this.sideStatus = !this.sideStatus;
-        this.collapseAll = false;
-        sessionStorage.setItem('sidebarStatus', 'close');
-        sidebar.setAttribute('style', 'width: 80px !important');
-        innerArrow.setAttribute('style', 'transform: rotate(0deg) ');
-        separator.setAttribute('style', 'width: 65% !important');
-
-        if(panel){
-          panel.setAttribute('style','display:none');
-        }
+      let panel = document.querySelector('.mat-menu-panel');
+      if (this.collapseAll == true && !panel) {
+        this.closeSide();
       }
     }
   }
@@ -86,7 +73,7 @@ export class SidebarComponent implements OnInit {
     forkJoin({ projects: projSubs, favorites: favSubs }).subscribe(
       (res: any) => {
         this.favList = res.favorites.body;
-        this.prop = res.projects  
+        this.prop = res.projects;
 
         console.log(this.favList);
         console.log(this.prop);
@@ -208,14 +195,14 @@ export class SidebarComponent implements OnInit {
           if (event) {
             this.favoriteService.postData(element, favData);
           } else {
-            // match the id of app selected with app in fav list to deleted from the service 
-            let app_table_id
-            if(this.favList.length> 0){
+            // match the id of app selected with app in fav list to deleted from the service
+            let app_table_id;
+            if (this.favList.length > 0) {
               this.favList.forEach((fav) => {
-                if(fav.app_id == element.id){
-                  app_table_id = fav
+                if (fav.app_id == element.id) {
+                  app_table_id = fav;
                 }
-              })
+              });
             }
             this.favoriteService.delete(app_table_id);
           }
@@ -238,7 +225,26 @@ export class SidebarComponent implements OnInit {
     }
   }
 
+  closeSide() {
+    let innerArrow = document.querySelector('#arrowSide');
+    let sidebar = document.querySelector('#sidebar');
+    let separator = document.querySelector('#separatorsidebar');
+    let panel = document.querySelector('.mat-menu-panel');
+
+    this.sideStatus = !this.sideStatus;
+    this.collapseAll = false;
+    sessionStorage.setItem('sidebarStatus', 'close');
+    sidebar.setAttribute('style', 'width: 80px !important');
+    innerArrow.setAttribute('style', 'transform: rotate(0deg) ');
+    separator.setAttribute('style', 'width: 65% !important');
+
+    if (panel) {
+      panel.setAttribute('style', 'display:none');
+    }
+  }
+
   openApp(dashboard: string) {
+    this.closeSide();
     this.router.navigate([`app-view/${dashboard}`], {
       queryParamsHandling: 'preserve',
     });

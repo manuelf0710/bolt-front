@@ -9,9 +9,7 @@
     class="rounded"
     title="Expandir Menu"
   >
-    <span class="material-icons menu-icon" id="arrowSide">
-      double_arrow
-    </span>
+    <span class="material-icons menu-icon" id="arrowSide"> double_arrow </span>
   </button>
 
   <mat-accordion multi="false">
@@ -31,19 +29,17 @@
         <i class="material-icons arrow" id="arrowEf" *ngIf="!sideStatus">
           arrow_forward_ios
         </i>
-        <span class="material-icons icon menu-icon" id="iconEf">
-          star
-        </span>
+        <span class="material-icons icon menu-icon" id="iconEf"> star </span>
         <div *ngIf="!sideStatus" class="option-name">
-          {{ lang == 'Esp' ? 'Favoritos' : 'Favorites' }}
+          {{ lang == "Esp" ? "Favoritos" : "Favorites" }}
         </div>
       </mat-expansion-panel-header>
 
-      <p style="margin-left: 40px;" *ngIf="favList.length == 0">
+      <p style="margin-left: 40px" *ngIf="favList.length == 0">
         {{
-          lang == 'Esp'
-            ? 'Aun no tienes ningún favorito!'
-            : 'You don’t have any favorites yet!'
+          lang == "Esp"
+            ? "Aun no tienes ningún favorito!"
+            : "You don’t have any favorites yet!"
         }}
       </p>
 
@@ -52,8 +48,11 @@
           <div class="flex1">
             <span
               class="icon {{ favItem.name.split(' ')[0].toLowerCase() }}"
+              style="margin-left: 10px"
             ></span>
-            {{ lang == 'Esp' ? favItem.name_es : favItem.name_en }}
+            <span class="wrap">
+              {{ lang == "Esp" ? favItem.name_es : favItem.name_en }}
+            </span>
           </div>
         </button>
         <input
@@ -86,7 +85,7 @@
           manage_accounts
         </span>
         <div *ngIf="!sideStatus" class="option-name">
-          {{ lang == 'Esp' ? 'Administrador' : 'Manager' }}
+          {{ lang == "Esp" ? "Administrador" : "Manager" }}
         </div>
       </mat-expansion-panel-header>
 
@@ -102,11 +101,9 @@
               disableRipple="true"
               class="colapsable-menu"
             >
-              <span class="material-icons icon">
-                account_tree
-              </span>
+              <span class="material-icons icon"> account_tree </span>
               <span>
-                {{ lang == 'Esp' ? 'Proyectos' : 'Projects' }}
+                {{ lang == "Esp" ? "Proyectos" : "Projects" }}
               </span>
             </button>
 
@@ -120,17 +117,15 @@
                 <button
                   mat-button
                   (click)="adminRedirect('projects')"
-                  style="width: 100%;"
+                  style="width: 100%"
                 >
                   <div class="flex1">
-                    <span class="material-icons icon">
-                      post_add
-                    </span>
+                    <span class="material-icons icon"> post_add </span>
                     <div *ngIf="!sideStatus">
                       {{
-                        lang == 'Esp'
-                          ? 'crear o modificar un proyecto'
-                          : 'create or modify projects'
+                        lang == "Esp"
+                          ? "crear o modificar un proyecto"
+                          : "create or modify projects"
                       }}
                     </div>
                   </div>
@@ -148,9 +143,7 @@
               disableRipple="true"
               class="colapsable-menu"
             >
-              <span class="material-icons icon">
-                people_alt
-              </span>
+              <span class="material-icons icon"> people_alt </span>
               Roles
             </button>
 
@@ -164,18 +157,16 @@
                 <button
                   mat-button
                   (click)="adminRedirect('roles/users')"
-                  style="width: 100%;"
+                  style="width: 100%"
                 >
                   <div class="flex1">
-                    <span class="material-icons icon">
-                      person_add
-                    </span>
+                    <span class="material-icons icon"> person_add </span>
                     <div>
                       {{
-                        lang == 'Esp'
-                          ? 'crear y modificar usuarios'
-                          : 'create
-                      and modify users'
+                        lang == "Esp"
+                          ? "crear y modificar usuarios"
+                          : "create
+                      and modify users"
                       }}
                     </div>
                   </div>
@@ -185,16 +176,14 @@
                 <button
                   mat-button
                   (click)="adminRedirect('roles')"
-                  style="width: 100%;"
+                  style="width: 100%"
                 >
                   <div class="flex1">
-                    <span class="material-icons icon">
-                      people_alt
-                    </span>
+                    <span class="material-icons icon"> people_alt </span>
 
                     <div>
                       {{
-                        lang == 'Esp' ? 'Administrar roles' : 'Manages roles'
+                        lang == "Esp" ? "Administrar roles" : "Manages roles"
                       }}
                     </div>
                   </div>
@@ -212,9 +201,7 @@
               disableRipple="true"
               class="colapsable-menu"
             >
-              <span class="material-icons icon">
-                photo
-              </span>
+              <span class="material-icons icon"> photo </span>
               Banner
             </button>
 
@@ -228,18 +215,16 @@
                 <button
                   mat-button
                   (click)="adminRedirect('banners')"
-                  style="width: 100%;"
+                  style="width: 100%"
                 >
                   <div class="flex1">
-                    <span class="material-icons icon">
-                      collections
-                    </span>
+                    <span class="material-icons icon"> collections </span>
 
                     <div>
                       {{
-                        lang == 'Esp'
-                          ? 'Crear o modificar banners'
-                          : 'Create or modify banners'
+                        lang == "Esp"
+                          ? "Crear o modificar banners"
+                          : "Create or modify banners"
                       }}
                     </div>
                   </div>
@@ -250,101 +235,103 @@
         </div>
       </div>
     </mat-expansion-panel>
-  </mat-accordion>
 
-  <mat-divider id="separatorsidebar"></mat-divider>
-  <h2 class="sidebar-title" *ngIf="prop.length > 0 && !sideStatus">
-    {{ lang == 'Esp' ? 'Proyectos asignados' : 'Assigned projects' }}
-  </h2>
+    <mat-divider id="separatorsidebar"></mat-divider>
+    <h2 class="sidebar-title" *ngIf="prop.length > 0 && !sideStatus">
+      {{ lang == "Esp" ? "Proyectos asignados" : "Assigned projects" }}
+    </h2>
 
-  <h2 class="sidebar-title" *ngIf="!prop.length && !sideStatus">
-    {{ lang == 'Esp' ? 'Sin Proyectos asignados' : 'No Assigned projects' }}
-  </h2>  
+    <h2 class="sidebar-title" *ngIf="!prop.length && !sideStatus">
+      {{ lang == "Esp" ? "Sin Proyectos asignados" : "No Assigned projects" }}
+    </h2>
 
-  <!-- projects section -->
+    <!-- projects section -->
 
-  <mat-accordion *ngIf="prop.length > 0" multi="false">
-    <mat-expansion-panel
-      *ngFor="let project of prop; let id = index"
-      (opened)="arrowRotate(true, id)"
-      (closed)="arrowRotate(false, id)"
-      [id]="'panel' + id"
-      hideToggle
-      [disabled]="sideStatus"
-      [expanded]="sideStatus == true ? collapseAll : null"
-    >
-      <mat-expansion-panel-header
-        (click)="sideStatus == true ? openSidebar() : null"
+    <div *ngIf="prop.length > 0">
+      <mat-expansion-panel
+        *ngFor="let project of prop; let id = index"
+        (opened)="arrowRotate(true, id)"
+        (closed)="arrowRotate(false, id)"
+        [id]="'panel' + id"
+        hideToggle
+        [disabled]="sideStatus"
+        [expanded]="sideStatus == true ? collapseAll : null"
       >
-        <i
-          class="material-icons arrow"
-          [id]="'arrowH' + id"
-          *ngIf="!sideStatus"
+        <mat-expansion-panel-header
+          (click)="sideStatus == true ? openSidebar() : null"
         >
-          arrow_forward_ios
-        </i>
-        <span class="material-icons icon menu-icon" [id]="'iconH' + id">
-          {{ project.icon }}
-        </span>
-        <span *ngIf="!sideStatus" class="option-name">
-          {{ lang == 'Esp' ? project.name_es : project.name_en }}
-        </span>
-      </mat-expansion-panel-header>
-      <div class="left-line">
-        <div *ngFor="let menuItem of project.submenus">
-          <div *ngIf="menuItem.apps.length > 0 && menuItem.status == true">
-            <button
-              [id]="menuItem.name_es"
-              mat-button
-              [matMenuTriggerFor]="menu"
-              (menuOpened)="menuOpened(menuItem.name_es)"
-              (menuClosed)="menuClosed(menuItem.name_es)"
-              disableRipple="true"
-              class="colapsable-menu"
-            >
-              <span>
-                {{ lang == 'Esp' ? menuItem.name_es : menuItem.name_en }}
-              </span>
-            </button>
-
-            <mat-menu
-              #menu="matMenu"
-              xPosition="after"
-              yPosition="below"
-              direction="vertical"
-            >
-              <section
-                mat-menu-item
+          <i
+            class="material-icons arrow"
+            [id]="'arrowH' + id"
+            *ngIf="!sideStatus"
+          >
+            arrow_forward_ios
+          </i>
+          <span class="material-icons icon menu-icon" [id]="'iconH' + id">
+            {{ project.icon }}
+          </span>
+          <span *ngIf="!sideStatus" class="option-name wrap">
+            {{ lang == "Esp" ? project.name_es : project.name_en }}
+          </span>
+        </mat-expansion-panel-header>
+        <div class="left-line">
+          <div *ngFor="let menuItem of project.submenus">
+            <div *ngIf="menuItem.apps.length > 0 && menuItem.status == true">
+              <button
+                [id]="menuItem.name_es"
+                mat-button
+                [matMenuTriggerFor]="menu"
+                (menuOpened)="menuOpened(menuItem.name_es)"
+                (menuClosed)="menuClosed(menuItem.name_es)"
                 disableRipple="true"
-                class="row"
-                *ngFor="let program of menuItem.apps"
-                (click)="$event.stopPropagation()"
+                class="colapsable-menu"
               >
-                <button mat-button (click)="openApp(program.id)">
-                  <div class="flex1">
-                    <i
-                      *ngIf="sideStatus"
-                      class="material-icons arrow"
-                      [id]="id"
-                    >
-                      arrow_forward_ios
-                    </i>
-                     {{ lang == 'Esp' ? program.name_es : program.name_en }}
-                  </div>
-                </button>
-                <input
-                  [id]="program.id"
-                  class="star"
-                  type="checkbox"
-                  title="bookmark page"
-                  [(checked)]="program.fav"
-                  (change)="showConfirmation($event.target.checked, program)"
-                />
-              </section>
-            </mat-menu>
+                <span class="wrap">
+                  {{ lang == "Esp" ? menuItem.name_es : menuItem.name_en }}
+                </span>
+              </button>
+
+              <mat-menu
+                #menu="matMenu"
+                xPosition="after"
+                yPosition="below"
+                direction="vertical"
+              >
+                <section
+                  mat-menu-item
+                  disableRipple="true"
+                  class="row"
+                  *ngFor="let program of menuItem.apps"
+                  (click)="$event.stopPropagation()"
+                >
+                  <button mat-button (click)="openApp(program.id)">
+                    <div class="flex1">
+                      <i
+                        *ngIf="sideStatus"
+                        class="material-icons arrow"
+                        [id]="id"
+                      >
+                        arrow_forward_ios
+                      </i>
+                      <span class="wrap">
+                        {{ lang == "Esp" ? program.name_es : program.name_en }}
+                      </span>
+                    </div>
+                  </button>
+                  <input
+                    [id]="program.id"
+                    class="star"
+                    type="checkbox"
+                    title="bookmark page"
+                    [(checked)]="program.fav"
+                    (change)="showConfirmation($event.target.checked, program)"
+                  />
+                </section>
+              </mat-menu>
+            </div>
           </div>
         </div>
-      </div>
-    </mat-expansion-panel>
+      </mat-expansion-panel>
+    </div>
   </mat-accordion>
 </aside>

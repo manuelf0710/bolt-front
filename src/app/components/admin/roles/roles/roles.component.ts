@@ -211,19 +211,19 @@ export class RolesComponent implements OnInit {
     };
     console.log('dataguardar', dataForm);
 
-    if (!operation) {
-      this.rolesService.postData(dataForm);
-    } else {
-      this.message_action_es = 'actualizó';
-      this.message_action_en = 'updated';
-      // TO DO:: PUT REQUEST
-      this.rolesService.updateData(
-        this.role_id,
-        dataForm,
-        this.message_action_es,
-        this.message_action_en
-      );
-    }
+    // if (!operation) {
+    //   this.rolesService.postData(dataForm);
+    // } else {
+    //   this.message_action_es = 'actualizó';
+    //   this.message_action_en = 'updated';
+    //   // TO DO:: PUT REQUEST
+    //   this.rolesService.updateData(
+    //     this.role_id,
+    //     dataForm,
+    //     this.message_action_es,
+    //     this.message_action_en
+    //   );
+    // }
   }
 
   updateRoleStatus(role, event) {
@@ -387,8 +387,7 @@ export class RolesComponent implements OnInit {
   }
 
   allowSubmenuAccess(completed: boolean, submenuInserted: any) {
-    //this.showError();
-    // set status value in all apps where submenuinserted id is equal to app.submenu_id
+    // set status value in all apps where submenu inserted id is equal to app.submenu_id
     this.projects.forEach((project) => {
       project.submenus.forEach((submenu) => {
         if (submenu == null) {
@@ -405,8 +404,8 @@ export class RolesComponent implements OnInit {
       });
     });
 
-    // insert submenu and apps when the father submenu is selected
-    // delete submenu and apps when the father submenu is deselected
+    // insert submenu and apps when the father project is selected
+    // delete submenu and apps when the father project is deselected
     if (completed) {
       this.allComplete = true;
       this.allowed_submenus.push({

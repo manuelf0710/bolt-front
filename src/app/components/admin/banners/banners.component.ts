@@ -129,11 +129,21 @@ export class BannersComponent implements OnInit, OnDestroy {
   }
 
   openBannerForm(action?: any) {
+    this.open_form = true;
+    setTimeout(() => {
+      let cont = document.querySelector('#container');
+
+      cont.scroll({
+        top: 800,
+        behavior: 'smooth',
+      });
+      window.scroll({
+        top: 100,
+      });
+    }, 100);
+
     if (action) {
       this.bannerId = action.id;
-    }
-    this.open_form = true;
-    if (action) {
       this.edit_form = true;
       this.loadBanner(action);
     }
@@ -225,6 +235,11 @@ export class BannersComponent implements OnInit, OnDestroy {
     this.urlPdfBanner = '';
     this.bannerForm.reset('');
     this.bannerForm.markAsUntouched();
+    let cont = document.querySelector('#container');
+    window.scroll({
+      top: 0,
+      behavior: 'smooth',
+    });
   }
 
   showConfirmation(target: any, operation: string, event?: any) {

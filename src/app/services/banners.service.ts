@@ -71,7 +71,10 @@ export class BannersService {
 
   updateData(target: any, id: string) {
     this.httpService
-      .put(environment.serverUrl + environment.banners.putById + id, target)
+      .putFormData(
+        environment.serverUrl + environment.banners.putById + id,
+        target
+      )
       .subscribe(
         (response: any) => {
           if (response.status == 200) {
@@ -86,9 +89,9 @@ export class BannersService {
                 message_en: `Successfully updated the banner ${target.name_en}`,
               }
             );
-            /*setTimeout(() => {
+            setTimeout(() => {
               window.location.reload();
-            }, 2000); */
+            }, 2000);
           } else {
           }
         },

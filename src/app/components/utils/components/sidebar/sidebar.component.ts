@@ -35,7 +35,8 @@ export class SidebarComponent implements OnInit {
     if (this.eRef.nativeElement.contains(event.target)) {
     } else {
       let panel = document.querySelector('.mat-menu-panel');
-      if (this.collapseAll == true && !panel) {
+      let tutorial = localStorage.getItem('tutorial');
+      if (this.collapseAll == true && !panel && tutorial) {
         this.closeSide();
       }
     }
@@ -251,6 +252,7 @@ export class SidebarComponent implements OnInit {
   }
 
   adminRedirect(route: string) {
+    this.closeSide();
     this.router.navigate([`admin/${route}`], {
       queryParamsHandling: 'preserve',
     });

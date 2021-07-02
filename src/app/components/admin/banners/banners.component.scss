@@ -63,10 +63,15 @@ h3 {
           font-weight: bold;
         }
       }
-
+      .card__body__message {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 100%;
+      }
       .card__body__message,
       .menu-icon {
-        font-family: 'Gotham';
+        font-family: "Gotham";
         font-size: 18px;
         line-height: 18px;
         color: #707782;

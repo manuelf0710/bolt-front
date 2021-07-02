@@ -73,7 +73,6 @@ export class HomeComponent implements OnInit {
       localStorage.setItem('userData', JSON.stringify(decodedAuthData.user));
       localStorage.setItem('userDataSaml', JSON.stringify(decodedAuthData.req));
 
-      console.log(decodedAuthData.req);
       // save auth data in local storage
       this.authService.saveAuthData(token, expirationDate, userId);
       // set session timer
@@ -81,6 +80,8 @@ export class HomeComponent implements OnInit {
       // set true auth status listenner
       this.authService.setListenner();
       window.location.href = '/home';
+    } else {
+      this.ui.dismissLoading();
     }
   }
 

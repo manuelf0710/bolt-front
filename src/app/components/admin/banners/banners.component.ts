@@ -6,17 +6,15 @@ import {
   Validators,
 } from '@angular/forms';
 
+import { Subscription } from 'rxjs';
+import { BannersService } from 'src/app/services/banners.service';
+import { environment } from 'src/environments/environment';
+
 import { MatDialog } from '@angular/material/dialog';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 import { ModalConfirmationComponent } from '../../utils/pop up/modal-confirmation/modal-confirmation.component';
 import { UiService } from 'src/app/services/ui.service';
 import { Banner } from 'src/app/model/banner.model';
-
-import { Banners } from 'src/app/mocks/banner-mock';
-import { Subscription } from 'rxjs';
-import { BannersService } from 'src/app/services/banners.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-banners',
@@ -38,7 +36,7 @@ export class BannersComponent implements OnInit, OnDestroy {
   public pdfFile: any = null;
   public imgFile: any = null;
   public BannerName: string = '';
-  public BannerStatus: number = 0;
+  public BannerStatus: number = 1;
   public urlAction: boolean = true;
   public message_action_es: string = 'deshabilitar';
   public message_action_en: string = 'disable';

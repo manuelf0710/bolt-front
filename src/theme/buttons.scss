@@ -1,5 +1,5 @@
 /*import colors*/
-@import './variables.scss';
+@import "./variables.scss";
 
 /* button styles */
 .flex-column .mat-button {
@@ -85,7 +85,7 @@
     33px,
     transparent,
     #e21d47,
-    'Gotham',
+    "Gotham",
     14px,
     13px !important
   );
@@ -105,7 +105,7 @@
     36px,
     $octonary-red,
     $primary-white,
-    'Gotham',
+    "Gotham",
     14px,
     13px !important
   );
@@ -117,7 +117,7 @@
     30px,
     transparent,
     #e31e44,
-    'Gotham',
+    "Gotham",
     18px,
     17px !important
   );
@@ -132,7 +132,7 @@
 // admin styles
 // projects table toogle
 @mixin toogle($font-size, $line-height, $color) {
-  font-family: 'Gotham';
+  font-family: "Gotham";
   font-style: normal;
   font-weight: normal;
   font-size: $font-size;
@@ -158,7 +158,7 @@
     height: 12px;
     background-color: $primary-white;
     border: 1px solid #e21d47;
-    margin-top:1px;
+    margin-top: 1px;
   }
 }
 .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
@@ -176,7 +176,7 @@
 
 .sub-toogle {
   @include toogle(14px, 16px, #e21d47);
-  font-family: 'Roboto';
+  font-family: "Roboto";
   text-decoration-line: underline;
 }
 .project-btn {
@@ -235,4 +235,8 @@
 }
 .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
   border-color: #e21d47;
+}
+
+.button-disabled {
+  color: $nonary-grey;
 }

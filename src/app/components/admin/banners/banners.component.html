@@ -23,6 +23,7 @@
           class="enable-toogle"
           (change)="showConfirmation(banner, 'update', $event)"
           [checked]="banner.status == 1"
+          [disabled]="banner_list.length == 1 ? true : false"
         ></mat-slide-toggle>
         <mat-card-content>
           <div class="col" style="margin-bottom: 10px">
@@ -58,8 +59,16 @@
             mat-button
             class="menu-icon"
             (click)="showConfirmation(banner, 'delete')"
+            [disabled]="banner_list.length == 1 ? true : false"
           >
-            <span class="material-icons"> delete </span>
+            <span
+              class="material-icons"
+              [ngClass]="{
+                'button-disabled': banner_list.length == 1 ? true : false
+              }"
+            >
+              delete
+            </span>
           </button>
         </mat-card-actions>
       </mat-card>

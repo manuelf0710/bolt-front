@@ -64,8 +64,10 @@ export class SidebarComponent implements OnInit {
 
     if (this.sideMemory == 'close') {
       this.sideStatus = false;
+      this.closeSide();
     } else {
       this.sideStatus = true;
+      this.openSide();
     }
     this.getData();
   }
@@ -78,7 +80,6 @@ export class SidebarComponent implements OnInit {
       (res: any) => {
         this.favList = res.favorites.body;
         this.prop = res.projects;
-        this.openSide();
       }
     );
   }

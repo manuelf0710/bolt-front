@@ -132,17 +132,17 @@ export class RolesComponent implements OnInit {
 
       let fetchProjects = res.projects.body.items;
       this.projects = fetchProjects;
-      console.log('estos proyectos ', this.projects);
-      this.markUnchekedAllApps();
+      this.markUnchekedAll();
     });
   }
 
-  markUnchekedAllApps() {
+  markUnchekedAll() {
     for (let i = 0; i < this.projects.length; i++) {
       //this.allowSubmenuAccess();
       for (let j = 0; j < this.projects[i].submenus.length; j++) {
         //this.markUnchekedAllApps(i, j, this.projects[i].submenus[j]);
         for (let k = 0; k < this.projects[i].submenus[j].apps.length; k++) {
+          this.projects[i].submenus[j].access = 0;
           this.projects[i].submenus[j].apps[k].checked = 0;
         }
       }
@@ -172,7 +172,6 @@ export class RolesComponent implements OnInit {
   }
 
   updateRole(operation: string) {
-    console.log(this.createRolForm.get('role_projects').value);
     if (
       this.createRolForm.invalid ||
       this.allowed_apps.length == 0 ||
@@ -187,14 +186,12 @@ export class RolesComponent implements OnInit {
     let user_id = localStorage.getItem('userId');
     let projectIdFound = false;
     this.projectResume.forEach((projectSelected) => {
-      console.log('sampalas', projectSelected);
       projectIdFound = this.projectsId.some(
         (item) => item == projectSelected.id
       );
       if (!projectIdFound) {
         this.projectsId = [...this.projectsId, projectSelected.id];
       }
-      console.log('aqui');
     });
     let dataForm = {
       status: this.role_status,
@@ -280,12 +277,8 @@ export class RolesComponent implements OnInit {
         this.role_status = target.status;
 
         target.projects.forEach((element) => {
-          console.log('el elemento ', element);
           this.projectNames = [...this.projectNames, element.name_en];
         });
-
-        console.log('projectnames ', this.projectNames);
-        console.log('projectsresume', this.projectResume);
 
         this.createRolForm.patchValue({
           rol_name_es: target['name_es'],
@@ -296,49 +289,17 @@ export class RolesComponent implements OnInit {
         });
 
         this.readProjectsSelected(this.projectNames);
-        console.log('projectsresume', this.projectResume);
         /*this.prop = res;
 
         if (!this.prop.length) {
          
         } */
-        console.log('res in loadrole ', res);
       },
       (error: any) => {
-        console.log('ha ocurrido un error loadrole');
-        console.log('error loadrole', error);
         this.ui.dismissLoading();
       },
       () => {}
     );
-  }
-
-  loadRole2(target: any) {
-    console.log('target ', target);
-    console.log('target end');
-    this.cleanForm();
-    this.create = false;
-    this.showForm = true;
-    this.role_id = target.id;
-    this.role_status = target.status;
-    // this.projects = MockProjectsByRole
-    console.log(target);
-
-    target.projects.forEach((element) => {
-      console.log('el elemento ', element);
-      this.projectNames = [...this.projectNames, element.name_en];
-    });
-
-    console.log('los names');
-
-    this.createRolForm.patchValue({
-      rol_name_es: target['name_es'],
-      rol_name_en: target['name_en'],
-      description_es: target['description_es'],
-      description_en: target['description_en'],
-      role_projects: this.projectNames,
-    });
-    this.readProjectsSelected(this.projectNames);
   }
 
   deleteRole(role: any) {
@@ -370,7 +331,6 @@ export class RolesComponent implements OnInit {
   readProjectsSelected(projects_selected: any) {
     this.projectResume = [];
     // TO DO GET request to obtain projects by rol
-    console.log('leeproyectoselected', projects_selected);
     this.projects.forEach((singleProject) => {
       projects_selected.forEach((nameProject) => {
         if (
@@ -391,7 +351,7 @@ export class RolesComponent implements OnInit {
           return;
         }
         if (submenuInserted.id == submenu.id) {
-          completed ? (submenu.status = 1) : (submenu.status = 0);
+          completed ? (submenu.access = 1) : (submenu.access = 0);
         }
         submenu.apps.forEach((app) => {
           if (submenuInserted.id == app.submenu_id) {
@@ -456,7 +416,6 @@ export class RolesComponent implements OnInit {
   }
 
   someSelected(submenu) {
-    //console.log('in someselected', this.projectResume);
     let isSomeSelected = false;
     if (this.saveType) {
       //let isSomeSelected;
@@ -464,9 +423,17 @@ export class RolesComponent implements OnInit {
         isSomeSelected = false;
       }
       isSomeSelected = submenu.apps.filter((a) => a.checked).length > 0;
-    } else {
     }
-    //console.log('valor de issomeselected ', isSomeSelected);
+    if (!isSomeSelected) {
+      submenu.access = 0;
+      let toDel = this.allowed_submenus.indexOf(
+        this.allowed_submenus.find(
+          (toDeleted) => toDeleted.submenu_id == submenu.id
+        )
+      );
+      this.allowed_submenus.splice(toDel, toDel);
+    }
+
     return isSomeSelected;
   }
 

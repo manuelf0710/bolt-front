@@ -4,48 +4,42 @@
     <h1 class="underline-title" *ngSwitchCase="'Esp'">proyectos</h1>
     <h1 class="underline-title" *ngSwitchCase="'Eng'">projects</h1>
     <button class="bolt-btn-filled" (click)="createProject()">
-      <span *ngSwitchCase="'Esp'">
-        Crear nuevo proyecto
-      </span>
-      <span *ngSwitchCase="'Eng'">
-        Create new project
-      </span>
+      <span *ngSwitchCase="'Esp'"> Crear nuevo proyecto </span>
+      <span *ngSwitchCase="'Eng'"> Create new project </span>
     </button>
 
     <mat-tab-group>
       <!-- active project -->
       <mat-tab>
         <ng-template mat-tab-label>
-          <span class="material-icons icon">
-            check_circle
-          </span>
-          {{ this.lang == 'Esp' ? 'Habilitados' : 'Enabled' }}
+          <span class="material-icons icon"> check_circle </span>
+          {{ this.lang == "Esp" ? "Habilitados" : "Enabled" }}
         </ng-template>
         <div class="grid">
           <div class="grid-header">
-            <div class="grid-header__title" style="margin-left: 40px;">
-              {{ this.lang == 'Esp' ? 'Proyecto' : 'Project' }}
+            <div class="grid-header__title" style="margin-left: 40px">
+              {{ this.lang == "Esp" ? "Proyecto" : "Project" }}
             </div>
             <div class="grid-header__title">
-              {{ this.lang == 'Esp' ? 'Descripción' : 'Description' }}
+              {{ this.lang == "Esp" ? "Descripción" : "Description" }}
             </div>
-            <div class="grid-header__title" style="text-align: center;">
-              {{ this.lang == 'Esp' ? 'Icono' : 'Icon' }}
+            <div class="grid-header__title" style="text-align: center">
+              {{ this.lang == "Esp" ? "Icono" : "Icon" }}
             </div>
-            <div class="grid-header__title" style="text-align: center;">
-              {{ this.lang == 'Esp' ? 'Acciones' : 'Actions' }}
+            <div class="grid-header__title" style="text-align: center">
+              {{ this.lang == "Esp" ? "Acciones" : "Actions" }}
             </div>
           </div>
 
           <p
             *ngIf="activeProjects.length == 0"
             class="grid-content__description"
-            style="text-align: center; margin-top: 10px;"
+            style="text-align: center; margin-top: 10px"
           >
             {{
-              lang == 'Esp'
-                ? 'No existe ningún protecto con estado activo'
-                : 'No project exist with active status '
+              lang == "Esp"
+                ? "No existe ningún protecto con estado activo"
+                : "No project exist with active status "
             }}
           </p>
 
@@ -65,12 +59,12 @@
                   arrow_forward_ios
                 </span>
                 <span class="grid-content__name">
-                  {{ lang == 'Esp' ? activeItem.name_es : activeItem.name_en }}
+                  {{ lang == "Esp" ? activeItem.name_es : activeItem.name_en }}
                 </span>
               </button>
               <p class="grid-content__description">
                 {{
-                  lang == 'Esp'
+                  lang == "Esp"
                     ? activeItem.description_es
                     : activeItem.description_en
                 }}
@@ -97,15 +91,11 @@
                   class="action-btn"
                   (click)="createProject(activeItem)"
                 >
-                  <span class="material-icons menu-icon">
-                    edit
-                  </span>
+                  <span class="material-icons menu-icon"> edit </span>
                   <span class="action-text" *ngSwitchCase="'Esp'">
                     editar
                   </span>
-                  <span class="action-text" *ngSwitchCase="'Eng'">
-                    edit
-                  </span>
+                  <span class="action-text" *ngSwitchCase="'Eng'"> edit </span>
                 </button>
 
                 <button
@@ -113,9 +103,7 @@
                   class="action-btn"
                   (click)="deleteProject(activeItem)"
                 >
-                  <span class="material-icons menu-icon">
-                    delete_forever
-                  </span>
+                  <span class="material-icons menu-icon"> delete_forever </span>
                   <span class="action-text" *ngSwitchCase="'Esp'">
                     Eliminar
                   </span>
@@ -127,20 +115,20 @@
                 <button
                   mat-button
                   class="action-btn"
-                  style="padding: 0; width: 86px;"
+                  style="padding: 0; width: 86px"
                   (click)="createSubmenu(activeItem)"
                 >
                   <span class="plus-icon"></span>
                   <span
                     class="action-text"
-                    style="margin-top: 5px;"
+                    style="margin-top: 5px"
                     *ngSwitchCase="'Esp'"
                   >
                     Añadir sub menú
                   </span>
                   <span
                     class="action-text"
-                    style="margin-top: 5px;"
+                    style="margin-top: 5px"
                     *ngSwitchCase="'Eng'"
                   >
                     add sub menu
@@ -154,9 +142,9 @@
                 *ngIf="activeItem.submenus.length == 0"
               >
                 {{
-                  lang == 'Esp'
-                    ? 'Aun no has asignado sub menús a este proyecto'
-                    : 'You have not yet assigned sub menus to this project'
+                  lang == "Esp"
+                    ? "Aun no has asignado sub menús a este proyecto"
+                    : "You have not yet assigned sub menus to this project"
                 }}
               </p>
               <div *ngIf="activeItem.submenus.length > 0" class="col">
@@ -175,41 +163,86 @@
             </div>
           </div>
         </div>
+
+        <!-- paginator 1-->
+        <div class="paginator row" *ngIf="pages_1">
+          <button
+            mat-button
+            class="paginator-button"
+            (click)="updatePageActive('start')"
+            [disabled]="active_count_1 == 1"
+          >
+            <span style="transform: rotate(180deg)" class="material-icons">
+              double_arrow
+            </span>
+          </button>
+          <button
+            mat-button
+            class="paginator-button"
+            (click)="updatePageActive('prev')"
+            [disabled]="active_count_1 == 1"
+          >
+            <span style="transform: rotate(180deg)" class="material-icons">
+              play_arrow
+            </span>
+          </button>
+          <p *ngSwitchCase="'Esp'">
+            Mostrando {{ activeProjects.length }} de
+            {{ total_items_1 }} resultados
+          </p>
+          <p *ngSwitchCase="'Eng'">
+            Showing {{ activeProjects.length }} of {{ total_items_1 }} results
+          </p>
+          <button
+            mat-button
+            class="paginator-button"
+            (click)="updatePageActive('next')"
+            [disabled]="active_count_1 == pages_1"
+          >
+            <span class="material-icons"> play_arrow </span>
+          </button>
+          <button
+            mat-button
+            class="paginator-button"
+            (click)="updatePageActive('last')"
+            [disabled]="active_count_1 == pages_1"
+          >
+            <span class="material-icons"> double_arrow </span>
+          </button>
+        </div>
       </mat-tab>
 
       <!-- inactive projects -->
       <mat-tab>
         <ng-template mat-tab-label>
-          <span class="material-icons icon">
-            disabled_by_default
-          </span>
-          {{ this.lang == 'Esp' ? 'Deshabilitados' : 'Disabled' }}
+          <span class="material-icons icon"> disabled_by_default </span>
+          {{ this.lang == "Esp" ? "Deshabilitados" : "Disabled" }}
         </ng-template>
         <div class="grid">
           <div class="grid-header">
-            <div class="grid-header__title" style="margin-left: 40px;">
-              {{ this.lang == 'Esp' ? 'Proyecto' : 'Project' }}
+            <div class="grid-header__title" style="margin-left: 40px">
+              {{ this.lang == "Esp" ? "Proyecto" : "Project" }}
             </div>
             <div class="grid-header__title">
-              {{ this.lang == 'Esp' ? 'Descripción' : 'Description' }}
+              {{ this.lang == "Esp" ? "Descripción" : "Description" }}
             </div>
-            <div class="grid-header__title" style="text-align: center;">
-              {{ this.lang == 'Esp' ? 'Icono' : 'Icon' }}
+            <div class="grid-header__title" style="text-align: center">
+              {{ this.lang == "Esp" ? "Icono" : "Icon" }}
             </div>
-            <div class="grid-header__title" style="text-align: center;">
-              {{ this.lang == 'Esp' ? 'Acciones' : 'Actions' }}
+            <div class="grid-header__title" style="text-align: center">
+              {{ this.lang == "Esp" ? "Acciones" : "Actions" }}
             </div>
           </div>
 
           <p
             *ngIf="inactiveProjects.length == 0"
             class="grid-content__description"
-            style="text-align: center; margin-top: 10px;"
+            style="text-align: center; margin-top: 10px"
           >
             {{
-              lang == 'Esp'
-                ? 'No existe ningún protecto con estado inactivo'
-                : 'No project exist with inactive status '
+              lang == "Esp"
+                ? "No existe ningún protecto con estado inactivo"
+                : "No project exist with inactive status "
             }}
           </p>
 
@@ -230,13 +263,13 @@
                 </span>
                 <span class="grid-content__name">
                   {{
-                    lang == 'Esp' ? inactiveItem.name_es : inactiveItem.name_en
+                    lang == "Esp" ? inactiveItem.name_es : inactiveItem.name_en
                   }}
                 </span>
               </button>
               <p class="grid-content__description">
                 {{
-                  lang == 'Esp'
+                  lang == "Esp"
                     ? inactiveItem.description_es
                     : inactiveItem.description_en
                 }}
@@ -263,15 +296,11 @@
                   class="action-btn"
                   (click)="createProject(inactiveItem)"
                 >
-                  <span class="material-icons menu-icon">
-                    edit
-                  </span>
+                  <span class="material-icons menu-icon"> edit </span>
                   <span class="action-text" *ngSwitchCase="'Esp'">
                     editar
                   </span>
-                  <span class="action-text" *ngSwitchCase="'Eng'">
-                    edit
-                  </span>
+                  <span class="action-text" *ngSwitchCase="'Eng'"> edit </span>
                 </button>
 
                 <button
@@ -279,9 +308,7 @@
                   class="action-btn"
                   (click)="deleteProject(inactiveItem)"
                 >
-                  <span class="material-icons menu-icon">
-                    delete_forever
-                  </span>
+                  <span class="material-icons menu-icon"> delete_forever </span>
                   <span class="action-text" *ngSwitchCase="'Esp'">
                     Eliminar
                   </span>
@@ -293,21 +320,21 @@
                 <button
                   mat-button
                   class="action-btn"
-                  style="padding: 0; width: 86px;"
+                  style="padding: 0; width: 86px"
                   (click)="createSubmenu(inactiveItem)"
                 >
                   <span class="plus-icon"></span>
 
                   <span
                     class="action-text"
-                    style="margin-top: 5px;"
+                    style="margin-top: 5px"
                     *ngSwitchCase="'Esp'"
                   >
                     Añadir sub menú
                   </span>
                   <span
                     class="action-text"
-                    style="margin-top: 5px;"
+                    style="margin-top: 5px"
                     *ngSwitchCase="'Eng'"
                   >
                     add sub menu
@@ -321,9 +348,9 @@
                 *ngIf="inactiveItem.submenus.length == 0"
               >
                 {{
-                  lang == 'Esp'
-                    ? 'Aun no has asignado sub menús a este proyecto'
-                    : 'You have not yet assigned sub menus to this project'
+                  lang == "Esp"
+                    ? "Aun no has asignado sub menús a este proyecto"
+                    : "You have not yet assigned sub menus to this project"
                 }}
               </p>
               <div class="col" *ngIf="inactiveItem.submenus.length > 0">
@@ -342,57 +369,53 @@
             </div>
           </div>
         </div>
+        <!-- paginator 2 -->
+        <div class="paginator row" *ngIf="pages_2">
+          <button
+            mat-button
+            class="paginator-button"
+            (click)="updatePageInactive('start')"
+            [disabled]="active_count_2 == 1"
+          >
+            <span style="transform: rotate(180deg)" class="material-icons">
+              double_arrow
+            </span>
+          </button>
+          <button
+            mat-button
+            class="paginator-button"
+            (click)="updatePageInactive('prev')"
+            [disabled]="active_count_2 == 1"
+          >
+            <span style="transform: rotate(180deg)" class="material-icons">
+              play_arrow
+            </span>
+          </button>
+          <p *ngSwitchCase="'Esp'">
+            Mostrando {{ inactiveProjects.length }} de
+            {{ total_items_2 }} resultados
+          </p>
+          <p *ngSwitchCase="'Eng'">
+            Showing {{ inactiveProjects.length }} of {{ total_items_2 }} results
+          </p>
+          <button
+            mat-button
+            class="paginator-button"
+            (click)="updatePageInactive('next')"
+            [disabled]="active_count_2 == pages_2"
+          >
+            <span class="material-icons"> play_arrow </span>
+          </button>
+          <button
+            mat-button
+            class="paginator-button"
+            (click)="updatePageInactive('last')"
+            [disabled]="active_count_2 == pages_2"
+          >
+            <span class="material-icons"> double_arrow </span>
+          </button>
+        </div>
       </mat-tab>
     </mat-tab-group>
-
-    <!-- paginator -->
-    <div class="paginator row" *ngIf="pages">
-      <button
-        mat-button
-        class="paginator-button"
-        (click)="updatePage('start')"
-        [disabled]="active_count == 1"
-      >
-        <span style="transform: rotate(180deg);" class="material-icons">
-          double_arrow
-        </span>
-      </button>
-      <button
-        mat-button
-        class="paginator-button"
-        (click)="updatePage('prev')"
-        [disabled]="active_count == 1"
-      >
-        <span style="transform: rotate(180deg);" class="material-icons">
-          play_arrow
-        </span>
-      </button>
-      <p *ngSwitchCase="'Esp'">
-        Mostrando {{ projects.length }} de {{ total_items }} resultados
-      </p>
-      <p *ngSwitchCase="'Eng'">
-        Showing {{ projects.length }} of {{ total_items }} results
-      </p>
-      <button
-        mat-button
-        class="paginator-button"
-        (click)="updatePage('next')"
-        [disabled]="active_count == pages"
-      >
-        <span class="material-icons">
-          play_arrow
-        </span>
-      </button>
-      <button
-        mat-button
-        class="paginator-button"
-        (click)="updatePage('last')"
-        [disabled]="active_count == pages"
-      >
-        <span class="material-icons">
-          double_arrow
-        </span>
-      </button>
-    </div>
   </div>
 </div>

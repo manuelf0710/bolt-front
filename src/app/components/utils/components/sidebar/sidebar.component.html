@@ -1,16 +1,15 @@
 <!-- sidebar -->
 <aside class="flex-column box-shadow" id="sidebar">
   <!-- hide/show sidebar button -->
-  <button
+  <span
     mat-button
     disableRipple="true"
-    (click)="openSidebar()"
     id="collapseSide"
     class="rounded"
     title="Expandir Menu"
   >
     <span class="material-icons menu-icon" id="arrowSide"> double_arrow </span>
-  </button>
+  </span>
 
   <mat-accordion multi="false">
     <!-- fav section -->
@@ -24,7 +23,7 @@
       [expanded]="sideStatus == true ? collapseAll : null"
     >
       <mat-expansion-panel-header
-        (click)="sideStatus == true ? openSidebar() : null"
+        (click)="sideStatus == true ? openSide() : null"
       >
         <i class="material-icons arrow" id="arrowEf" *ngIf="!sideStatus">
           arrow_forward_ios
@@ -76,7 +75,7 @@
       [expanded]="sideStatus == true ? collapseAll : null"
     >
       <mat-expansion-panel-header
-        (click)="sideStatus == true ? openSidebar() : null"
+        (click)="sideStatus == true ? openSide() : null"
       >
         <i class="material-icons arrow" id="arrowEa" *ngIf="!sideStatus">
           arrow_forward_ios
@@ -259,7 +258,7 @@
         [expanded]="sideStatus == true ? collapseAll : null"
       >
         <mat-expansion-panel-header
-          (click)="sideStatus == true ? openSidebar() : null"
+          (click)="sideStatus == true ? openSide() : null"
         >
           <i
             class="material-icons arrow"

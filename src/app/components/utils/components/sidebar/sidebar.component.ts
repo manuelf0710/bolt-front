@@ -29,13 +29,16 @@ export class SidebarComponent implements OnInit {
   public isAuth: boolean = false;
   public sideStatus: boolean = false;
   public collapseAll: boolean = false;
+  public btnClose: boolean = false;
 
   @HostListener('document:click', ['$event'])
   clickout(event) {
     if (this.eRef.nativeElement.contains(event.target)) {
+      this.openSide();
     } else {
       let panel = document.querySelector('.mat-menu-panel');
       let tutorial = localStorage.getItem('tutorial');
+
       if (this.collapseAll == true && !panel && tutorial) {
         this.closeSide();
       }
@@ -75,36 +78,9 @@ export class SidebarComponent implements OnInit {
       (res: any) => {
         this.favList = res.favorites.body;
         this.prop = res.projects;
-
-        console.log(this.favList);
-        console.log(this.prop);
-        this.openSidebar();
+        this.openSide();
       }
     );
-  }
-
-  openSidebar() {
-    let innerArrow = document.querySelector('#arrowSide');
-    let sidebar = document.querySelector('#sidebar');
-    let separator = document.querySelector('#separatorsidebar');
-
-    this.sideStatus = !this.sideStatus;
-    if (this.sideStatus) {
-      this.collapseAll = false;
-
-      sessionStorage.setItem('sidebarStatus', 'close');
-
-      sidebar.setAttribute('style', 'width: 80px !important');
-
-      innerArrow.setAttribute('style', 'transform: rotate(0deg) ');
-      separator.setAttribute('style', 'width: 65% !important');
-    } else {
-      this.collapseAll = true;
-      sessionStorage.setItem('sidebarStatus', 'open');
-      sidebar.setAttribute('style', 'width: 267px !important');
-      innerArrow.setAttribute('style', 'transform: rotate(180deg)');
-      separator.setAttribute('style', 'width: 85% !important');
-    }
   }
 
   menuOpened(item) {
@@ -226,13 +202,25 @@ export class SidebarComponent implements OnInit {
     }
   }
 
+  openSide() {
+    let innerArrow = document.querySelector('#arrowSide');
+    let sidebar = document.querySelector('#sidebar');
+    let separator = document.querySelector('#separatorsidebar');
+    this.sideStatus = false;
+    this.collapseAll = true;
+    sessionStorage.setItem('sidebarStatus', 'open');
+    sidebar.setAttribute('style', 'width: 267px !important');
+    innerArrow.setAttribute('style', 'transform: rotate(180deg)');
+    separator.setAttribute('style', 'width: 85% !important');
+  }
+
   closeSide() {
     let innerArrow = document.querySelector('#arrowSide');
     let sidebar = document.querySelector('#sidebar');
     let separator = document.querySelector('#separatorsidebar');
     let panel = document.querySelector('.mat-menu-panel');
 
-    this.sideStatus = !this.sideStatus;
+    this.sideStatus = true;
     this.collapseAll = false;
     sessionStorage.setItem('sidebarStatus', 'close');
     sidebar.setAttribute('style', 'width: 80px !important');

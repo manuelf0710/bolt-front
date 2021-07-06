@@ -36,7 +36,7 @@ export const environment = {
 
   projects: {
     get: 'projects',
-    getAll: 'projects/menu',
+    getAll: 'projects/menu/',
     menuByUser: 'projects/menubyuser',
     menuByRole: 'projects/menubyrole',
     post: 'projects',

@@ -94,7 +94,6 @@ export class HomeComponent implements OnInit {
         // cambiar validacion de usuario a role de usuario
         if (this.user_id && this.user_id.length > 0) {
           this.favList = favorites;
-          console.log(this.favList);
         } else {
           this.openAlert();
         }

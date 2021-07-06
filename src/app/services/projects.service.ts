@@ -28,7 +28,43 @@ export class ProjectsService {
     );
   }
 
-  getProjectsAssignByUserRol(): Observable<any>{
+  getActiveData(page?: number, limit?: number): Observable<any> {
+    if (!page) {
+      page = 1;
+    }
+    if (!limit) {
+      limit = 10;
+    }
+    return this.httpService.get(
+      environment.serverUrl +
+        environment.projects.getAll +
+        '?status=1' +
+        '&page=' +
+        page +
+        '&limit=' +
+        limit
+    );
+  }
+
+  getInactiveData(page?: number, limit?: number): Observable<any> {
+    if (!page) {
+      page = 1;
+    }
+    if (!limit) {
+      limit = 10;
+    }
+    return this.httpService.get(
+      environment.serverUrl +
+        environment.projects.getAll +
+        '?status=0' +
+        '&page=' +
+        page +
+        '&limit=' +
+        limit
+    );
+  }
+
+  getProjectsAssignByUserRol(): Observable<any> {
     return this.httpService
       .get(environment.serverUrl + environment.projects.menuByUser)
       .pipe(
@@ -62,38 +98,6 @@ export class ProjectsService {
             });
 
             this._simpleProjectsSbj.next(this._simpleProjects);
-          } else {
-            // TODO :: logic for error
-          }
-        },
-        (error) => {
-          // TODO :: logic for error
-        }
-      );
-  }
-
-  getData(page?: number, limit?: number) {
-    if (!page) {
-      page = 1;
-    }
-    if (!limit) {
-      limit = 10;
-    }
-    this.httpService
-      .get(
-        environment.serverUrl +
-          environment.projects.getAll +
-          '?page=' +
-          page +
-          '&limit=' +
-          limit
-      )
-      .subscribe(
-        (response: any) => {
-          if (response.status == 200) {
-            this._fullProjects = response.body;
-
-            this._fullProjectsSbj.next(this._fullProjects);
           } else {
             // TODO :: logic for error
           }

@@ -138,56 +138,33 @@ export class SidebarComponent implements OnInit {
     }
   }
 
-  showConfirmation(event, element) {
-    let message_action_es;
-    let message_action_en;
-
+  showConfirmation(event, element, origin?) {
     if (this.favList.length < 6) {
       if (event) {
-        message_action_es = 'agregar';
-        message_action_en = 'add';
+        let favData = {
+          app_id: element.id,
+          user_id: this.userId,
+        };
+        this.favoriteService.postData(element, favData);
       } else {
-        message_action_es = 'eliminar';
-        message_action_en = 'delete';
-      }
-
-      const confDialog = this.dialog.open(ModalConfirmationComponent, {
-        id: ModalConfirmationComponent.toString(),
-        disableClose: true,
-        hasBackdrop: true,
-        width: '500px',
-        height: 'auto',
-        data: {
-          fav_name: this.lang == 'Esp' ? element.name_es : element.name_en,
-          message_action_es: message_action_es,
-          message_action_en: message_action_en,
-        },
-      });
-
-      confDialog.afterClosed().subscribe((result) => {
-        if (result) {
-          let favData = {
-            app_id: element.id,
-            user_id: this.userId,
-          };
-          if (event) {
-            this.favoriteService.postData(element, favData);
-          } else {
-            // match the id of app selected with app in fav list to deleted from the service
-            let app_table_id;
-            if (this.favList.length > 0) {
-              this.favList.forEach((fav) => {
-                if (fav.app_id == element.id) {
-                  app_table_id = fav;
-                }
-              });
+        // match the id of app selected with app in fav list to deleted from the service
+        let app_table_id;
+        if (this.favList.length > 0) {
+          this.favList.forEach((fav) => {
+            if (origin) {
+              if (fav.app_id == element.app_id) {
+                app_table_id = fav;
+              }
+            } else {
+              if (fav.app_id == element.id) {
+                app_table_id = fav;
+              }
             }
-            this.favoriteService.delete(app_table_id);
-          }
-        } else {
-          window.location.reload();
+          });
         }
-      });
+
+        this.favoriteService.delete(app_table_id);
+      }
     } else {
       if (event) {
         this.ui.createSnackbar(

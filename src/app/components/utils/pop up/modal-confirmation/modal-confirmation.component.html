@@ -71,19 +71,7 @@
       ?
     </p>
   </div>
-  <!-- view for fav item -->
-  <div class="dialog-alert__content" *ngIf="data.fav_name">
-    <p *ngSwitchCase="'Esp'">
-      ¿Desea {{ data.message_action_es }} la aplicacion
-      <strong>{{ data.fav_name }}</strong>
-      en su lista de favoritos ?
-    </p>
-    <p *ngSwitchCase="'Eng'">
-      ¿ Do you want to {{ data.message_action_en }} the role
-      <strong>{{ data.fav_name }}</strong>
-      in your favorite list ?
-    </p>
-  </div>
+
   <!-- view for banners -->
   <div class="dialog-alert__content" *ngIf="data.banner_name">
     <p *ngSwitchCase="'Esp'">
@@ -100,12 +88,8 @@
 
   <!-- view for re start session -->
   <div class="dialog-alert__content" *ngIf="data.session">
-    <p *ngSwitchCase="'Esp'">
-      ¿Desea volver a iniciar sesión?
-    </p>
-    <p *ngSwitchCase="'Eng'">
-      Would you like to log in again?
-    </p>
+    <p *ngSwitchCase="'Esp'">¿Desea volver a iniciar sesión?</p>
+    <p *ngSwitchCase="'Eng'">Would you like to log in again?</p>
   </div>
 
   <div class="row">

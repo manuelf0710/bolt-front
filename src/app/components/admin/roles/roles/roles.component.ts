@@ -189,8 +189,28 @@ export class RolesComponent implements OnInit {
     let subToSend = [];
     let appToSend = [];
 
+    // push only the projects presents in the select
     this.projectResume.forEach((projectSelected) => {
       this.projectsId.push(projectSelected.id);
+    });
+
+    //push the submenus present into the projectsid array
+
+    this.projectsId.forEach((projectId) => {
+      this.allowed_submenus.forEach((element) => {
+        if (element.projects_id == projectId) {
+          subToSend.push(element);
+        }
+      });
+    });
+
+    //push the apps present into the subToSend array
+    subToSend.forEach((subSelected) => {
+      this.allowed_apps.forEach((element) => {
+        if (element.submenu_id == subSelected.submenu_id) {
+          appToSend.push(element);
+        }
+      });
     });
 
     let dataForm = {
@@ -201,8 +221,8 @@ export class RolesComponent implements OnInit {
       description_en: this.createRolForm.controls.description_en.value,
       created_by: user_id,
       projects: this.projectsId,
-      submenus: this.allowed_submenus,
-      apps: this.allowed_apps,
+      submenus: this.create ? this.allowed_submenus : subToSend,
+      apps: this.create ? this.allowed_apps : appToSend,
     };
     console.log('dataguardar', dataForm);
 
@@ -282,18 +302,31 @@ export class RolesComponent implements OnInit {
         res.forEach((project) => {
           project.access = 1;
           project.submenus.forEach((submenu) => {
-            this.allowed_submenus = [...this.allowed_submenus, submenu];
+            this.allowed_submenus = [
+              ...this.allowed_submenus,
+              {
+                projects_id: submenu.project_id,
+                submenu_id: submenu.id,
+                access: submenu.rs_access,
+              },
+            ];
             if (submenu == null) {
               return;
             }
             submenu.apps.forEach((app) => {
               app.checked = 1;
-              this.allowed_apps = [...this.allowed_apps, app];
+              this.allowed_apps = [
+                ...this.allowed_apps,
+                {
+                  submenu_id: app.submenu_id,
+                  app_id: app.id,
+                  access: app.checked,
+                },
+              ];
             });
           });
         });
-        console.log(this.allowed_submenus);
-        console.log(this.allowed_apps);
+
         // copy of projects array
         this.projectsCopy = [...this.projects];
 
@@ -305,7 +338,6 @@ export class RolesComponent implements OnInit {
         });
 
         this.loaded_list = res.concat(this.projectsCopy);
-        console.log(this.loaded_list);
 
         target.projects.forEach((element) => {
           this.projectNames = [...this.projectNames, element.name_en];

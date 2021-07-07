@@ -268,10 +268,10 @@ export class RolesComponent implements OnInit {
   }
 
   loadRole(target: any) {
-    console.log(target);
-
     this.cleanForm();
     this.ui.showLoading();
+    this.allowed_apps = [];
+    this.allowed_submenus = [];
     this.projectService.getProjectsAssignByRol(target.id).subscribe(
       (res: any[]) => {
         this.ui.dismissLoading();
@@ -284,15 +284,18 @@ export class RolesComponent implements OnInit {
         res.forEach((project) => {
           project.access = 1;
           project.submenus.forEach((submenu) => {
+            this.allowed_submenus = [...this.allowed_submenus, submenu];
             if (submenu == null) {
               return;
             }
             submenu.apps.forEach((app) => {
               app.checked = 1;
+              this.allowed_apps = [...this.allowed_apps, app];
             });
           });
         });
-
+        console.log(this.allowed_submenus);
+        console.log(this.allowed_apps);
         // copy of projects array
         this.projectsCopy = [...this.projects];
 
@@ -319,11 +322,6 @@ export class RolesComponent implements OnInit {
         });
 
         this.readProjectsSelected(this.projectNames);
-        /*this.prop = res;
-
-        if (!this.prop.length) {
-         
-        } */
       },
       (error: any) => {
         this.ui.dismissLoading();
@@ -365,8 +363,9 @@ export class RolesComponent implements OnInit {
     targetArray.forEach((singleProject) => {
       projects_selected.forEach((nameProject) => {
         if (
-          nameProject == singleProject.name_en ||
-          nameProject == singleProject.name_es
+          (nameProject == singleProject.name_en ||
+            nameProject == singleProject.name_es) &&
+          singleProject.submenus.length > 0
         ) {
           this.projectResume = [...this.projectResume, singleProject];
         }

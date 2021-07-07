@@ -68,12 +68,14 @@
               multiple
               (selectionChange)="readProjectsSelected($event.value)"
             >
-              <mat-option
-                *ngFor="let option of projects"
-                [value]="option?.name_en"
-              >
-                {{ lang == "Esp" ? option?.name_es : option?.name_en }}
-              </mat-option>
+              <section *ngFor="let option of projects">
+                <mat-option
+                  *ngIf="option.submenus.length > 0"
+                  [value]="option?.name_en"
+                >
+                  {{ lang == "Esp" ? option?.name_es : option?.name_en }}
+                </mat-option>
+              </section>
             </mat-select>
             <mat-error *ngIf="createRolForm.controls.role_projects.errors">
               {{ getMessageform("role_projects") }}

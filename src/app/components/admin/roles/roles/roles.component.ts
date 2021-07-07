@@ -37,12 +37,14 @@ export class RolesComponent implements OnInit {
 
   public roles: Roles[] = [];
   public projects: Projects[] = [];
+  public projectsCopy: any[] = [];
 
   public projectResume = [];
   public projectsId = [];
   public projectNames = [];
   public allowed_submenus = [];
   public allowed_apps = [];
+  public loaded_list = [];
 
   public showForm: boolean = false;
   public editionActive: boolean = false;
@@ -206,19 +208,19 @@ export class RolesComponent implements OnInit {
     };
     console.log('dataguardar', dataForm);
 
-    // if (!operation) {
-    //   this.rolesService.postData(dataForm);
-    // } else {
-    //   this.message_action_es = 'actualizó';
-    //   this.message_action_en = 'updated';
-    //   // TO DO:: PUT REQUEST
-    //   this.rolesService.updateData(
-    //     this.role_id,
-    //     dataForm,
-    //     this.message_action_es,
-    //     this.message_action_en
-    //   );
-    // }
+    if (!operation) {
+      this.rolesService.postData(dataForm);
+    } else {
+      this.message_action_es = 'actualizó';
+      this.message_action_en = 'updated';
+      // TO DO:: PUT REQUEST
+      this.rolesService.updateData(
+        this.role_id,
+        dataForm,
+        this.message_action_es,
+        this.message_action_en
+      );
+    }
   }
 
   updateRoleStatus(role, event) {
@@ -266,6 +268,8 @@ export class RolesComponent implements OnInit {
   }
 
   loadRole(target: any) {
+    console.log(target);
+
     this.cleanForm();
     this.ui.showLoading();
     this.projectService.getProjectsAssignByRol(target.id).subscribe(
@@ -275,6 +279,32 @@ export class RolesComponent implements OnInit {
         this.showForm = true;
         this.role_id = target.id;
         this.role_status = target.status;
+
+        // set status value in all apps where submenu inserted id is equal to app.submenu_id
+        res.forEach((project) => {
+          project.access = 1;
+          project.submenus.forEach((submenu) => {
+            if (submenu == null) {
+              return;
+            }
+            submenu.apps.forEach((app) => {
+              app.checked = 1;
+            });
+          });
+        });
+
+        // copy of projects array
+        this.projectsCopy = [...this.projects];
+
+        res.forEach((l2) => {
+          let indexSub = this.projectsCopy.indexOf(
+            this.projectsCopy.find((proj) => proj.id == l2.id)
+          );
+          this.projectsCopy.splice(indexSub, 1);
+        });
+
+        this.loaded_list = res.concat(this.projectsCopy);
+        console.log(this.loaded_list);
 
         target.projects.forEach((element) => {
           this.projectNames = [...this.projectNames, element.name_en];
@@ -329,9 +359,10 @@ export class RolesComponent implements OnInit {
   }
 
   readProjectsSelected(projects_selected: any) {
+    let targetArray = this.create ? this.projects : this.loaded_list;
     this.projectResume = [];
-    // TO DO GET request to obtain projects by rol
-    this.projects.forEach((singleProject) => {
+
+    targetArray.forEach((singleProject) => {
       projects_selected.forEach((nameProject) => {
         if (
           nameProject == singleProject.name_en ||
@@ -345,7 +376,8 @@ export class RolesComponent implements OnInit {
 
   allowSubmenuAccess(completed: boolean, submenuInserted: any) {
     // set status value in all apps where submenu inserted id is equal to app.submenu_id
-    this.projects.forEach((project) => {
+    let targetArray = this.create ? this.projects : this.loaded_list;
+    targetArray.forEach((project) => {
       project.submenus.forEach((submenu) => {
         if (submenu == null) {
           return;

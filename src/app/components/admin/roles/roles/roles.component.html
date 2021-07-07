@@ -126,23 +126,23 @@
           </mat-form-field>
         </div>
       </div>
-
+      <!-- projects to create a role -->
       <div class="row row__3" *ngFor="let project of projectResume">
         <div class="col">
           <h2 class="check-row-title">
-            proyectos
             {{ this.lang == "Esp" ? project.name_es : project.name_en }}
           </h2>
           <p *ngSwitchCase="'Esp'" class="text-muted">Sub menús</p>
           <p *ngSwitchCase="'Eng'" class="text-muted">Sub menus</p>
-
+          <!-- create a new role -->
           <div class="grid">
             <div class="col row-check" *ngFor="let submenu of project.submenus">
               <div class="row" *ngIf="submenu.apps.length > 0">
                 <div class="col">
                   <span class="example-list-section">
                     <mat-checkbox
-                      [checked]="someSelected(submenu)"
+                      [disabled]="submenu.status == 0"
+                      [checked]="someSelected(submenu) || submenu.access"
                       (change)="allowSubmenuAccess($event.checked, submenu)"
                     >
                       {{ lang == "Esp" ? submenu.name_es : submenu.name_en }}

@@ -186,15 +186,13 @@ export class RolesComponent implements OnInit {
       return;
     }
     let user_id = localStorage.getItem('userId');
-    let projectIdFound = false;
+    let subToSend = [];
+    let appToSend = [];
+
     this.projectResume.forEach((projectSelected) => {
-      projectIdFound = this.projectsId.some(
-        (item) => item == projectSelected.id
-      );
-      if (!projectIdFound) {
-        this.projectsId = [...this.projectsId, projectSelected.id];
-      }
+      this.projectsId.push(projectSelected.id);
     });
+
     let dataForm = {
       status: this.role_status,
       name_es: this.createRolForm.controls.rol_name_es.value,

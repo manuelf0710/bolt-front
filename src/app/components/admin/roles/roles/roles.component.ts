@@ -151,6 +151,19 @@ export class RolesComponent implements OnInit {
     }
   }
 
+  goToTop() {
+    setTimeout(() => {
+      let cont = document.querySelector('#container');
+      window.scroll({
+        top: 0,
+      });
+      cont.scroll({
+        top: 0,
+        behavior: 'smooth',
+      });
+    }, 200);
+  }
+
   openForm(open?: boolean) {
     if (open) {
       this.showForm = true;
@@ -164,15 +177,15 @@ export class RolesComponent implements OnInit {
     this.role_id = null;
     this.projectNames = [];
     this.projectResume = [];
+    this.projectsId = [];
+    this.allowed_submenus = [];
+    this.allowed_apps = [];
     this.createRolForm.reset('');
     this.createRolForm.markAsUntouched();
   }
 
   cancel() {
     this.showForm = false;
-    this.projectsId = [];
-    this.allowed_submenus = [];
-    this.allowed_apps = [];
     this.cleanForm();
   }
 
@@ -242,9 +255,7 @@ export class RolesComponent implements OnInit {
         this.message_action_en
       );
     }
-    this.projectsId = [];
-    this.allowed_submenus = [];
-    this.allowed_apps = [];
+    this.cancel();
   }
 
   updateRoleStatus(role, event) {
@@ -298,11 +309,13 @@ export class RolesComponent implements OnInit {
     this.allowed_submenus = [];
     this.projectService.getProjectsAssignByRol(target.id).subscribe(
       (res: any[]) => {
-        this.ui.dismissLoading();
         this.create = false;
         this.showForm = true;
         this.role_id = target.id;
         this.role_status = target.status;
+        this.goToTop();
+        this.ui.dismissLoading();
+
         console.log(res);
 
         // set the format to send data
@@ -470,7 +483,6 @@ export class RolesComponent implements OnInit {
   }
 
   allowAppAccess(checkboxStatus: boolean, app: any) {
-    //this.showError();
     if (checkboxStatus) {
       // insert app selected
       this.allowed_apps.push({

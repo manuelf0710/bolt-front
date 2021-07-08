@@ -170,6 +170,9 @@ export class RolesComponent implements OnInit {
 
   cancel() {
     this.showForm = false;
+    this.projectsId = [];
+    this.allowed_submenus = [];
+    this.allowed_apps = [];
     this.cleanForm();
   }
 
@@ -239,6 +242,9 @@ export class RolesComponent implements OnInit {
         this.message_action_en
       );
     }
+    this.projectsId = [];
+    this.allowed_submenus = [];
+    this.allowed_apps = [];
   }
 
   updateRoleStatus(role, event) {
@@ -297,32 +303,37 @@ export class RolesComponent implements OnInit {
         this.showForm = true;
         this.role_id = target.id;
         this.role_status = target.status;
+        console.log(res);
 
-        // set status value in all apps where submenu inserted id is equal to app.submenu_id
+        // set the format to send data
         res.forEach((project) => {
-          project.access = 1;
           project.submenus.forEach((submenu) => {
-            this.allowed_submenus = [
-              ...this.allowed_submenus,
-              {
-                projects_id: submenu.project_id,
-                submenu_id: submenu.id,
-                access: submenu.rs_access,
-              },
-            ];
             if (submenu == null) {
               return;
             }
-            submenu.apps.forEach((app) => {
-              app.checked = 1;
-              this.allowed_apps = [
-                ...this.allowed_apps,
+
+            if (submenu.checked == 1) {
+              this.allowed_submenus = [
+                ...this.allowed_submenus,
                 {
-                  submenu_id: app.submenu_id,
-                  app_id: app.id,
-                  access: app.checked,
+                  projects_id: submenu.project_id,
+                  submenu_id: submenu.id,
+                  access: submenu.rs_access,
                 },
               ];
+            }
+
+            submenu.apps.forEach((app) => {
+              if (app.checked == 1) {
+                this.allowed_apps = [
+                  ...this.allowed_apps,
+                  {
+                    submenu_id: app.submenu_id,
+                    app_id: app.id,
+                    access: app.checked,
+                  },
+                ];
+              }
             });
           });
         });

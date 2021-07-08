@@ -144,7 +144,7 @@
                   <span class="example-list-section">
                     <mat-checkbox
                       [disabled]="submenu.status == 0"
-                      [checked]="someSelected(submenu) || submenu.access"
+                      [checked]="someSelected(submenu) || submenu.checked"
                       (change)="allowSubmenuAccess($event.checked, submenu)"
                     >
                       {{ lang == "Esp" ? submenu.name_es : submenu.name_en }}

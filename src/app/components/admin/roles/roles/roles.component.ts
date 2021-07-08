@@ -316,8 +316,6 @@ export class RolesComponent implements OnInit {
         this.goToTop();
         this.ui.dismissLoading();
 
-        console.log(res);
-
         // set the format to send data
         res.forEach((project) => {
           project.submenus.forEach((submenu) => {

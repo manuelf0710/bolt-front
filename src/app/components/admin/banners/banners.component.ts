@@ -167,7 +167,7 @@ export class BannersComponent implements OnInit, OnDestroy {
       this.urlImagBanner = target['image'];
       this.BannerStatus = target['status'];
 
-      if (target['pdf'] == 'null') {
+      if (target['pdf'] == null) {
         this.urlAction = true;
       } else {
         this.urlPdfBanner = target['pdf'];

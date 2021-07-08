@@ -31,24 +31,11 @@ export class ErrorInterceptor implements HttpInterceptor {
         if (msg == undefined) {
           msg = errorResponse.message;
         }
-        if (errorResponse.error.statusCode == 401) {
-          const confDialog = this.dialog.open(ModalConfirmationComponent, {
-            id: ModalConfirmationComponent.toString(),
-            disableClose: true,
-            hasBackdrop: true,
-            width: '500px',
-            height: 'auto',
-            data: {
-              session: true,
-              message_action_es: 'iniciar sesión',
-              message_action_en: 'log in',
-            },
-          });
-
-          confDialog.afterClosed().subscribe((result) => {
-            if (result) {
-              this.authService.login();
-            }
+        if (errorResponse.error.statusCode != 401) {
+          this.ui.createSnackbar(msg, 'x', {
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            panelClass: 'snack-alert',
           });
         }
         this.ui.createSnackbar(msg, 'x', {

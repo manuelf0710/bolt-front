@@ -146,29 +146,13 @@ export class SidebarComponent implements OnInit {
           user_id: this.userId,
         };
         this.favoriteService.postData(element, favData);
-      } else {
-        // match the id of app selected with app in fav list to deleted from the service
-        let app_table_id;
-        if (this.favList.length > 0) {
-          this.favList.forEach((fav) => {
-            if (origin) {
-              if (fav.app_id == element.app_id) {
-                app_table_id = fav;
-              }
-            } else {
-              if (fav.app_id == element.id) {
-                app_table_id = fav;
-              }
-            }
-          });
-        }
-
-        this.favoriteService.delete(app_table_id);
       }
     } else {
       if (event) {
         this.ui.createSnackbar(
-          'Excedió el número de favoritos para poder asignar un nuevo tablero debe eliminar uno de los que tienes en la sección ',
+          this.lang == 'Esp'
+            ? 'Excedió el número de favoritos, para poder asignar un nuevo tablero debes eliminar uno de los que tienes en la sección'
+            : 'Exceeded the number of favorites, in order to assign a new board you must remove one of those you have in the section',
           'x',
           {
             horizontalPosition: 'center',
@@ -177,6 +161,26 @@ export class SidebarComponent implements OnInit {
           }
         );
       }
+    }
+    if (!event) {
+      // match the id of app selected with app in fav list to deleted from the service
+      let app_table_id;
+      if (this.favList.length > 0) {
+        this.favList.forEach((fav) => {
+          if (origin) {
+            if (fav.app_id == element.app_id) {
+              app_table_id = fav;
+            }
+          } else {
+            if (fav.app_id == element.id) {
+              app_table_id = fav;
+            }
+          }
+        });
+      }
+      console.log(element);
+
+      this.favoriteService.delete(app_table_id);
     }
   }
 

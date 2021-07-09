@@ -26,7 +26,7 @@ export class AuthService {
   }
   public isAdministrator(): boolean {
     let userProfile = JSON.parse(localStorage.getItem('userData'));
-    if (userProfile['profile'] == 'user') {
+    if (userProfile['profile'] != 'user') {
       this.isAdmin = true;
     }
     return this.isAdmin;

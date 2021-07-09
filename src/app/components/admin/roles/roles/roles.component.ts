@@ -240,7 +240,6 @@ export class RolesComponent implements OnInit {
       submenus: this.create ? this.allowed_submenus : subToSend,
       apps: this.create ? this.allowed_apps : appToSend,
     };
-    console.log('dataguardar', dataForm);
 
     if (!operation) {
       this.rolesService.postData(dataForm);

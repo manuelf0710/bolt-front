@@ -50,13 +50,11 @@ export class RolesComponent implements OnInit {
   public editionActive: boolean = false;
   public create: boolean = true;
   public available_apps: boolean = false;
-
-  allComplete: boolean = false;
+  public isSomeSelected: boolean = false;
 
   public role_id: string = null;
   public message_action_es: string = 'deshabilitar';
   public message_action_en: string = 'disable';
-  public saveType = true; //es guardar
 
   private errorMessage: any = {
     es: {
@@ -134,6 +132,9 @@ export class RolesComponent implements OnInit {
 
       let fetchProjects = res.projects.body.items;
       this.projects = fetchProjects;
+
+      console.log(this.projects);
+
       this.markUnchekedAll();
     });
   }
@@ -237,9 +238,10 @@ export class RolesComponent implements OnInit {
       description_en: this.createRolForm.controls.description_en.value,
       created_by: user_id,
       projects: this.projectsId,
-      submenus: this.create ? this.allowed_submenus : subToSend,
-      apps: this.create ? this.allowed_apps : appToSend,
+      submenus: subToSend,
+      apps: appToSend,
     };
+    console.log(dataForm);
 
     if (!operation) {
       this.rolesService.postData(dataForm);
@@ -445,13 +447,15 @@ export class RolesComponent implements OnInit {
 
     // insert submenu and apps when the father project is selected
     // delete submenu and apps when the father project is deselected
-    if (completed) {
-      this.allComplete = true;
+
+    if (completed && submenuInserted.access == 1) {
       this.allowed_submenus.push({
         projects_id: submenuInserted.project_id,
         submenu_id: submenuInserted.id,
         access: completed,
       });
+
+      // add submenu apps to allowed apps array
       submenuInserted.apps.forEach((app) => {
         if (submenuInserted.id == app.submenu_id) {
           this.allowed_apps.push({
@@ -462,7 +466,6 @@ export class RolesComponent implements OnInit {
         }
       });
     } else {
-      this.allComplete = false;
       let indexSub = this.allowed_submenus.indexOf(
         this.allowed_submenus.find(
           (sub) => sub.submenu_id == submenuInserted.id
@@ -470,6 +473,7 @@ export class RolesComponent implements OnInit {
       );
       this.allowed_submenus.splice(indexSub, 1);
 
+      // deleted apps associated to submenu deleted
       submenuInserted.apps.forEach(() => {
         let indexApp = this.allowed_apps.indexOf(
           this.allowed_apps.find((app) => app.app_id == app.id)
@@ -493,29 +497,40 @@ export class RolesComponent implements OnInit {
         this.allowed_apps.find((app) => app.app_id == app.id)
       );
       this.allowed_apps.splice(indexApp, 1);
+
+      this.someSelected(app.submenu_id);
     }
   }
 
-  someSelected(submenu) {
-    let isSomeSelected = false;
-    if (this.saveType) {
-      //let isSomeSelected;
-      if (submenu.apps == null) {
-        isSomeSelected = false;
-      }
-      isSomeSelected = submenu.apps.filter((a) => a.checked).length > 0;
+  someSelected(submenuId: string) {
+    let submenu;
+    this.projects.forEach((project) => {
+      project.submenus.forEach((sub) => {
+        if (sub.id == submenuId) {
+          submenu = sub;
+        }
+      });
+    });
+
+    //let isSomeSelected;
+    if (submenu.apps == null) {
+      this.isSomeSelected = false;
     }
-    if (!isSomeSelected) {
-      submenu.access = 0;
-      let toDel = this.allowed_submenus.indexOf(
-        this.allowed_submenus.find(
-          (toDeleted) => toDeleted.submenu_id == submenu.id
-        )
-      );
-      this.allowed_submenus.splice(toDel, toDel);
+    this.isSomeSelected = submenu.apps.filter((a) => a.checked).length == 0;
+
+    if (this.isSomeSelected) {
+      let message =
+        this.lang == 'Esp'
+          ? `Seleccione por lo menos una aplicación para el sub menú ${submenu.name_es}`
+          : `Select at least one application for the sub menu ${submenu.name_en}`;
+      this.ui.createSnackbar(message, 'x', {
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: 'snack-alert',
+      });
     }
 
-    return isSomeSelected;
+    return this.isSomeSelected;
   }
 
   showError() {

@@ -90,33 +90,33 @@ export class RolesService {
     msg_es: string,
     msg_en: string
   ) {
-    this.httpService
-      .put(
-        environment.serverUrl + environment.roles.putByIdWithProjects + role_id,
-        projectData
-      )
-      .subscribe(
-        (response: any) => {
-          if (response.status == 200) {
-            this.ui.showModal(
-              ModalNotificationComponent,
-              '500px',
-              'auto',
-              null,
-              'backdrop',
-              {
-                message_es: `Se ${msg_es} con éxito el rol ${projectData.name_es}`,
-                message_en: `Successfully ${msg_en} the role ${projectData.name_en}`,
-              }
-            );
-            setTimeout(() => {
-              window.location.reload();
-            }, 2000);
-          } else {
-          }
-        },
-        (err) => {}
-      );
+    // this.httpService
+    //   .put(
+    //     environment.serverUrl + environment.roles.putByIdWithProjects + role_id,
+    //     projectData
+    //   )
+    //   .subscribe(
+    //     (response: any) => {
+    //       if (response.status == 200) {
+    //         this.ui.showModal(
+    //           ModalNotificationComponent,
+    //           '500px',
+    //           'auto',
+    //           null,
+    //           'backdrop',
+    //           {
+    //             message_es: `Se ${msg_es} con éxito el rol ${projectData.name_es}`,
+    //             message_en: `Successfully ${msg_en} the role ${projectData.name_en}`,
+    //           }
+    //         );
+    //         setTimeout(() => {
+    //           window.location.reload();
+    //         }, 2000);
+    //       } else {
+    //       }
+    //     },
+    //     (err) => {}
+    //   );
   }
 
   updateStatus(target: any, msg_es: string, msg_en: string) {

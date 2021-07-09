@@ -323,6 +323,8 @@ export class RolesComponent implements OnInit {
             if (submenu == null) {
               return;
             }
+            // aux var
+            submenu.access = submenu.checked;
 
             if (submenu.checked == 1) {
               this.allowed_submenus = [
@@ -349,6 +351,9 @@ export class RolesComponent implements OnInit {
             });
           });
         });
+
+        console.log('submenus', this.allowed_submenus);
+        console.log('apps', this.allowed_apps);
 
         // copy of projects array
         this.projectsCopy = [...this.projects];
@@ -481,6 +486,7 @@ export class RolesComponent implements OnInit {
         this.allowed_apps.splice(indexApp, 1);
       });
     }
+    console.log(this.allowed_submenus);
   }
 
   allowAppAccess(checkboxStatus: boolean, app: any) {

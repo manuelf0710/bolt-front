@@ -132,9 +132,6 @@ export class RolesComponent implements OnInit {
 
       let fetchProjects = res.projects.body.items;
       this.projects = fetchProjects;
-
-      console.log(this.projects);
-
       this.markUnchekedAll();
     });
   }
@@ -241,7 +238,6 @@ export class RolesComponent implements OnInit {
       submenus: subToSend,
       apps: appToSend,
     };
-    console.log(dataForm);
 
     if (!operation) {
       this.rolesService.postData(dataForm);
@@ -351,9 +347,6 @@ export class RolesComponent implements OnInit {
             });
           });
         });
-
-        console.log('submenus', this.allowed_submenus);
-        console.log('apps', this.allowed_apps);
 
         // copy of projects array
         this.projectsCopy = [...this.projects];
@@ -486,7 +479,6 @@ export class RolesComponent implements OnInit {
         this.allowed_apps.splice(indexApp, 1);
       });
     }
-    console.log(this.allowed_submenus);
   }
 
   allowAppAccess(checkboxStatus: boolean, app: any) {
@@ -510,7 +502,8 @@ export class RolesComponent implements OnInit {
 
   someSelected(submenuId: string) {
     let submenu;
-    this.projects.forEach((project) => {
+    let targetArray = this.create ? this.projects : this.loaded_list;
+    targetArray.forEach((project) => {
       project.submenus.forEach((sub) => {
         if (sub.id == submenuId) {
           submenu = sub;

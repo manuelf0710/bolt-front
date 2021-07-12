@@ -154,7 +154,9 @@
                     <ul>
                       <li *ngFor="let app of submenu.apps">
                         <mat-checkbox
-                          [disabled]="submenu.access == 0"
+                          [disabled]="
+                            submenu.access == 0 || submenu.status == 0
+                          "
                           [(ngModel)]="app.checked"
                           [ngModelOptions]="{ standalone: true }"
                           (change)="allowAppAccess($event.checked, app)"

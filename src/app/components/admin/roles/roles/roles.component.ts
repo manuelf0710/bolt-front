@@ -132,9 +132,6 @@ export class RolesComponent implements OnInit {
 
       let fetchProjects = res.projects.body.items;
       this.projects = fetchProjects;
-
-      console.log(this.projects);
-
       this.markUnchekedAll();
     });
   }
@@ -241,7 +238,6 @@ export class RolesComponent implements OnInit {
       submenus: subToSend,
       apps: appToSend,
     };
-    console.log(dataForm);
 
     if (!operation) {
       this.rolesService.postData(dataForm);
@@ -323,6 +319,8 @@ export class RolesComponent implements OnInit {
             if (submenu == null) {
               return;
             }
+            // aux var
+            submenu.access = submenu.checked;
 
             if (submenu.checked == 1) {
               this.allowed_submenus = [
@@ -504,7 +502,8 @@ export class RolesComponent implements OnInit {
 
   someSelected(submenuId: string) {
     let submenu;
-    this.projects.forEach((project) => {
+    let targetArray = this.create ? this.projects : this.loaded_list;
+    targetArray.forEach((project) => {
       project.submenus.forEach((sub) => {
         if (sub.id == submenuId) {
           submenu = sub;

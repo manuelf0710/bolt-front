@@ -51,6 +51,7 @@ export class RolesComponent implements OnInit {
   public create: boolean = true;
   public available_apps: boolean = false;
   public isSomeSelected: boolean = false;
+  public globlalError: boolean = false;
 
   public role_id: string = null;
   public message_action_es: string = 'deshabilitar';
@@ -191,7 +192,8 @@ export class RolesComponent implements OnInit {
     if (
       this.createRolForm.invalid ||
       this.allowed_apps.length == 0 ||
-      this.allowed_submenus.length == 0
+      this.allowed_submenus.length == 0 ||
+      this.globlalError
     ) {
       (<any>Object).values(this.createRolForm.controls).forEach((control) => {
         control.markAsTouched();
@@ -504,9 +506,8 @@ export class RolesComponent implements OnInit {
       );
 
       this.allowed_apps.splice(indexApp, 1);
-
-      this.someSelected(appInserted.submenu_id);
     }
+    this.someSelected(appInserted.submenu_id);
   }
 
   someSelected(submenuId: string) {
@@ -527,6 +528,7 @@ export class RolesComponent implements OnInit {
     this.isSomeSelected = submenu.apps.filter((a) => a.checked).length == 0;
 
     if (this.isSomeSelected) {
+      this.globlalError = true;
       let message =
         this.lang == 'Esp'
           ? `Seleccione por lo menos una aplicación para el sub menú ${submenu.name_es}`
@@ -537,6 +539,9 @@ export class RolesComponent implements OnInit {
         panelClass: 'snack-alert',
         duration: 5000,
       });
+    }
+    if (submenu.apps.filter((a) => a.checked).length > 0) {
+      this.globlalError = false;
     }
 
     return this.isSomeSelected;
@@ -550,7 +555,10 @@ export class RolesComponent implements OnInit {
         'Selecione como mínimo un sub menú y una aplicación asociada por proyecto';
       show = true;
     }
-    if (this.allowed_submenus.length > 0 && this.allowed_apps.length == 0) {
+    if (
+      (this.allowed_submenus.length > 0 && this.allowed_apps.length == 0) ||
+      this.globlalError
+    ) {
       message = 'Selecione como mínimo una aplicación asociada por sub menú';
       show = true;
     }

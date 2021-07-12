@@ -54,7 +54,15 @@
               font-size: 14px;
               line-height: 30px;
               margin-top: 0;
+              color: #707782;
             }
+          }
+          .grid {
+            display: grid;
+            grid-template-columns: auto auto auto auto auto;
+            grid-gap: 10px;
+            grid-row-gap: 20px;
+            margin-left: 10px;
           }
           .row-check {
             justify-content: flex-start;
@@ -122,6 +130,7 @@
         &__name {
           margin: 0;
           text-align: left;
+          padding-top: 12px;
         }
 
         &__action {

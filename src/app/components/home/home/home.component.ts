@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MockProjects } from 'src/app/mocks/projects-mock';
 import { Router } from '@angular/router';
 
 import { ModalAlertComponent } from '../../utils/pop up/modal-alert/modal-alert.component';
@@ -9,8 +8,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Banner } from 'src/app/model/banner.model';
 import { BannersService } from 'src/app/services/banners.service';
 import { forkJoin, Subscription } from 'rxjs';
-import { ProjectsService } from 'src/app/services/projects.service';
-import { User } from 'src/app/model/User.model';
 import { FavoritesService } from 'src/app/services/favorites.service';
 import { environment } from 'src/environments/environment';
 
@@ -23,7 +20,6 @@ export class HomeComponent implements OnInit {
   public projSubs: Subscription;
   public bannerSubs: Subscription;
   public user_id: string;
-  public prop = MockProjects;
   public banners: Banner[] = [];
   public bannerList: any = [];
   public lang: string;
@@ -73,7 +69,6 @@ export class HomeComponent implements OnInit {
       localStorage.setItem('userData', JSON.stringify(decodedAuthData.user));
       localStorage.setItem('userDataSaml', JSON.stringify(decodedAuthData.req));
 
-      console.log(decodedAuthData.req);
       // save auth data in local storage
       this.authService.saveAuthData(token, expirationDate, userId);
       // set session timer
@@ -81,6 +76,8 @@ export class HomeComponent implements OnInit {
       // set true auth status listenner
       this.authService.setListenner();
       window.location.href = '/home';
+    } else {
+      this.ui.dismissLoading();
     }
   }
 
@@ -97,7 +94,6 @@ export class HomeComponent implements OnInit {
         // cambiar validacion de usuario a role de usuario
         if (this.user_id && this.user_id.length > 0) {
           this.favList = favorites;
-          console.log(this.favList);
         } else {
           this.openAlert();
         }

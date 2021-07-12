@@ -1,5 +1,5 @@
 <app-header></app-header>
-<div class="container" [ngSwitch]="lang">
+<div class="container" [ngSwitch]="lang" id="container">
   <!-- role form -->
   <div class="inner-section section__1" *ngIf="showForm">
     <h1 class="underline-title" *ngSwitchCase="'Esp'">Crear rol</h1>
@@ -29,7 +29,7 @@
               maxlength="30"
             />
             <mat-error *ngIf="createRolForm.controls.rol_name_es.errors">
-              {{ getMessageform('rol_name_es') }}
+              {{ getMessageform("rol_name_es") }}
             </mat-error>
           </mat-form-field>
 
@@ -39,9 +39,7 @@
             floatLabel="auto"
             class="fullInput"
           >
-            <mat-label *ngSwitchCase="'Esp'">
-              Descripción (Español)
-            </mat-label>
+            <mat-label *ngSwitchCase="'Esp'"> Descripción (Español) </mat-label>
             <mat-label *ngSwitchCase="'Eng'">Description (Spanish)</mat-label>
 
             <textarea
@@ -52,7 +50,7 @@
             ></textarea>
 
             <mat-error *ngIf="createRolForm.controls.description_es.errors">
-              {{ getMessageform('description_es') }}
+              {{ getMessageform("description_es") }}
             </mat-error>
           </mat-form-field>
 
@@ -70,15 +68,17 @@
               multiple
               (selectionChange)="readProjectsSelected($event.value)"
             >
-              <mat-option
-                *ngFor="let option of projects"
-                [value]="option?.name_en"
-              >
-                {{ lang == 'Esp' ? option?.name_es : option?.name_en }}
-              </mat-option>
+              <section *ngFor="let option of projects">
+                <mat-option
+                  *ngIf="option.submenus.length > 0"
+                  [value]="option?.name_en"
+                >
+                  {{ lang == "Esp" ? option?.name_es : option?.name_en }}
+                </mat-option>
+              </section>
             </mat-select>
             <mat-error *ngIf="createRolForm.controls.role_projects.errors">
-              {{ getMessageform('role_projects') }}
+              {{ getMessageform("role_projects") }}
             </mat-error>
           </mat-form-field>
         </div>
@@ -90,9 +90,7 @@
             floatLabel="auto"
             class="fullInput input-bolt"
           >
-            <mat-label *ngSwitchCase="'Esp'">
-              Nombre (inglés)
-            </mat-label>
+            <mat-label *ngSwitchCase="'Esp'"> Nombre (inglés) </mat-label>
             <mat-label *ngSwitchCase="'Eng'">Name (English)</mat-label>
 
             <input
@@ -104,7 +102,7 @@
               maxlength="30"
             />
             <mat-error *ngIf="createRolForm.controls.rol_name_en.errors">
-              {{ getMessageform('rol_name_en') }}
+              {{ getMessageform("rol_name_en") }}
             </mat-error>
           </mat-form-field>
 
@@ -114,9 +112,7 @@
             floatLabel="auto"
             class="fullInput"
           >
-            <mat-label *ngSwitchCase="'Esp'">
-              Descripción (Inglés)
-            </mat-label>
+            <mat-label *ngSwitchCase="'Esp'"> Descripción (Inglés) </mat-label>
             <mat-label *ngSwitchCase="'Eng'">Description (English)</mat-label>
 
             <textarea
@@ -127,43 +123,43 @@
             ></textarea>
 
             <mat-error *ngIf="createRolForm.controls.description_en.errors">
-              {{ getMessageform('description_en') }}
+              {{ getMessageform("description_en") }}
             </mat-error>
           </mat-form-field>
         </div>
       </div>
-
+      <!-- projects to create a role -->
       <div class="row row__3" *ngFor="let project of projectResume">
         <div class="col">
-          <h2 class="check-row-title">proyectoshere
-            {{ this.lang == 'Esp' ? project.name_es : project.name_en }}
+          <h2 class="check-row-title">
+            {{ this.lang == "Esp" ? project.name_es : project.name_en }}
           </h2>
           <p *ngSwitchCase="'Esp'" class="text-muted">Sub menús</p>
           <p *ngSwitchCase="'Eng'" class="text-muted">Sub menus</p>
-
-          <div class="row">
+          <!-- create a new role -->
+          <div class="grid">
             <div class="col row-check" *ngFor="let submenu of project.submenus">
               <div class="row" *ngIf="submenu.apps.length > 0">
                 <div class="col">
-                  <span class="example-list-section"><!--submenuhere-->
+                  <span class="example-list-section">
                     <mat-checkbox
-                      [checked]="someSelected(submenu)"
+                      [disabled]="submenu.status == 0"
+                      [checked]="someSelected(submenu) || submenu.checked"
                       (change)="allowSubmenuAccess($event.checked, submenu)"
                     >
-                      {{ lang == 'Esp' ? submenu.name_es : submenu.name_en }}
+                      {{ lang == "Esp" ? submenu.name_es : submenu.name_en }}
                     </mat-checkbox>
                   </span>
                   <span class="example-list-section">
                     <ul>
                       <li *ngFor="let app of submenu.apps">
                         <mat-checkbox
-                          [disabled]="submenu.status == 0"
+                          [disabled]="submenu.checked == 0"
                           [(ngModel)]="app.checked"
                           [ngModelOptions]="{ standalone: true }"
                           (change)="allowAppAccess($event.checked, app)"
                         >
-                          {{ lang == 'Esp' ? app.name_es : app.name_en }}
-                          {{ submenu.status }}dddd
+                          {{ lang == "Esp" ? app.name_es : app.name_en }}
                         </mat-checkbox>
                       </li>
                     </ul>
@@ -179,7 +175,7 @@
         <button
           class="bolt-btn-filled"
           (click)="create ? updateRole() : updateRole('update')"
-          style="margin-right: 20px;"
+          style="margin-right: 20px"
         >
           <span *ngSwitchCase="'Esp'">Guardar</span>
           <span *ngSwitchCase="'Eng'">Save</span>
@@ -193,7 +189,7 @@
     </form>
   </div>
 
-  <!-- roles -->
+  <!-- roles table -->
   <div class="inner-section section__2">
     <div class="row">
       <h2 class="form-title">Roles</h2>
@@ -208,22 +204,22 @@
       <div class="grid-header">
         <div class="grid-header__title">
           <span>
-            {{ lang == 'Esp' ? 'Nombre' : 'Name' }}
+            {{ lang == "Esp" ? "Nombre" : "Name" }}
           </span>
         </div>
         <div class="grid-header__title">
           <span>
-            {{ lang == 'Esp' ? 'Descripción' : 'Description' }}
+            {{ lang == "Esp" ? "Descripción" : "Description" }}
           </span>
         </div>
         <div class="grid-header__title">
           <span>
-            {{ lang == 'Esp' ? 'Proyecto' : 'Project' }}
+            {{ lang == "Esp" ? "Proyecto" : "Project" }}
           </span>
         </div>
-        <div class="grid-header__title" style="text-align: center;">
+        <div class="grid-header__title" style="text-align: center">
           <span>
-            {{ lang == 'Esp' ? 'Acciones' : 'Actions' }}
+            {{ lang == "Esp" ? "Acciones" : "Actions" }}
           </span>
         </div>
       </div>
@@ -231,15 +227,15 @@
       <div *ngFor="let role of roles; let id = index">
         <div class="grid-content">
           <p class="grid-content__name">
-            {{ lang == 'Esp' ? role.name_es : role.name_en }}
+            {{ lang == "Esp" ? role.name_es : role.name_en }}
           </p>
           <p class="grid-content__description">
-            {{ lang == 'Esp' ? role.description_es : role.description_en }}
+            {{ lang == "Esp" ? role.description_es : role.description_en }}
           </p>
           <div class="col">
             <p class="grid-content__description">
               <i *ngFor="let project of role.projects">
-                {{ lang == 'Esp' ? project.name_es : project.name_en }}/
+                {{ lang == "Esp" ? project.name_es : project.name_en }}/
               </i>
             </p>
           </div>
@@ -253,35 +249,23 @@
                 [checked]="role.status == 1"
               ></mat-slide-toggle>
               <p class="toggle-text" *ngSwitchCase="'Esp'">
-                {{ role.status == 1 ? 'Deshabilitar' : 'Habilitar' }}
+                {{ role.status == 1 ? "Deshabilitar" : "Habilitar" }}
               </p>
               <p class="toggle-text" *ngSwitchCase="'Eng'">
-                {{ role.status == 1 ? 'Disable' : 'Enable' }}
+                {{ role.status == 1 ? "Disable" : "Enable" }}
               </p>
             </div>
 
             <button mat-button class="action-btn" (click)="loadRole(role)">
-              <span class="material-icons menu-icon">
-                edit
-              </span>
-              <span class="action-text" *ngSwitchCase="'Esp'">
-                editar
-              </span>
-              <span class="action-text" *ngSwitchCase="'Eng'">
-                edit
-              </span>
+              <span class="material-icons menu-icon"> edit </span>
+              <span class="action-text" *ngSwitchCase="'Esp'"> editar </span>
+              <span class="action-text" *ngSwitchCase="'Eng'"> edit </span>
             </button>
 
             <button mat-button class="action-btn" (click)="deleteRole(role)">
-              <span class="material-icons menu-icon">
-                delete_forever
-              </span>
-              <span class="action-text" *ngSwitchCase="'Esp'">
-                Eliminar
-              </span>
-              <span class="action-text" *ngSwitchCase="'Eng'">
-                Delete
-              </span>
+              <span class="material-icons menu-icon"> delete_forever </span>
+              <span class="action-text" *ngSwitchCase="'Esp'"> Eliminar </span>
+              <span class="action-text" *ngSwitchCase="'Eng'"> Delete </span>
             </button>
           </div>
         </div>
@@ -296,7 +280,7 @@
         (click)="updatePage('start')"
         [disabled]="active_count == 1"
       >
-        <span style="transform: rotate(180deg);" class="material-icons">
+        <span style="transform: rotate(180deg)" class="material-icons">
           double_arrow
         </span>
       </button>
@@ -306,7 +290,7 @@
         (click)="updatePage('prev')"
         [disabled]="active_count == 1"
       >
-        <span style="transform: rotate(180deg);" class="material-icons">
+        <span style="transform: rotate(180deg)" class="material-icons">
           play_arrow
         </span>
       </button>
@@ -322,9 +306,7 @@
         (click)="updatePage('next')"
         [disabled]="active_count == pages"
       >
-        <span class="material-icons">
-          play_arrow
-        </span>
+        <span class="material-icons"> play_arrow </span>
       </button>
       <button
         mat-button
@@ -332,9 +314,7 @@
         (click)="updatePage('last')"
         [disabled]="active_count == pages"
       >
-        <span class="material-icons">
-          double_arrow
-        </span>
+        <span class="material-icons"> double_arrow </span>
       </button>
     </div>
   </div>

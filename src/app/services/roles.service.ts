@@ -75,7 +75,7 @@ export class RolesService {
               }
             );
             setTimeout(() => {
-               window.location.reload()
+              window.location.reload();
             }, 2000);
           } else {
           }
@@ -92,7 +92,7 @@ export class RolesService {
   ) {
     this.httpService
       .put(
-        environment.serverUrl + environment.roles.putById + role_id,
+        environment.serverUrl + environment.roles.putByIdWithProjects + role_id,
         projectData
       )
       .subscribe(

@@ -4,8 +4,9 @@
 
 export const environment = {
   production: false,
-  //serverUrl: 'https://boltmaz.azurewebsites.net/api/v1/',
-  serverUrl: 'http://localhost:3000/api/v1/',
+  // serverUrl: 'https://boltmaz.azurewebsites.net/api/v1/',
+   serverUrl: 'http://localhost:3000/api/v1/',
+  //serverUrl: 'https://bolt-back.herokuapp.com/api/v1/',
 
   auth: {
     get: 'auth/saml',
@@ -35,7 +36,7 @@ export const environment = {
 
   projects: {
     get: 'projects',
-    getAll: 'projects/menu',
+    getAll: 'projects/menu/',
     menuByUser: 'projects/menubyuser',
     menuByRole: 'projects/menubyrole',
     post: 'projects',
@@ -78,8 +79,7 @@ export const environment = {
     getById: 'roles/',
     post: 'roles',
     postWithProjects: 'projectRoles/createrolprojapps',
-    putByIdWithProjects: 'projectRoles/updaterolprojapps',
-    putById: 'roles/',
+    putByIdWithProjects: 'projectRoles/updaterolprojapps/',
     deleteById: 'roles/',
     updateStatusById: 'roles/changestatus/',
   },

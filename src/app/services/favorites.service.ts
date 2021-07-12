@@ -10,6 +10,7 @@ import { UiService } from './ui.service';
   providedIn: 'root',
 })
 export class FavoritesService {
+  private lang: string = localStorage.getItem('lang');
   private _favorites: any[] = [];
   private _favoritesSbj = new Subject<any[]>();
   public favorites$ = this._favoritesSbj.asObservable();
@@ -47,20 +48,7 @@ export class FavoritesService {
       .subscribe(
         (response: any) => {
           if (response.status == 201) {
-            this.ui.showModal(
-              ModalNotificationComponent,
-              '500px',
-              'auto',
-              null,
-              'backdrop',
-              {
-                message_es: `Se agregó con éxito la aplicación ${target.name_es} a tu lista de favoritos`,
-                message_en: `Successfully added the app ${target.name_en} in your favorite list`,
-              }
-            );
-            setTimeout(() => {
-              window.location.reload();
-            }, 2000);
+            window.location.reload();
           } else {
           }
         },
@@ -108,20 +96,7 @@ export class FavoritesService {
       .subscribe(
         (response: any) => {
           if (response.status == 200) {
-            this.ui.showModal(
-              ModalNotificationComponent,
-              '500px',
-              'auto',
-              null,
-              'backdrop',
-              {
-                message_es: `Se eliminó con éxito el app ${target.name_es} de tu lista de favoritos`,
-                message_en: `Successfully deleted the app ${target.name_en} of your favorites list`,
-              }
-            );
-            setTimeout(() => {
-              window.location.reload();
-            }, 2000);
+            window.location.reload();
           }
         },
         (error) => {

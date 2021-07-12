@@ -6,17 +6,15 @@ import {
   Validators,
 } from '@angular/forms';
 
+import { Subscription } from 'rxjs';
+import { BannersService } from 'src/app/services/banners.service';
+import { environment } from 'src/environments/environment';
+
 import { MatDialog } from '@angular/material/dialog';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 import { ModalConfirmationComponent } from '../../utils/pop up/modal-confirmation/modal-confirmation.component';
 import { UiService } from 'src/app/services/ui.service';
 import { Banner } from 'src/app/model/banner.model';
-
-import { Banners } from 'src/app/mocks/banner-mock';
-import { Subscription } from 'rxjs';
-import { BannersService } from 'src/app/services/banners.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-banners',
@@ -38,7 +36,7 @@ export class BannersComponent implements OnInit, OnDestroy {
   public pdfFile: any = null;
   public imgFile: any = null;
   public BannerName: string = '';
-  public BannerStatus: number = 0;
+  public BannerStatus: number = 1;
   public urlAction: boolean = true;
   public message_action_es: string = 'deshabilitar';
   public message_action_en: string = 'disable';
@@ -129,11 +127,21 @@ export class BannersComponent implements OnInit, OnDestroy {
   }
 
   openBannerForm(action?: any) {
+    this.open_form = true;
+    setTimeout(() => {
+      let cont = document.querySelector('#container');
+
+      cont.scroll({
+        top: 800,
+        behavior: 'smooth',
+      });
+      window.scroll({
+        top: 100,
+      });
+    }, 100);
+
     if (action) {
       this.bannerId = action.id;
-    }
-    this.open_form = true;
-    if (action) {
       this.edit_form = true;
       this.loadBanner(action);
     }
@@ -159,7 +167,7 @@ export class BannersComponent implements OnInit, OnDestroy {
       this.urlImagBanner = target['image'];
       this.BannerStatus = target['status'];
 
-      if (target['pdf'] == 'null') {
+      if (target['pdf'] == null) {
         this.urlAction = true;
       } else {
         this.urlPdfBanner = target['pdf'];
@@ -225,6 +233,11 @@ export class BannersComponent implements OnInit, OnDestroy {
     this.urlPdfBanner = '';
     this.bannerForm.reset('');
     this.bannerForm.markAsUntouched();
+    let cont = document.querySelector('#container');
+    window.scroll({
+      top: 0,
+      behavior: 'smooth',
+    });
   }
 
   showConfirmation(target: any, operation: string, event?: any) {

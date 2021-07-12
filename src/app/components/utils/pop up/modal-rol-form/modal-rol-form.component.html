@@ -21,18 +21,15 @@
       <mat-label *ngSwitchCase="'Esp'">usuario</mat-label>
       <mat-label *ngSwitchCase="'Eng'">user</mat-label>
 
-      <span matPrefix class="material-icons">
-        person
-      </span>
+      <span matPrefix class="material-icons"> person </span>
       <input
         matInput
         id="user"
         formControlName="user"
         type="text"
-        required
         maxlength="15"
+        disabled
       />
-
     </mat-form-field>
 
     <mat-form-field
@@ -44,19 +41,15 @@
       <mat-label *ngSwitchCase="'Esp'">ID de red- VDI</mat-label>
       <mat-label *ngSwitchCase="'Eng'">network ID- VDI</mat-label>
 
-      <span matPrefix class="material-icons">
-        assignment_ind
-      </span>
+      <span matPrefix class="material-icons"> assignment_ind </span>
       <input
         matInput
         id="id"
         formControlName="id"
         type="text"
-        required
         maxlength="30"
+        disabled
       />
-
-
     </mat-form-field>
 
     <mat-form-field
@@ -70,19 +63,15 @@
       </mat-label>
       <mat-label *ngSwitchCase="'Eng'">Project you need access to</mat-label>
 
-      <span matPrefix class="material-icons">
-        vpn_key
-      </span>
+      <span matPrefix class="material-icons"> vpn_key </span>
       <mat-select [formControl]="userRolForm.controls.project">
         <mat-option
           *ngFor="let project of projects"
           [value]="lang == 'Esp' ? project.name_es : project.name_en"
         >
-          {{ lang == 'Esp' ? project.name_es : project.name_en }}
+          {{ lang == "Esp" ? project.name_es : project.name_en }}
         </mat-option>
       </mat-select>
-
-   
     </mat-form-field>
 
     <mat-form-field
@@ -94,9 +83,7 @@
       <mat-label *ngSwitchCase="'Esp'">País</mat-label>
       <mat-label *ngSwitchCase="'Eng'">country</mat-label>
 
-      <span matPrefix class="material-icons">
-        public
-      </span>
+      <span matPrefix class="material-icons"> public </span>
       <mat-select [formControl]="userRolForm.controls.country">
         <mat-option value="Argentina">Argentina</mat-option>
         <mat-option value="Colombia">Colombia</mat-option>
@@ -106,19 +93,17 @@
         <mat-option value="México">México</mat-option>
         <mat-option value="Brasil">Brasil</mat-option>
         <mat-option value="España">
-          {{ lang == 'Esp' ? 'España' : 'Spain' }}
+          {{ lang == "Esp" ? "España" : "Spain" }}
         </mat-option>
         <mat-option value="Usa">
-          {{ lang == 'Esp' ? 'Estados unidos' : 'United States' }}
+          {{ lang == "Esp" ? "Estados unidos" : "United States" }}
         </mat-option>
       </mat-select>
-
-    
     </mat-form-field>
 
     <button
       class="btn-submit-rol"
-      style="margin-top: 20px;"
+      style="margin-top: 20px"
       (click)="loginUser()"
       block="block"
       [ngClass]="{ 'button-disabled': userRolForm.invalid }"

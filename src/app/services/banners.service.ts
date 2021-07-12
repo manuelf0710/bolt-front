@@ -55,8 +55,8 @@ export class BannersService {
               null,
               'backdrop',
               {
-                message_es: `Se actualizó con éxito el banner ${target.name_es}`,
-                message_en: `Successfully updated the banner ${target.name_en}`,
+                message_es: `Se creó con éxito el banner`,
+                message_en: `Successfully created the banner`,
               }
             );
             setTimeout(() => {
@@ -71,7 +71,10 @@ export class BannersService {
 
   updateData(target: any, id: string) {
     this.httpService
-      .put(environment.serverUrl + environment.banners.putById + id, target)
+      .putFormData(
+        environment.serverUrl + environment.banners.putById + id,
+        target
+      )
       .subscribe(
         (response: any) => {
           if (response.status == 200) {
@@ -82,13 +85,13 @@ export class BannersService {
               null,
               'backdrop',
               {
-                message_es: `Se actualizó con éxito el banner ${target.name_es}`,
-                message_en: `Successfully updated the banner ${target.name_en}`,
+                message_es: `El banner fue actualizado con éxito`,
+                message_en: `The banner was successfully updated`,
               }
             );
-            /*setTimeout(() => {
+            setTimeout(() => {
               window.location.reload();
-            }, 2000); */
+            }, 2000);
           } else {
           }
         },

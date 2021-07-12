@@ -12,7 +12,7 @@ export class AuthService {
   private tokenTimer: any;
   private isAuth: boolean = true;
   public userId: string;
-  public isAdmin: boolean = true;
+  public isAdmin: boolean = false;
   private samlData: string;
 
   constructor(
@@ -25,6 +25,10 @@ export class AuthService {
     return this.isAuth;
   }
   public isAdministrator(): boolean {
+    let userProfile = JSON.parse(localStorage.getItem('userData'));
+    if (userProfile['profile'] != 'user') {
+      this.isAdmin = true;
+    }
     return this.isAdmin;
   }
 
@@ -49,7 +53,7 @@ export class AuthService {
     clearTimeout(this.tokenTimer);
     this.samlData = localStorage.getItem('userDataSaml');
     // clear local Storage
-    //this.clearAuthdata();
+    this.clearAuthdata();
     // clear user id
     this.userId = null;
     //this.router.navigate(['/']);

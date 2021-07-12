@@ -35,13 +35,17 @@ h3 {
         padding: 0 10px;
       }
     }
+    .paginator {
+      width: 100%;
+      justify-content: flex-end;
+    }
   }
 }
 ::ng-deep .mat-tab-group {
   width: 100%;
   .mat-tab-label {
     width: 50%;
-    font-family: 'Gotham';
+    font-family: "Gotham";
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
@@ -57,7 +61,7 @@ h3 {
     height: 3px;
   }
   .submenu-link {
-    color: #e21d47;
+    color: #333333;
     text-decoration: underline;
     cursor: pointer;
     margin-left: 10px;

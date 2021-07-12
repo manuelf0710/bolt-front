@@ -1,5 +1,5 @@
 /*import colors*/
-@import './variables.scss';
+@import "./variables.scss";
 
 /* background images*/
 @mixin img-background($img, $width, $height, $position) {
@@ -16,7 +16,7 @@
 
 .arrow {
   color: $septenary-grey;
-  margin-top: 2px;
+  margin-top: 4px;
   font-size: 16px !important;
   transition: all 0.4s;
 }
@@ -48,24 +48,29 @@
 
 // brand icons  for menu
 .tableau {
-  @include img-background(url('/assets/icon/dash.svg'), 20px, 20px, relative);
+  @include img-background(
+    url("/assets/icon/tableau.svg"),
+    20px,
+    20px,
+    relative
+  );
 }
 
 .power {
-  @include img-background(url('/assets/icon/power.svg'), 20px, 20px, relative);
+  @include img-background(url("/assets/icon/power.svg"), 20px, 20px, relative);
 }
 
 .shiny {
-  @include img-background(url('/assets/icon/shiny.svg'), 20px, 20px, relative);
+  @include img-background(url("/assets/icon/shiny.svg"), 20px, 20px, relative);
 }
 .dash {
-  @include img-background(url('/assets/icon/dash.svg'), 20px, 20px, relative);
+  @include img-background(url("/assets/icon/dash.svg"), 20px, 20px, relative);
 }
 
 // brand icons  for sub menu view
 .tableau-md {
   @include img-background(
-    url('/assets/icon/dash-big.svg'),
+    url("/assets/icon/dash-big.svg"),
     24px,
     24px,
     relative
@@ -74,7 +79,7 @@
 
 .power-md {
   @include img-background(
-    url('/assets/icon/power-big.svg'),
+    url("/assets/icon/power-big.svg"),
     24px,
     24px,
     relative
@@ -83,7 +88,7 @@
 
 .shiny-md {
   @include img-background(
-    url('/assets/icon/shiny-big.svg'),
+    url("/assets/icon/shiny-big.svg"),
     24px,
     24px,
     relative
@@ -92,7 +97,15 @@
 
 .dash-md {
   @include img-background(
-    url('/assets/icon/dash-big.svg'),
+    url("/assets/icon/dash-big.svg"),
+    24px,
+    24px,
+    relative
+  );
+}
+.tableau-md {
+  @include img-background(
+    url("/assets/icon/tableau-big.svg"),
     24px,
     24px,
     relative
@@ -101,7 +114,7 @@
 // fav item icons big
 .tableau-big {
   @include img-background(
-    url('/assets/icon/dash-big.svg'),
+    url("/assets/icon/tableau-big.svg"),
     33px,
     33px,
     absolute
@@ -109,7 +122,7 @@
 }
 .card-pattern {
   @include img-background(
-    url('/assets/icon/card-pattern.svg'),
+    url("/assets/icon/card-pattern.svg"),
     100%,
     60px,
     relative
@@ -118,7 +131,7 @@
 
 .power-big {
   @include img-background(
-    url('/assets/icon/power-big.svg'),
+    url("/assets/icon/power-big.svg"),
     33px,
     33px,
     absolute
@@ -127,7 +140,7 @@
 
 .shiny-big {
   @include img-background(
-    url('/assets/icon/shiny-big.svg'),
+    url("/assets/icon/shiny-big.svg"),
     33px,
     33px,
     absolute
@@ -136,7 +149,7 @@
 
 .dash-big {
   @include img-background(
-    url('/assets/icon/dash-big.svg'),
+    url("/assets/icon/dash-big.svg"),
     33px,
     33px,
     absolute
@@ -145,7 +158,7 @@
 
 .empty-fav {
   @include img-background(
-    url('/assets/images/empty-fav.png'),
+    url("/assets/images/empty-fav.png"),
     195px,
     147px,
     relative
@@ -157,7 +170,7 @@
 
 .icon-forbiden {
   @include img-background(
-    url('/assets/icon/access-forbiden.svg'),
+    url("/assets/icon/access-forbiden.svg"),
     60px,
     48px,
     relative
@@ -166,7 +179,7 @@
 // close icon
 .x-icon {
   @include img-background(
-    url('/assets/icon/close-x.svg'),
+    url("/assets/icon/close-x.svg"),
     20px,
     20px,
     absolute
@@ -175,7 +188,7 @@
 // check icon
 .check-icon {
   @include img-background(
-    url('/assets/icon/check-circle.svg'),
+    url("/assets/icon/check-circle.svg"),
     48px,
     48px,
     relative
@@ -184,7 +197,7 @@
 //riase-hand icon
 .raise-hand {
   @include img-background(
-    url('/assets/icon/hand-sparkles.svg'),
+    url("/assets/icon/hand-sparkles.svg"),
     60px,
     48px,
     relative
@@ -193,7 +206,7 @@
 // next step icon for button
 .next-step {
   @include img-background(
-    url('/assets/icon/arrow-alt-circle-right.svg'),
+    url("/assets/icon/arrow-alt-circle-right.svg"),
     23px,
     28px,
     absolute
@@ -204,7 +217,7 @@
 // arrow pointer icon
 .arrow-pointer {
   @include img-background(
-    url('/assets/icon/arrow-pointer.svg'),
+    url("/assets/icon/arrow-pointer.svg"),
     35px,
     47px,
     absolute
@@ -213,7 +226,7 @@
 // exclamation icon
 .exclamation-icon {
   @include img-background(
-    url('/assets/icon/exclamation-triangle.svg'),
+    url("/assets/icon/exclamation-triangle.svg"),
     54px,
     48px,
     relative
@@ -222,12 +235,12 @@
 
 // footer
 .bolt-icon {
-  @include img-background(url('/assets/icon/bolt.svg'), 215px, 79px, relative);
+  @include img-background(url("/assets/icon/bolt.svg"), 215px, 79px, relative);
 }
 
 .brew-icon {
   @include img-background(
-    url('/assets/icon/brewTech.svg'),
+    url("/assets/icon/brewTech.svg"),
     100px,
     79px,
     relative
@@ -235,7 +248,7 @@
 }
 .abinbev-icon {
   @include img-background(
-    url('/assets/icon/abinbev.svg'),
+    url("/assets/icon/abinbev.svg"),
     132px,
     27px,
     relative
@@ -244,7 +257,7 @@
 
 .analytics-icon {
   @include img-background(
-    url('/assets/icon/analytics.svg'),
+    url("/assets/icon/analytics.svg"),
     129px,
     61px,
     relative
@@ -255,7 +268,7 @@
 //projects
 .plus-icon {
   @include img-background(
-    url('/assets/icon/plus-circle.svg'),
+    url("/assets/icon/plus-circle.svg"),
     18px,
     18px,
     relative

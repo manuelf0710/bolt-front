@@ -202,10 +202,11 @@ export class RolesComponent implements OnInit {
     let user_id = localStorage.getItem('userId');
     let subToSend = [];
     let appToSend = [];
+    this.projectsId = [];
 
     // push only the projects presents in the select
     this.projectResume.forEach((projectSelected) => {
-      this.projectsId.push(projectSelected.id);
+      this.projectsId = [...this.projectsId, projectSelected.id];
     });
 
     //push the submenus present into the projectsid array
@@ -236,9 +237,10 @@ export class RolesComponent implements OnInit {
       created_by: user_id,
       projects: this.projectsId,
       submenus: subToSend,
-      apps: appToSend,
+      apps: this.allowed_apps,
     };
 
+    // return;
     if (!operation) {
       this.rolesService.postData(dataForm);
     } else {
@@ -464,6 +466,7 @@ export class RolesComponent implements OnInit {
         }
       });
     } else {
+      // delete submenu in submenu_access array
       let indexSub = this.allowed_submenus.indexOf(
         this.allowed_submenus.find(
           (sub) => sub.submenu_id == submenuInserted.id
@@ -472,31 +475,37 @@ export class RolesComponent implements OnInit {
       this.allowed_submenus.splice(indexSub, 1);
 
       // deleted apps associated to submenu deleted
-      submenuInserted.apps.forEach(() => {
+
+      submenuInserted.apps.forEach((appTo) => {
         let indexApp = this.allowed_apps.indexOf(
-          this.allowed_apps.find((app) => app.app_id == app.id)
+          this.allowed_apps.find((app) => app.app_id == appTo.id)
         );
-        this.allowed_apps.splice(indexApp, 1);
+        this.allowed_apps.forEach((app) => {
+          if (app.app_id == appTo.id) {
+            this.allowed_apps.splice(indexApp, 1);
+          }
+        });
       });
     }
   }
 
-  allowAppAccess(checkboxStatus: boolean, app: any) {
+  allowAppAccess(checkboxStatus: boolean, appInserted: any) {
     if (checkboxStatus) {
       // insert app selected
       this.allowed_apps.push({
-        submenu_id: app.submenu_id,
-        app_id: app.id,
+        submenu_id: appInserted.submenu_id,
+        app_id: appInserted.id,
         access: checkboxStatus,
       });
     } else {
       // find and delete app selected
       let indexApp = this.allowed_apps.indexOf(
-        this.allowed_apps.find((app) => app.app_id == app.id)
+        this.allowed_apps.find((app) => app.app_id == appInserted.id)
       );
+
       this.allowed_apps.splice(indexApp, 1);
 
-      this.someSelected(app.submenu_id);
+      this.someSelected(appInserted.submenu_id);
     }
   }
 
@@ -526,6 +535,7 @@ export class RolesComponent implements OnInit {
         horizontalPosition: 'right',
         verticalPosition: 'top',
         panelClass: 'snack-alert',
+        duration: 5000,
       });
     }
 

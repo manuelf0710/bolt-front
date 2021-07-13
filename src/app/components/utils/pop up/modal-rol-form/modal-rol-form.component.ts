@@ -87,7 +87,7 @@ export class ModalRolFormComponent implements OnInit {
       country: new FormControl('', [Validators.required]),
     });
   }
-  loginUser(): void {
+  madeRequest(): void {
     if (this.userRolForm.invalid) {
       (<any>Object).values(this.userRolForm.controls).forEach((control) => {
         control.markAsTouched();
@@ -104,7 +104,10 @@ export class ModalRolFormComponent implements OnInit {
     console.log(requestData);
 
     this.httpService
-      .post(environment.serverUrl + environment.users, requestData)
+      .post(
+        environment.serverUrl + environment.users.accesstoproject,
+        requestData
+      )
       .subscribe(
         (response: any) => {
           this.ui.showLoading();

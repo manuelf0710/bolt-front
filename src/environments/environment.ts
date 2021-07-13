@@ -73,6 +73,7 @@ export const environment = {
     putById: 'user/',
     deleteById: 'user/',
     updateStatusById: 'user/changestatus/',
+    accesstoproject: 'users/accesstoproject',
   },
   roles: {
     getAll: 'roles',

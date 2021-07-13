@@ -1,7 +1,6 @@
 export const environment = {
   production: true,
   serverUrl: 'https://boltmaz.azurewebsites.net/api/v1/',
-
   auth: {
     get: 'auth/saml',
   },
@@ -30,7 +29,7 @@ export const environment = {
 
   projects: {
     get: 'projects',
-    getAll: 'projects/menu',
+    getAll: 'projects/menu/',
     menuByUser: 'projects/menubyuser',
     menuByRole: 'projects/menubyrole',
     post: 'projects',
@@ -67,13 +66,14 @@ export const environment = {
     putById: 'user/',
     deleteById: 'user/',
     updateStatusById: 'user/changestatus/',
+    accesstoproject: 'users/accesstoproject',
   },
   roles: {
     getAll: 'roles',
     getById: 'roles/',
     post: 'roles',
     postWithProjects: 'projectRoles/createrolprojapps',
-    putById: 'roles/',
+    putByIdWithProjects: 'projectRoles/updaterolprojapps/',
     deleteById: 'roles/',
     updateStatusById: 'roles/changestatus/',
   },

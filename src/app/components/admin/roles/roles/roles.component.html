@@ -236,8 +236,9 @@
           </p>
           <div class="col">
             <p class="grid-content__description">
-              <i *ngFor="let project of role.projects">
-                {{ lang == "Esp" ? project.name_es : project.name_en }}/
+              <i *ngFor="let project of role.projects; last as isLast">
+                {{ lang == "Esp" ? project.name_es : project.name_en
+                }}{{ isLast ? null : "/" }}
               </i>
             </p>
           </div>

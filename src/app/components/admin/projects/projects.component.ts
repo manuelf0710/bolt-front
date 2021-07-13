@@ -157,6 +157,7 @@ export class ProjectsComponent implements OnInit, OnDestroy {
       message_en = 'enable';
       state = 1;
     }
+
     const confDialog = this.dialog.open(ModalConfirmationComponent, {
       id: ModalConfirmationComponent.toString(),
       disableClose: true,

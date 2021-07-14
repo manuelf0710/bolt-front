@@ -73,6 +73,7 @@ export const environment = {
     getById: 'roles/',
     post: 'roles',
     postWithProjects: 'projectRoles/createrolprojapps',
+    putByIdWithProjects: 'projectRoles/updaterolprojapps/',
     putById: 'roles/',
     deleteById: 'roles/',
     updateStatusById: 'roles/changestatus/',

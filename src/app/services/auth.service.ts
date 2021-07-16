@@ -2,7 +2,8 @@ import { DOCUMENT } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 @Injectable()
@@ -45,28 +46,31 @@ export class AuthService {
     this.authStatusListener.next(true);
   }
 
+  registerLog(): Observable<any> {
+    return this.http
+      .get(environment.serverUrl + environment.auth.registerlogout)
+      .pipe(
+        map((lista: any) => {
+          console.log('el valor de lista logout ', lista);
+          const registerlog = lista.body;
+          return registerlog;
+        })
+      );
+  }
+
   logout() {
     this.token = null;
     this.isAuth = false;
     this.authStatusListener.next(false);
-    // clear timer
     clearTimeout(this.tokenTimer);
     this.samlData = localStorage.getItem('userDataSaml');
-    // clear local Storage
     this.clearAuthdata();
-    // clear user id
     this.userId = null;
     //this.router.navigate(['/']);
-    let encodeData = btoa(this.samlData);
-    /*alert(
-      'ingresa = ' +
-        environment.serverUrl +
-        environment.logout.get +
-        '?params=' +
-        encodeData
-    ); */
-    this.document.location.href =
-      environment.serverUrl.split('/api')[0] + '?params=' + encodeData;
+    //let encodeData = btoa(this.samlData);
+    /*this.document.location.href =
+              environment.serverUrl + environment.logout.get + '?params=' + encodeData;*/
+    this.document.location.href = environment.logout.get;
   }
 
   autoAuthUser() {

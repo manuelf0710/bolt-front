@@ -29,14 +29,29 @@ export class EmbedViewComponent implements OnInit, OnDestroy {
   }
 
   getData() {
-    this.appSbc = this.appService.apps$.subscribe((apps) => {
+    /*this.appSbc = this.appService.apps$.subscribe((apps) => {
       apps.forEach((singleApp) => {
         if (singleApp.id == this.ext_id) {
           this.elementProps.push(singleApp);
         }
       });
-    });
-    this.appService.getData();
+    }); */
+
+    this.appService.getDataById(this.ext_id).subscribe(
+      (res: any[]) => {
+        this.elementProps = res;
+        //console.log('la res', res);
+        //this.prop = MockProjects;
+        if (this.elementProps) {
+        }
+      },
+      (error: any) => {
+        console.log('ha ocurrido un error ');
+        console.log('error ', error);
+      },
+      () => {}
+    );
+    //this.appService.getDataById(this.ext_id);
   }
 
   getSafeUrl(url: any) {

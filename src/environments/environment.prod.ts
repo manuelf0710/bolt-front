@@ -3,6 +3,7 @@ export const environment = {
   serverUrl: 'https://boltmaz.azurewebsites.net/api/v1/',
   auth: {
     get: 'auth/saml',
+    registerlogout: 'auth/registerlog',
   },
 
   types: {
@@ -15,7 +16,8 @@ export const environment = {
 
   logout: {
     resource: '/user/logout',
-    get: 'auth/logout',
+    //get: 'auth/logout',
+    get: 'https://login.microsoftonline.com/common/wsfederation?wa=wsignout1.0',
   },
 
   banners: {

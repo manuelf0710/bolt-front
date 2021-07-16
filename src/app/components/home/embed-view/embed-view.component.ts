@@ -41,18 +41,12 @@ export class EmbedViewComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   getData() {
-    this.appService.getDataById(this.ext_id).subscribe(
-      (res: any[]) => {
-        this.elementProps = res;
-        if (this.elementProps) {
-        }
-      },
-      (error: any) => {
-        console.log('ha ocurrido un error ');
-        console.log('error ', error);
-      },
-      () => {}
-    );
+    this.appSbc = this.appService
+      .getDataById(this.ext_id)
+      .subscribe((res: any[]) => {
+        this.elementProps.push(res);
+      });
+    this.appService.getData();
   }
 
   getSafeUrl(url: any) {
@@ -63,5 +57,6 @@ export class EmbedViewComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     this.appSbc.unsubscribe();
+    this.subscriber.unsubscribe();
   }
 }

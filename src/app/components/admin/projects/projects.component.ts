@@ -91,9 +91,8 @@ export class ProjectsComponent implements OnInit, OnDestroy {
   }
 
   projectStatus(project, event, action) {
+    let ProjName = project.name_es;
     if (event.checked) {
-      let ProjName = project.name_es;
-
       if (action == 'enable') {
         this.message_action_es = 'habilitar';
         this.message_action_en = 'enable';
@@ -104,44 +103,43 @@ export class ProjectsComponent implements OnInit, OnDestroy {
       if (this.lang == 'Eng') {
         ProjName = project.name_en;
       }
-
-      const confDialog = this.dialog.open(ModalConfirmationComponent, {
-        id: ModalConfirmationComponent.toString(),
-        disableClose: true,
-        hasBackdrop: true,
-        width: '500px',
-        height: 'auto',
-        data: {
-          project_name: ProjName,
-          message_action_es: this.message_action_es,
-          message_action_en: this.message_action_en,
-        },
-      });
-
-      confDialog.afterClosed().subscribe((result) => {
-        this.projectPermission = result;
-        let status;
-        if (this.projectPermission) {
-          if (action == 'enable') {
-            this.message_action_es = 'habilitó';
-            this.message_action_en = 'enabled';
-            status = 1;
-          } else {
-            this.message_action_es = 'deshabilitó';
-            this.message_action_en = 'disabled';
-            status = 0;
-          }
-
-          this.projectService.updateStatus(
-            project,
-            this.message_action_es,
-            this.message_action_en
-          );
-        } else {
-          window.location.reload();
-        }
-      });
     }
+    const confDialog = this.dialog.open(ModalConfirmationComponent, {
+      id: ModalConfirmationComponent.toString(),
+      disableClose: true,
+      hasBackdrop: true,
+      width: '500px',
+      height: 'auto',
+      data: {
+        project_name: ProjName,
+        message_action_es: this.message_action_es,
+        message_action_en: this.message_action_en,
+      },
+    });
+
+    confDialog.afterClosed().subscribe((result) => {
+      this.projectPermission = result;
+      let status;
+      if (this.projectPermission) {
+        if (action == 'enable') {
+          this.message_action_es = 'habilitó';
+          this.message_action_en = 'enabled';
+          status = 1;
+        } else {
+          this.message_action_es = 'deshabilitó';
+          this.message_action_en = 'disabled';
+          status = 0;
+        }
+
+        this.projectService.updateStatus(
+          project,
+          this.message_action_es,
+          this.message_action_en
+        );
+      } else {
+        window.location.reload();
+      }
+    });
   }
 
   subMenuDisable(submenuName, event: MatSlideToggleChange) {

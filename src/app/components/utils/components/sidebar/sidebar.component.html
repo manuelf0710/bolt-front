@@ -306,6 +306,11 @@
                 >
                   <button mat-button (click)="openApp(program.id)">
                     <div class="flex1">
+                      <span
+                        mat-prefix
+                        class="icon {{ getClassName(program.id) }}"
+                        style="margin-left: 10px"
+                      ></span>
                       <i
                         *ngIf="sideStatus"
                         class="material-icons arrow"

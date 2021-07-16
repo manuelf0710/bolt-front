@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 
 import { AppList } from 'src/app/model/AppList';
+import { AppsService } from 'src/app/services/apps.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { FavoritesService } from 'src/app/services/favorites.service';
 import { ProjectsService } from 'src/app/services/projects.service';
@@ -18,6 +19,7 @@ import { ModalConfirmationComponent } from '../../pop up/modal-confirmation/moda
 export class SidebarComponent implements OnInit {
   public favList: AppList[] = [];
   public prop: any[] = [];
+  public appsData: any[] = [];
 
   public arrowType: string = 'arrow_forward_ios';
   public lang: string;
@@ -52,6 +54,7 @@ export class SidebarComponent implements OnInit {
     private authService: AuthService,
     private favoriteService: FavoritesService,
     private projectService: ProjectsService,
+    private appService: AppsService,
     private eRef: ElementRef
   ) {}
 
@@ -74,14 +77,18 @@ export class SidebarComponent implements OnInit {
 
   getData() {
     let favSubs = this.favoriteService.getObservableData(this.userId);
+    let appsSubs = this.appService.getObservableData();
     let projSubs = this.projectService.getProjectsAssignByUserRol();
 
-    forkJoin({ projects: projSubs, favorites: favSubs }).subscribe(
-      (res: any) => {
-        this.favList = res.favorites.body;
-        this.prop = res.projects;
-      }
-    );
+    forkJoin({
+      projects: projSubs,
+      favorites: favSubs,
+      apps: appsSubs,
+    }).subscribe((res: any) => {
+      this.favList = res.favorites.body;
+      this.prop = res.projects;
+      this.appsData = res.apps.body.items;
+    });
   }
 
   menuOpened(item) {
@@ -178,8 +185,6 @@ export class SidebarComponent implements OnInit {
           }
         });
       }
-      console.log(element);
-
       this.favoriteService.delete(app_table_id);
     }
   }
@@ -219,6 +224,16 @@ export class SidebarComponent implements OnInit {
     this.router.navigate([`app-view/${dashboard}`], {
       queryParamsHandling: 'preserve',
     });
+  }
+
+  getClassName(Id: string) {
+    let className = '';
+    this.appsData.forEach((app) => {
+      if (app.id == Id) {
+        className = app.type.name.split(' ')[0].toLowerCase();
+      }
+    });
+    return className;
   }
 
   adminRedirect(route: string) {

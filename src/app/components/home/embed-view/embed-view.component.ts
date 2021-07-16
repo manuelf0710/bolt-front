@@ -1,7 +1,8 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { AppList } from 'src/app/model/AppList';
 import { AppsService } from 'src/app/services/apps.service';
 
@@ -10,7 +11,8 @@ import { AppsService } from 'src/app/services/apps.service';
   templateUrl: './embed-view.component.html',
   styleUrls: ['./embed-view.component.scss'],
 })
-export class EmbedViewComponent implements OnInit, OnDestroy {
+export class EmbedViewComponent implements OnInit, AfterViewInit, OnDestroy {
+  public subscriber: Subscription;
   public appSbc: Subscription;
   public ext_id: string;
   public objEmbed = AppList;
@@ -28,20 +30,20 @@ export class EmbedViewComponent implements OnInit, OnDestroy {
     this.getData();
   }
 
-  getData() {
-    /*this.appSbc = this.appService.apps$.subscribe((apps) => {
-      apps.forEach((singleApp) => {
-        if (singleApp.id == this.ext_id) {
-          this.elementProps.push(singleApp);
+  ngAfterViewInit(): void {
+    this.subscriber = this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event) => {
+        if (event) {
+          window.location.href = event['url'];
         }
       });
-    }); */
+  }
 
+  getData() {
     this.appService.getDataById(this.ext_id).subscribe(
       (res: any[]) => {
         this.elementProps = res;
-        //console.log('la res', res);
-        //this.prop = MockProjects;
         if (this.elementProps) {
         }
       },
@@ -51,7 +53,6 @@ export class EmbedViewComponent implements OnInit, OnDestroy {
       },
       () => {}
     );
-    //this.appService.getDataById(this.ext_id);
   }
 
   getSafeUrl(url: any) {

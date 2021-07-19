@@ -9,7 +9,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { FavoritesService } from 'src/app/services/favorites.service';
 import { ProjectsService } from 'src/app/services/projects.service';
 import { UiService } from 'src/app/services/ui.service';
-import { ModalConfirmationComponent } from '../../pop up/modal-confirmation/modal-confirmation.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -33,20 +32,6 @@ export class SidebarComponent implements OnInit {
   public collapseAll: boolean = false;
   public btnClose: boolean = false;
 
-  @HostListener('document:click', ['$event'])
-  clickout(event) {
-    if (this.eRef.nativeElement.contains(event.target)) {
-      this.openSide();
-    } else {
-      let panel = document.querySelector('.mat-menu-panel');
-      let tutorial = localStorage.getItem('tutorial');
-
-      if (this.collapseAll == true && !panel && tutorial) {
-        this.closeSide();
-      }
-    }
-  }
-
   constructor(
     private router: Router,
     private ui: UiService,
@@ -54,8 +39,7 @@ export class SidebarComponent implements OnInit {
     private authService: AuthService,
     private favoriteService: FavoritesService,
     private projectService: ProjectsService,
-    private appService: AppsService,
-    private eRef: ElementRef
+    private appService: AppsService
   ) {}
 
   ngOnInit(): void {
@@ -201,6 +185,10 @@ export class SidebarComponent implements OnInit {
     separator.setAttribute('style', 'width: 85% !important');
   }
 
+  receiveDataChild(event: boolean) {
+    this.collapseAll = event;
+    this.sideStatus = !event;
+  }
   closeSide() {
     let innerArrow = document.querySelector('#arrowSide');
     let sidebar = document.querySelector('#sidebar');

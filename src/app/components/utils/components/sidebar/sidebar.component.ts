@@ -1,5 +1,12 @@
-import { Component, OnInit, ElementRef, HostListener } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ElementRef,
+  HostListener,
+  ViewChild,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatAccordion } from '@angular/material/expansion';
 import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 
@@ -16,6 +23,7 @@ import { UiService } from 'src/app/services/ui.service';
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit {
+  @ViewChild(MatAccordion) accordion: MatAccordion;
   public favList: AppList[] = [];
   public prop: any[] = [];
   public appsData: any[] = [];
@@ -30,7 +38,6 @@ export class SidebarComponent implements OnInit {
   public isAuth: boolean = false;
   public sideStatus: boolean = false;
   public collapseAll: boolean = false;
-  public btnClose: boolean = false;
 
   constructor(
     private router: Router,
@@ -77,18 +84,23 @@ export class SidebarComponent implements OnInit {
 
   menuOpened(item) {
     let menu = document.getElementById(item);
+    let division = document.getElementById('bg-' + item);
     let overlay = document.getElementsByClassName(
       'cdk-overlay-connected-position-bounding-box'
     );
+
+    division.classList.add('background-black');
     menu.classList.add('highlight-item');
     overlay[0].setAttribute(
       'style',
-      'transform: translateX(211px) translateY(-36px) ;left: 0 !important;'
+      'transform: translateX(211px) translateY(-40px) ;left: 0 !important;'
     );
   }
 
   menuClosed(item) {
     let menu = document.getElementById(item);
+    let division = document.getElementById('bg-' + item);
+    division.classList.remove('background-black');
     menu.classList.remove('highlight-item');
   }
 
@@ -126,6 +138,44 @@ export class SidebarComponent implements OnInit {
         actHeader.classList.remove('bg-black-panel');
         actIcon.classList.add('menu-icon');
       }
+    }
+  }
+
+  openSide() {
+    let innerArrow = document.querySelector('#arrowSide');
+    let sidebar = document.querySelector('#sidebar');
+    let separator = document.querySelector('#separatorsidebar');
+    this.sideStatus = false;
+    this.collapseAll = true;
+
+    sessionStorage.setItem('sidebarStatus', 'open');
+    sidebar.setAttribute('style', 'width: 267px !important');
+    innerArrow.setAttribute('style', 'transform: rotate(180deg)');
+    separator.setAttribute('style', 'width: 85% !important');
+  }
+
+  receiveDataChild(event: boolean) {
+    this.collapseAll = event;
+    this.sideStatus = !event;
+  }
+
+  closeSide() {
+    console.log('cerrar');
+
+    let innerArrow = document.querySelector('#arrowSide');
+    let sidebar = document.querySelector('#sidebar');
+    let separator = document.querySelector('#separatorsidebar');
+    let panel = document.querySelector('.mat-menu-panel');
+    this.sideStatus = true;
+    this.collapseAll = false;
+
+    sessionStorage.setItem('sidebarStatus', 'close');
+    sidebar.setAttribute('style', 'width: 80px !important');
+    innerArrow.setAttribute('style', 'transform: rotate(0deg) ');
+    separator.setAttribute('style', 'width: 65% !important');
+
+    if (panel) {
+      panel.setAttribute('style', 'display:none');
     }
   }
 
@@ -173,47 +223,6 @@ export class SidebarComponent implements OnInit {
     }
   }
 
-  openSide() {
-    let innerArrow = document.querySelector('#arrowSide');
-    let sidebar = document.querySelector('#sidebar');
-    let separator = document.querySelector('#separatorsidebar');
-    this.sideStatus = false;
-    this.collapseAll = true;
-    sessionStorage.setItem('sidebarStatus', 'open');
-    sidebar.setAttribute('style', 'width: 267px !important');
-    innerArrow.setAttribute('style', 'transform: rotate(180deg)');
-    separator.setAttribute('style', 'width: 85% !important');
-  }
-
-  receiveDataChild(event: boolean) {
-    this.collapseAll = event;
-    this.sideStatus = !event;
-  }
-  closeSide() {
-    let innerArrow = document.querySelector('#arrowSide');
-    let sidebar = document.querySelector('#sidebar');
-    let separator = document.querySelector('#separatorsidebar');
-    let panel = document.querySelector('.mat-menu-panel');
-
-    this.sideStatus = true;
-    this.collapseAll = false;
-    sessionStorage.setItem('sidebarStatus', 'close');
-    sidebar.setAttribute('style', 'width: 80px !important');
-    innerArrow.setAttribute('style', 'transform: rotate(0deg) ');
-    separator.setAttribute('style', 'width: 65% !important');
-
-    if (panel) {
-      panel.setAttribute('style', 'display:none');
-    }
-  }
-
-  openApp(dashboard: string) {
-    this.closeSide();
-    this.router.navigate([`app-view/${dashboard}`], {
-      queryParamsHandling: 'preserve',
-    });
-  }
-
   getClassName(Id: string) {
     let className = '';
     this.appsData.forEach((app) => {
@@ -224,10 +233,27 @@ export class SidebarComponent implements OnInit {
     return className;
   }
 
+  openApp(dashboard: string) {
+    this.collapseEvent();
+    this.closeSide();
+    this.router.navigate([`app-view/${dashboard}`], {
+      queryParamsHandling: 'preserve',
+    });
+  }
+
   adminRedirect(route: string) {
+    this.collapseEvent();
     this.closeSide();
     this.router.navigate([`admin/${route}`], {
       queryParamsHandling: 'preserve',
     });
+  }
+
+  collapseEvent() {
+    this.accordion.multi = true;
+    this.accordion.closeAll();
+    setTimeout(() => {
+      this.accordion.multi = false;
+    }, 100);
   }
 }

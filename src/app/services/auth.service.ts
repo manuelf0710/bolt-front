@@ -66,10 +66,6 @@ export class AuthService {
     this.samlData = localStorage.getItem('userDataSaml');
     this.clearAuthdata();
     this.userId = null;
-    //this.router.navigate(['/']);
-    //let encodeData = btoa(this.samlData);
-    /*this.document.location.href =
-              environment.serverUrl + environment.logout.get + '?params=' + encodeData;*/
     this.document.location.href = environment.logout.get;
   }
 

@@ -10,6 +10,7 @@
     appToggleSide
     [sideStatus]="sideStatus"
     (colapsable)="receiveDataChild($event)"
+    (click)="collapseEvent()"
   >
     <span class="material-icons menu-icon" id="arrowSide"> double_arrow </span>
   </span>
@@ -24,13 +25,11 @@
     <mat-accordion multi="false">
       <!-- fav section -->
       <mat-expansion-panel
-        hideToggle
-        (opened)="arrowRotate(true, 'f')"
-        (closed)="arrowRotate(false, 'f')"
         id="extf"
         class="no-padding"
-        [disabled]="sideStatus"
-        [expanded]="sideStatus == true ? collapseAll : null"
+        (afterExpand)="arrowRotate(true, 'f')"
+        (closed)="arrowRotate(false, 'f')"
+        hideToggle
       >
         <mat-expansion-panel-header>
           <i class="material-icons arrow" id="arrowEf" *ngIf="!sideStatus">
@@ -81,10 +80,8 @@
         *ngIf="isAdmin"
         id="exta"
         hideToggle
-        (opened)="arrowRotate(true, 'a')"
+        (afterExpand)="arrowRotate(true, 'a')"
         (closed)="arrowRotate(false, 'a')"
-        [disabled]="sideStatus"
-        [expanded]="sideStatus == true ? collapseAll : null"
       >
         <mat-expansion-panel-header>
           <i class="material-icons arrow" id="arrowEa" *ngIf="!sideStatus">
@@ -101,14 +98,16 @@
         <div class="left-line">
           <div>
             <div>
+              <div id="bg-projects"></div>
               <button
                 id="projects"
-                mat-button
+                class="colapsable-menu"
                 [matMenuTriggerFor]="menuProjects"
                 (menuOpened)="menuOpened('projects')"
                 (menuClosed)="menuClosed('projects')"
+                [expanded]="btnClose"
                 disableRipple="true"
-                class="colapsable-menu"
+                mat-button
               >
                 <span class="material-icons icon"> account_tree </span>
                 <span>
@@ -142,7 +141,9 @@
                 </section>
               </mat-menu>
             </div>
+
             <div>
+              <div id="bg-roles"></div>
               <button
                 id="roles"
                 mat-button
@@ -200,7 +201,9 @@
                 </section>
               </mat-menu>
             </div>
+
             <div>
+              <div id="bg-banner"></div>
               <button
                 id="banner"
                 mat-button
@@ -260,12 +263,10 @@
       <div *ngIf="prop.length > 0">
         <mat-expansion-panel
           *ngFor="let project of prop; let id = index"
-          (opened)="arrowRotate(true, id)"
-          (closed)="arrowRotate(false, id)"
           [id]="'panel' + id"
+          (afterExpand)="arrowRotate(true, id)"
+          (closed)="arrowRotate(false, id)"
           hideToggle
-          [disabled]="sideStatus"
-          [expanded]="sideStatus == true ? collapseAll : null"
         >
           <mat-expansion-panel-header>
             <i
@@ -285,6 +286,7 @@
           <div class="left-line">
             <div *ngFor="let menuItem of project.submenus">
               <div *ngIf="menuItem.apps.length > 0 && menuItem.status == true">
+                <div [id]="'bg-' + menuItem.name_es"></div>
                 <button
                   [id]="menuItem.name_es"
                   mat-button

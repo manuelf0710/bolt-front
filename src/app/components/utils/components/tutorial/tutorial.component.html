@@ -96,12 +96,13 @@
     <span class="arrow-pointer"></span>
     <p class="tutorial__content" *ngIf="lang == 'Esp'">
       Para desplegar / replegar el menú basta con dar clic dentro del mismo y
-      este se desplegará, para replegarlo debes hacer clic fuera del menú y este
-      se replegará
+      este se desplegará, para replegarlo debes hacer clic en el botón ubicado
+      en la parte superior del menú y este se replegará
     </p>
     <p class="tutorial__content" *ngIf="lang == 'Eng'">
-      To display / fold the menu just click on it and this will be displayed, to
-      replicate it you must click outside the menu and it will fall back
+      To display / replicate the menu just click on it and it will unfold, to
+      replicate it you must click on the button located at the top of the menu
+      and this will be folded
     </p>
     <button mat-button class="transparent-btn" (click)="next()">
       <span *ngIf="lang == 'Esp'">siguiente</span>

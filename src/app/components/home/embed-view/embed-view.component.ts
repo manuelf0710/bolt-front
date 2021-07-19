@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -18,7 +18,7 @@ export class EmbedViewComponent implements OnInit, AfterViewInit, OnDestroy {
   public objEmbed = AppList;
   public elementProps = [];
   public saveUrl: any[] = [];
-
+  public cur_url: SafeUrl = '';
   constructor(
     private router: Router,
     private appService: AppsService,
@@ -26,7 +26,6 @@ export class EmbedViewComponent implements OnInit, AfterViewInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.ext_id = this.router.url.replace('/app-view/', '');
     this.getData();
   }
 
@@ -35,22 +34,26 @@ export class EmbedViewComponent implements OnInit, AfterViewInit, OnDestroy {
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event) => {
         if (event) {
-          window.location.href = event['url'];
+          this.getData();
         }
       });
   }
 
   getData() {
+    this.ext_id = this.router.url.replace('/app-view/', '');
     this.appSbc = this.appService
       .getDataById(this.ext_id)
       .subscribe((res: any[]) => {
         this.elementProps.push(res);
+        this.elementProps.forEach((dash) => {
+          this.getSafeUrl(dash['url']);
+        });
       });
     this.appService.getData();
   }
 
   getSafeUrl(url: any) {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(
+    this.cur_url = this.sanitizer.bypassSecurityTrustResourceUrl(
       url + '#embedded=true'
     );
   }

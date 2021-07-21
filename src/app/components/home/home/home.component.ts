@@ -127,8 +127,10 @@ export class HomeComponent implements OnInit {
   }
 
   redirectTo(slide: any) {
+    console.log('open in new tab', slide);
+
     let extUrl = slide.url_redirect;
-    if (slide.pdf != 'null') {
+    if (slide.pdf != null) {
       extUrl = slide.pdf_info.full_path;
     }
     window.open(extUrl);

@@ -8,8 +8,6 @@
     class="rounded"
     title="Expandir Menu"
     appToggleSide
-    [sideStatus]="sideStatus"
-    (colapsable)="receiveDataChild($event)"
     (click)="collapseEvent()"
   >
     <span class="material-icons menu-icon" id="arrowSide"> double_arrow </span>
@@ -19,8 +17,6 @@
     id="project_list"
     style="justify-content: flex-start; flex: 1"
     appToggleSide
-    [sideStatus]="sideStatus"
-    (colapsable)="receiveDataChild($event)"
   >
     <mat-accordion multi="false">
       <!-- fav section -->
@@ -32,11 +28,15 @@
         hideToggle
       >
         <mat-expansion-panel-header>
-          <i class="material-icons arrow" id="arrowEf" *ngIf="!sideStatus">
+          <i
+            class="material-icons arrow"
+            id="arrowEf"
+            *ngIf="!sideToggleService.sideStatus"
+          >
             arrow_forward_ios
           </i>
           <span class="material-icons icon menu-icon" id="iconEf"> star </span>
-          <div *ngIf="!sideStatus" class="option-name">
+          <div *ngIf="!sideToggleService.sideStatus" class="option-name">
             {{ lang == "Esp" ? "Favoritos" : "Favorites" }}
           </div>
         </mat-expansion-panel-header>
@@ -84,13 +84,17 @@
         (closed)="arrowRotate(false, 'a')"
       >
         <mat-expansion-panel-header>
-          <i class="material-icons arrow" id="arrowEa" *ngIf="!sideStatus">
+          <i
+            class="material-icons arrow"
+            id="arrowEa"
+            *ngIf="!sideToggleService.sideStatus"
+          >
             arrow_forward_ios
           </i>
           <span class="material-icons icon menu-icon" id="iconEa">
             manage_accounts
           </span>
-          <div *ngIf="!sideStatus" class="option-name">
+          <div *ngIf="!sideToggleService.sideStatus" class="option-name">
             {{ lang == "Esp" ? "Administrador" : "Manager" }}
           </div>
         </mat-expansion-panel-header>
@@ -129,7 +133,7 @@
                   >
                     <div class="flex1">
                       <span class="material-icons icon"> post_add </span>
-                      <div *ngIf="!sideStatus">
+                      <div *ngIf="!sideToggleService.sideStatus">
                         {{
                           lang == "Esp"
                             ? "crear o modificar un proyecto"
@@ -250,11 +254,17 @@
 
       <mat-divider id="separatorsidebar"></mat-divider>
 
-      <h2 class="sidebar-title" *ngIf="prop.length > 0 && !sideStatus">
+      <h2
+        class="sidebar-title"
+        *ngIf="prop.length > 0 && !sideToggleService.sideStatus"
+      >
         {{ lang == "Esp" ? "Proyectos asignados" : "Assigned projects" }}
       </h2>
 
-      <h2 class="sidebar-title" *ngIf="!prop.length && !sideStatus">
+      <h2
+        class="sidebar-title"
+        *ngIf="!prop.length && !sideToggleService.sideStatus"
+      >
         {{ lang == "Esp" ? "Sin Proyectos asignados" : "No Assigned projects" }}
       </h2>
 
@@ -272,14 +282,17 @@
             <i
               class="material-icons arrow"
               [id]="'arrowH' + id"
-              *ngIf="!sideStatus"
+              *ngIf="!sideToggleService.sideStatus"
             >
               arrow_forward_ios
             </i>
             <span class="material-icons icon menu-icon" [id]="'iconH' + id">
               {{ project.icon }}
             </span>
-            <span *ngIf="!sideStatus" class="option-name wrap">
+            <span
+              *ngIf="!sideToggleService.sideStatus"
+              class="option-name wrap"
+            >
               {{ lang == "Esp" ? project.name_es : project.name_en }}
             </span>
           </mat-expansion-panel-header>
@@ -322,7 +335,7 @@
                           style="margin-left: 10px"
                         ></span>
                         <i
-                          *ngIf="sideStatus"
+                          *ngIf="sideToggleService.sideStatus"
                           class="material-icons arrow"
                           [id]="id"
                         >

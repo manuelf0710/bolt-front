@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  ElementRef,
-  HostListener,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatAccordion } from '@angular/material/expansion';
 import { Router } from '@angular/router';
@@ -15,6 +9,7 @@ import { AppsService } from 'src/app/services/apps.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { FavoritesService } from 'src/app/services/favorites.service';
 import { ProjectsService } from 'src/app/services/projects.service';
+import { SidebarToggleService } from 'src/app/services/sidebar-toggle.service';
 import { UiService } from 'src/app/services/ui.service';
 
 @Component({
@@ -46,7 +41,8 @@ export class SidebarComponent implements OnInit {
     private authService: AuthService,
     private favoriteService: FavoritesService,
     private projectService: ProjectsService,
-    private appService: AppsService
+    private appService: AppsService,
+    public sideToggleService: SidebarToggleService
   ) {}
 
   ngOnInit(): void {
@@ -57,11 +53,11 @@ export class SidebarComponent implements OnInit {
     this.sideMemory = sessionStorage.getItem('sidebarStatus') || 'open';
 
     if (this.sideMemory == 'close') {
-      this.sideStatus = false;
-      this.closeSide();
+      this.sideToggleService.sideStatus = false;
+      this.sideToggleService.closeSide();
     } else {
-      this.sideStatus = true;
-      this.openSide();
+      this.sideToggleService.sideStatus = true;
+      this.sideToggleService.openSide();
     }
     this.getData();
   }
@@ -141,42 +137,6 @@ export class SidebarComponent implements OnInit {
     }
   }
 
-  openSide() {
-    let innerArrow = document.querySelector('#arrowSide');
-    let sidebar = document.querySelector('#sidebar');
-    let separator = document.querySelector('#separatorsidebar');
-    this.sideStatus = false;
-    this.collapseAll = true;
-
-    sessionStorage.setItem('sidebarStatus', 'open');
-    sidebar.setAttribute('style', 'width: 267px !important');
-    innerArrow.setAttribute('style', 'transform: rotate(180deg)');
-    separator.setAttribute('style', 'width: 85% !important');
-  }
-
-  receiveDataChild(event: boolean) {
-    this.collapseAll = event;
-    this.sideStatus = !event;
-  }
-
-  closeSide() {
-    let innerArrow = document.querySelector('#arrowSide');
-    let sidebar = document.querySelector('#sidebar');
-    let separator = document.querySelector('#separatorsidebar');
-    let panel = document.querySelector('.mat-menu-panel');
-    this.sideStatus = true;
-    this.collapseAll = false;
-
-    sessionStorage.setItem('sidebarStatus', 'close');
-    sidebar.setAttribute('style', 'width: 80px !important');
-    innerArrow.setAttribute('style', 'transform: rotate(0deg) ');
-    separator.setAttribute('style', 'width: 65% !important');
-
-    if (panel) {
-      panel.setAttribute('style', 'display:none');
-    }
-  }
-
   showConfirmation(event, element, origin?) {
     if (this.favList.length < 6) {
       if (event) {
@@ -233,7 +193,7 @@ export class SidebarComponent implements OnInit {
 
   openApp(dashboard: string) {
     this.collapseEvent();
-    this.closeSide();
+    this.sideToggleService.closeSide();
     this.router.navigate([`app-view/${dashboard}`], {
       queryParamsHandling: 'preserve',
     });
@@ -241,7 +201,7 @@ export class SidebarComponent implements OnInit {
 
   adminRedirect(route: string) {
     this.collapseEvent();
-    this.closeSide();
+    this.sideToggleService.closeSide();
     this.router.navigate([`admin/${route}`], {
       queryParamsHandling: 'preserve',
     });

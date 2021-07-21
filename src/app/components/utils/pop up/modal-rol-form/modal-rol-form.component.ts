@@ -101,7 +101,6 @@ export class ModalRolFormComponent implements OnInit {
       project: this.userRolForm.controls.project.value,
       country: this.userRolForm.controls.country.value,
     };
-    console.log(requestData);
 
     this.httpService
       .post(

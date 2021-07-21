@@ -84,8 +84,6 @@ export class SubmenusService {
       .subscribe(
         (response: any) => {
           if (response.status == 201) {
-            console.log(response);
-
             fun;
             const mod = this.ui.showModal(
               ModalNotificationComponent,

@@ -51,7 +51,6 @@ export class AuthService {
       .get(environment.serverUrl + environment.auth.registerlogout)
       .pipe(
         map((lista: any) => {
-          console.log('el valor de lista logout ', lista);
           const registerlog = lista.body;
           return registerlog;
         })

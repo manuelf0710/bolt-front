@@ -160,8 +160,6 @@ export class SidebarComponent implements OnInit {
   }
 
   closeSide() {
-    console.log('cerrar');
-
     let innerArrow = document.querySelector('#arrowSide');
     let sidebar = document.querySelector('#sidebar');
     let separator = document.querySelector('#separatorsidebar');

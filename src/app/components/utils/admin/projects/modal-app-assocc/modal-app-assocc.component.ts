@@ -178,7 +178,6 @@ export class ModalAppAssoccComponent implements OnInit {
 
     let app_type_id;
     let user_id = localStorage.getItem('userId');
-    console.log(this.selectedValue);
 
     this.appTypes.forEach((type) => {
       if (type.name == this.selectedValue) {

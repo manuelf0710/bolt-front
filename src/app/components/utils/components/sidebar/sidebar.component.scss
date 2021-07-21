@@ -11,7 +11,7 @@
   height: 800px;
   box-sizing: border-box;
   background-color: #e3e3e3;
-  transition: all 0.4s;
+  transition: all 0.2s;
   z-index: 1000;
 }
 .wrap {
@@ -37,6 +37,7 @@ mat-accordion {
   opacity: 0.91;
   backdrop-filter: blur(4px);
   color: #fff;
+  transition: background 0.2s;
 }
 
 ::ng-deep .mat-expansion-panel-header {

@@ -23,8 +23,11 @@ export const environment = {
 
   logout: {
     resource: '/user/logout',
-    //get: 'auth/logout',
     get: 'https://login.microsoftonline.com/common/wsfederation?wa=wsignout1.0',
+  },
+
+  request: {
+    accesstoproject: 'mail',
   },
 
   banners: {
@@ -75,7 +78,6 @@ export const environment = {
     putById: 'user/',
     deleteById: 'user/',
     updateStatusById: 'user/changestatus/',
-    accesstoproject: 'users/accesstoproject',
   },
   roles: {
     getAll: 'roles',

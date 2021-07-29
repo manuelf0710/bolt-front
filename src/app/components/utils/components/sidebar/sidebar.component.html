@@ -325,7 +325,6 @@
                     disableRipple="true"
                     class="row"
                     *ngFor="let program of menuItem.apps"
-                    (click)="$event.stopPropagation()"
                   >
                     <button mat-button (click)="openApp(program.id)">
                       <div class="flex1">

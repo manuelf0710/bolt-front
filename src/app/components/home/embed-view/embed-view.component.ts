@@ -30,7 +30,7 @@ export class EmbedViewComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     this.getData();
     let dt = new FormData();
-    dt.append('username', 'modeloj\\delgadv');
+    dt.append('username', 'modelo\\jdelgadv');
 
     this.httpService
       .post('http://tableaudev.gmodelo.com.mx/trusted', dt)

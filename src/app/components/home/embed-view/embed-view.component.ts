@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { AppList } from 'src/app/model/AppList';
 import { AppsService } from 'src/app/services/apps.service';
+import { HttpService } from 'src/app/services/http.service';
 
 @Component({
   selector: 'app-embed-view',
@@ -22,11 +23,20 @@ export class EmbedViewComponent implements OnInit, AfterViewInit, OnDestroy {
   constructor(
     private router: Router,
     private appService: AppsService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private httpService: HttpService
   ) {}
 
   ngOnInit(): void {
     this.getData();
+    let dt = new FormData();
+    dt.append('username', 'modeloj\\delgadv');
+
+    this.httpService
+      .post('http://tableaudev.gmodelo.com.mx/trusted', dt)
+      .subscribe((response: any) => {
+        console.log(response);
+      });
   }
 
   ngAfterViewInit(): void {

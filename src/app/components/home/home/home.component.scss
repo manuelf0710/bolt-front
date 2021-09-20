@@ -1,6 +1,6 @@
 .main-content {
   width: auto;
-  height: 800px;
+  height: 700px;
   margin-left: 80px;
   box-sizing: border-box;
   padding: 0px;
@@ -8,9 +8,15 @@
   display: grid;
   grid-template-columns: 50% auto;
   grid-gap: 10px;
+  @media only screen and (min-width: 1600px) {
+    height: 800px;
+  }
 }
 ::ng-deep .carousel-slide-content {
-  max-height: 800px;
+  max-height: 700px;
+  @media only screen and (min-width: 1600px) {
+    max-height: 800px;
+  }
 }
 ::ng-deep .carousel {
   height: 100% !important;
@@ -111,7 +117,7 @@
         margin: auto 20px;
       }
       .last-seen {
-        font-family: 'Roboto';
+        font-family: "Roboto";
         font-style: normal;
         font-weight: bold;
         font-size: 12px;

@@ -20,6 +20,10 @@ export const environment = {
     get: 'auth/logout',
   },
 
+  request: {
+    accesstoproject: 'mail',
+  },
+
   banners: {
     getAll: 'banners',
     post: 'banners',

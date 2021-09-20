@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
+import { ModalUserFormComponent } from 'src/app/components/utils/admin/roles-and-users/modal-user-form/modal-user-form.component';
 import { ModalConfirmationComponent } from 'src/app/components/utils/pop up/modal-confirmation/modal-confirmation.component';
 import { RolFormComponent } from 'src/app/components/utils/admin/roles-and-users/rol-form/rol-form.component';
 import { UiService } from 'src/app/services/ui.service';
@@ -57,6 +58,16 @@ export class UsersComponent implements OnInit, OnDestroy {
       country: new FormControl('', []),
       user_id: new FormControl('', []),
     });
+  }
+
+  createUser(user?: any) {
+    if (!user) {
+      this.ui.showModal(ModalUserFormComponent, '500px', 'auto', null, null);
+    } else {
+      this.ui.showModal(ModalUserFormComponent, '500px', 'auto', null, null, {
+        user: user,
+      });
+    }
   }
 
   searchUser() {

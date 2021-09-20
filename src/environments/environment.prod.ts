@@ -20,6 +20,10 @@ export const environment = {
     get: 'https://login.microsoftonline.com/common/wsfederation?wa=wsignout1.0',
   },
 
+  request: {
+    accesstoproject: 'mail',
+  },
+
   banners: {
     getAll: 'banners',
     post: 'banners',

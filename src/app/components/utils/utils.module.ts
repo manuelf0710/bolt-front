@@ -31,6 +31,7 @@ import { ModalAlertComponent } from './pop up/modal-alert/modal-alert.component'
 import { LoginComponent } from './login/login.component';
 import { ModalConfirmationComponent } from './pop up/modal-confirmation/modal-confirmation.component';
 import { ModalProjectFormComponent } from './admin/projects/modal-project-form/modal-project-form.component';
+import { ModalUserFormComponent } from './admin/roles-and-users/modal-user-form/modal-user-form.component';
 import { ModalAppAssoccComponent } from './admin/projects/modal-app-assocc/modal-app-assocc.component';
 import { ModalSubmenuFormComponent } from './admin/projects/modal-submenu-form/modal-submenu-form.component';
 import { RolFormComponent } from './admin/roles-and-users/rol-form/rol-form.component';
@@ -49,6 +50,7 @@ import { ToggleSideDirective } from 'src/app/directives/toggle-side.directive';
     LoginComponent,
     ModalConfirmationComponent,
     ModalProjectFormComponent,
+    ModalUserFormComponent,
     ModalAppAssoccComponent,
     ModalSubmenuFormComponent,
     RolFormComponent,

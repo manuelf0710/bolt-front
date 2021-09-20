@@ -89,6 +89,10 @@
     <div class="row">
       <h2 *ngSwitchCase="'Esp'" class="form-title">Resúltados de busqueda</h2>
       <h2 *ngSwitchCase="'Eng'" class="form-title">Search results</h2>
+    <button class="bolt-btn-filled" (click)="createUser()">
+      <span *ngSwitchCase="'Esp'"> Crear nuevo usuario </span>
+      <span *ngSwitchCase="'Eng'"> Create new user </span>
+    </button>      
     </div>
 
     <div class="grid">
@@ -179,7 +183,19 @@
               <p class="toggle-text" *ngSwitchCase="'Eng'">
                 {{ user.status == 1 ? 'Disable' : 'Enable' }}
               </p>
+              
             </div>
+                <button
+                  mat-button
+                  class="action-btn"
+                  (click)="createUser(user)"
+                >
+                  <span class="material-icons menu-icon"> edit </span>
+                  <span class="action-text" *ngSwitchCase="'Esp'">
+                    editar
+                  </span>
+                  <span class="action-text" *ngSwitchCase="'Eng'"> edit </span>
+                </button>
 
             <button mat-button class="action-btn" (click)="addNewRol(user)">
               <span class="plus-icon"></span>

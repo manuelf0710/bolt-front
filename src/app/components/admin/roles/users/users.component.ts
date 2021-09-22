@@ -63,10 +63,36 @@ export class UsersComponent implements OnInit, OnDestroy {
   createUser(user?: any) {
     if (!user) {
       this.ui.showModal(ModalUserFormComponent, '500px', 'auto', null, null);
+      /*const confDialog = this.dialog.open(ModalUserFormComponent, {
+        id: ModalUserFormComponent.toString(),
+        disableClose: true,
+        hasBackdrop: true,
+        width: '500px',
+        height: 'auto',
+      });*/
     } else {
       this.ui.showModal(ModalUserFormComponent, '500px', 'auto', null, null, {
         user: user,
       });
+      /* 
+      const confDialog = this.dialog.open(ModalUserFormComponent, {
+        id: ModalUserFormComponent.toString(),
+        disableClose: true,
+        hasBackdrop: true,
+        width: '500px',
+        height: 'auto',
+        data: { user: user },
+      });
+
+      confDialog.afterClosed().subscribe((result) => {
+        alert(result);
+        if (result) {
+          console.log('el resultado ', result);
+        } else {
+          console.log('el resultado else ', result);
+        }
+      });
+      */
     }
   }
 

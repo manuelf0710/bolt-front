@@ -205,6 +205,7 @@ export class ModalUserFormComponent implements OnInit {
         networkid: this.data.user['employee_code'],
         country: this.data.user['country'],
       });
+      this.createUserForm.controls['networkid'].disable();
     }
   }
 }

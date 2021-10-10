@@ -81,7 +81,7 @@
 
 // footer
 .footer {
-  @include title('Roboto', 12px, 14px, $primary-white);
+  @include title('Roboto', 12px, 14px, $primary-red);
 
   &__title {
     width: fit-content;

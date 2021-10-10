@@ -144,7 +144,7 @@
                   <span class="example-list-section">
                     <mat-checkbox
                       [disabled]="submenu.status == 0"
-                      [checked]="someSelected(submenu) || submenu.checked"
+                      [checked]="submenu.checked"
                       (change)="allowSubmenuAccess($event.checked, submenu)"
                     >
                       {{ lang == "Esp" ? submenu.name_es : submenu.name_en }}
@@ -154,7 +154,9 @@
                     <ul>
                       <li *ngFor="let app of submenu.apps">
                         <mat-checkbox
-                          [disabled]="submenu.checked == 0"
+                          [disabled]="
+                            submenu.access == 0 || submenu.status == 0
+                          "
                           [(ngModel)]="app.checked"
                           [ngModelOptions]="{ standalone: true }"
                           (change)="allowAppAccess($event.checked, app)"
@@ -234,8 +236,9 @@
           </p>
           <div class="col">
             <p class="grid-content__description">
-              <i *ngFor="let project of role.projects">
-                {{ lang == "Esp" ? project.name_es : project.name_en }}/
+              <i *ngFor="let project of role.projects; last as isLast">
+                {{ lang == "Esp" ? project.name_es : project.name_en
+                }}{{ isLast ? null : "/" }}
               </i>
             </p>
           </div>

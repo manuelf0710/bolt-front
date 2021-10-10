@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: auto;
   grid-gap: 10px;
-  background-color: #2d2d2d;
+  background-color: #001a26;
   min-height: 96px;
   padding: 20px 40px;
   justify-content: space-around;
@@ -49,7 +49,7 @@
 .redSpace {
   height: 15px;
   width: 100%;
-  background: linear-gradient(90deg, #ec2224 0%, #db1961 100%);
+  background: linear-gradient(90deg, #ffaa00 0%, #fac65e  100%);
 }
 .vertical-divider {
   height: 42px;

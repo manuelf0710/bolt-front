@@ -144,7 +144,7 @@
 
   color: $color;
   .mat-slide-toggle-bar {
-    border: 2px solid #e21d47;
+    border: 2px solid #397eb7;
     width: 24px;
   }
   .mat-slide-toggle-thumb-container {
@@ -157,7 +157,7 @@
     width: 12px;
     height: 12px;
     background-color: $primary-white;
-    border: 1px solid #e21d47;
+    border: 1px solid #397eb7;
     margin-top: 1px;
   }
 }
@@ -168,7 +168,7 @@
   transform: translate3d(9px, 0, 0) !important;
 }
 .mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
-  background-color: #e21d47;
+  background-color: #397eb7;
 }
 .enable-toogle {
   @include toogle(10px, 30px, #e21d47);

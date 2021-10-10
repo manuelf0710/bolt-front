@@ -116,24 +116,24 @@ export class SidebarComponent implements OnInit {
         extArrow.classList.add('arrowDown');
         extArrow.classList.remove('arrowUp');
         extHeader.classList.add('bg-black-panel');
-        extIcon.classList.remove('menu-icon');
+        extIcon.classList.remove('menu-icon-lola');
       } else {
         extArrow.classList.add('arrowUp');
         extArrow.classList.remove('arrowDown');
         extHeader.classList.remove('bg-black-panel');
-        extIcon.classList.add('menu-icon');
+        extIcon.classList.add('menu-icon-lola');
       }
     } else {
       if (state) {
         actArrow.classList.add('arrowDown');
         actArrow.classList.remove('arrowUp');
         actHeader.classList.add('bg-black-panel');
-        actIcon.classList.remove('menu-icon');
+        actIcon.classList.remove('menu-icon-lola');
       } else {
         actArrow.classList.add('arrowUp');
         actArrow.classList.remove('arrowDown');
         actHeader.classList.remove('bg-black-panel');
-        actIcon.classList.add('menu-icon');
+        actIcon.classList.add('menu-icon-lola');
       }
     }
   }

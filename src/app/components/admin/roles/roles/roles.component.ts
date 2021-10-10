@@ -50,13 +50,12 @@ export class RolesComponent implements OnInit {
   public editionActive: boolean = false;
   public create: boolean = true;
   public available_apps: boolean = false;
-
-  allComplete: boolean = false;
+  public isSomeSelected: boolean = false;
+  public globlalError: boolean = false;
 
   public role_id: string = null;
   public message_action_es: string = 'deshabilitar';
   public message_action_en: string = 'disable';
-  public saveType = true; //es guardar
 
   private errorMessage: any = {
     es: {
@@ -141,12 +140,8 @@ export class RolesComponent implements OnInit {
   markUnchekedAll() {
     for (let i = 0; i < this.projects.length; i++) {
       //this.allowSubmenuAccess();
-      this.projects[i].access = 0;
-      this.projects[i].checked = 0;
       for (let j = 0; j < this.projects[i].submenus.length; j++) {
         //this.markUnchekedAllApps(i, j, this.projects[i].submenus[j]);
-        this.projects[i].submenus[j].access = 0;
-        this.projects[i].submenus[j].checked = 0;
         for (let k = 0; k < this.projects[i].submenus[j].apps.length; k++) {
           this.projects[i].submenus[j].access = 0;
           this.projects[i].submenus[j].apps[k].checked = 0;
@@ -186,7 +181,6 @@ export class RolesComponent implements OnInit {
     this.allowed_apps = [];
     this.createRolForm.reset('');
     this.createRolForm.markAsUntouched();
-    this.markUnchekedAll();
   }
 
   cancel() {
@@ -198,7 +192,8 @@ export class RolesComponent implements OnInit {
     if (
       this.createRolForm.invalid ||
       this.allowed_apps.length == 0 ||
-      this.allowed_submenus.length == 0
+      this.allowed_submenus.length == 0 ||
+      this.globlalError
     ) {
       (<any>Object).values(this.createRolForm.controls).forEach((control) => {
         control.markAsTouched();
@@ -209,10 +204,11 @@ export class RolesComponent implements OnInit {
     let user_id = localStorage.getItem('userId');
     let subToSend = [];
     let appToSend = [];
+    this.projectsId = [];
 
     // push only the projects presents in the select
     this.projectResume.forEach((projectSelected) => {
-      this.projectsId.push(projectSelected.id);
+      this.projectsId = [...this.projectsId, projectSelected.id];
     });
 
     //push the submenus present into the projectsid array
@@ -242,12 +238,11 @@ export class RolesComponent implements OnInit {
       description_en: this.createRolForm.controls.description_en.value,
       created_by: user_id,
       projects: this.projectsId,
-      submenus: this.create ? this.allowed_submenus : subToSend,
-      apps: this.create ? this.allowed_apps : appToSend,
+      submenus: subToSend,
+      apps: this.allowed_apps,
     };
-    console.log('dataform');
-    console.log(dataForm);
-    return;
+
+    // return;
     if (!operation) {
       this.rolesService.postData(dataForm);
     } else {
@@ -328,6 +323,8 @@ export class RolesComponent implements OnInit {
             if (submenu == null) {
               return;
             }
+            // aux var
+            submenu.access = submenu.checked;
 
             if (submenu.checked == 1) {
               this.allowed_submenus = [
@@ -335,8 +332,7 @@ export class RolesComponent implements OnInit {
                 {
                   projects_id: submenu.project_id,
                   submenu_id: submenu.id,
-                  checked: submenu.checked,
-                  name_es: submenu.name_es,
+                  access: submenu.rs_access,
                 },
               ];
             }
@@ -348,8 +344,7 @@ export class RolesComponent implements OnInit {
                   {
                     submenu_id: app.submenu_id,
                     app_id: app.id,
-                    checked: app.checked,
-                    name_es: app.name_es,
+                    access: app.checked,
                   },
                 ];
               }
@@ -435,9 +430,6 @@ export class RolesComponent implements OnInit {
 
   allowSubmenuAccess(completed: boolean, submenuInserted: any) {
     // set status value in all apps where submenu inserted id is equal to app.submenu_id
-
-    console.log('valor de completed allowsbmenuaccess ', completed);
-
     let targetArray = this.create ? this.projects : this.loaded_list;
     targetArray.forEach((project) => {
       project.submenus.forEach((submenu) => {
@@ -445,7 +437,7 @@ export class RolesComponent implements OnInit {
           return;
         }
         if (submenuInserted.id == submenu.id) {
-          completed ? (submenu.checked = 1) : (submenu.checked = 0);
+          completed ? (submenu.access = 1) : (submenu.access = 0);
         }
         submenu.apps.forEach((app) => {
           if (submenuInserted.id == app.submenu_id) {
@@ -457,26 +449,26 @@ export class RolesComponent implements OnInit {
 
     // insert submenu and apps when the father project is selected
     // delete submenu and apps when the father project is deselected
-    if (completed) {
-      this.allComplete = true;
+
+    if (completed && submenuInserted.access == 1) {
       this.allowed_submenus.push({
         projects_id: submenuInserted.project_id,
         submenu_id: submenuInserted.id,
-        checked: completed,
-        name_es: submenuInserted.name_es,
+        access: completed,
       });
+
+      // add submenu apps to allowed apps array
       submenuInserted.apps.forEach((app) => {
         if (submenuInserted.id == app.submenu_id) {
           this.allowed_apps.push({
             submenu_id: app.submenu_id,
             app_id: app.id,
-            checked: completed,
-            name_es: app.name_es,
+            access: completed,
           });
         }
       });
     } else {
-      this.allComplete = false;
+      // delete submenu in submenu_access array
       let indexSub = this.allowed_submenus.indexOf(
         this.allowed_submenus.find(
           (sub) => sub.submenu_id == submenuInserted.id
@@ -484,62 +476,75 @@ export class RolesComponent implements OnInit {
       );
       this.allowed_submenus.splice(indexSub, 1);
 
-      submenuInserted.apps.forEach((app2) => {
+      // deleted apps associated to submenu deleted
+
+      submenuInserted.apps.forEach((appTo) => {
         let indexApp = this.allowed_apps.indexOf(
-          this.allowed_apps.find((app) => app.app_id == app2.id)
+          this.allowed_apps.find((app) => app.app_id == appTo.id)
         );
-        this.allowed_apps.splice(indexApp, 1);
+        this.allowed_apps.forEach((app) => {
+          if (app.app_id == appTo.id) {
+            this.allowed_apps.splice(indexApp, 1);
+          }
+        });
       });
     }
   }
 
-  allowAppAccess(checkboxStatus: boolean, app: any) {
-    console.log('allowappAcces ', checkboxStatus);
-    console.log('valor de la app ', app);
+  allowAppAccess(checkboxStatus: boolean, appInserted: any) {
     if (checkboxStatus) {
       // insert app selected
       this.allowed_apps.push({
-        submenu_id: app.submenu_id,
-        app_id: app.id,
-        checked: checkboxStatus,
-        name_es: app.name_es,
+        submenu_id: appInserted.submenu_id,
+        app_id: appInserted.id,
+        access: checkboxStatus,
       });
     } else {
       // find and delete app selected
-      console.log('allowed apps antes ', this.allowed_apps);
-      const indexApp = this.allowed_apps.indexOf(
-        this.allowed_apps.find((app2) => app2.app_id == app.id)
+      let indexApp = this.allowed_apps.indexOf(
+        this.allowed_apps.find((app) => app.app_id == appInserted.id)
       );
-      if (indexApp >= 0) {
-        this.allowed_apps.splice(indexApp, 1);
-      }
 
-      console.log('indexapp ', indexApp);
+      this.allowed_apps.splice(indexApp, 1);
     }
-
-    console.log('allowed apps ', this.allowed_apps);
+    this.someSelected(appInserted.submenu_id);
   }
 
-  someSelected(submenu) {
-    let isSomeSelected = false;
-    if (this.saveType) {
-      //let isSomeSelected;
-      if (submenu.apps == null) {
-        isSomeSelected = false;
-      }
-      isSomeSelected = submenu.apps.filter((a) => a.checked).length > 0;
+  someSelected(submenuId: string) {
+    let submenu;
+    let targetArray = this.create ? this.projects : this.loaded_list;
+    targetArray.forEach((project) => {
+      project.submenus.forEach((sub) => {
+        if (sub.id == submenuId) {
+          submenu = sub;
+        }
+      });
+    });
+
+    //let isSomeSelected;
+    if (submenu.apps == null) {
+      this.isSomeSelected = false;
     }
-    if (!isSomeSelected) {
-      submenu.checked = 0;
-      let toDel = this.allowed_submenus.indexOf(
-        this.allowed_submenus.find(
-          (toDeleted) => toDeleted.submenu_id == submenu.id
-        )
-      );
-      this.allowed_submenus.splice(toDel, toDel);
+    this.isSomeSelected = submenu.apps.filter((a) => a.checked).length == 0;
+
+    if (this.isSomeSelected) {
+      this.globlalError = true;
+      let message =
+        this.lang == 'Esp'
+          ? `Seleccione por lo menos una aplicación para el sub menú ${submenu.name_es}`
+          : `Select at least one application for the sub menu ${submenu.name_en}`;
+      this.ui.createSnackbar(message, 'x', {
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: 'snack-alert',
+        duration: 5000,
+      });
+    }
+    if (submenu.apps.filter((a) => a.checked).length > 0) {
+      this.globlalError = false;
     }
 
-    return isSomeSelected;
+    return this.isSomeSelected;
   }
 
   showError() {
@@ -550,7 +555,10 @@ export class RolesComponent implements OnInit {
         'Selecione como mínimo un sub menú y una aplicación asociada por proyecto';
       show = true;
     }
-    if (this.allowed_submenus.length > 0 && this.allowed_apps.length == 0) {
+    if (
+      (this.allowed_submenus.length > 0 && this.allowed_apps.length == 0) ||
+      this.globlalError
+    ) {
       message = 'Selecione como mínimo una aplicación asociada por sub menú';
       show = true;
     }

@@ -7,7 +7,7 @@ mat-toolbar {
 /* bolt styles */
 /* navbar styles */
 .back-nav {
-  background: #4b4b4b;
+  background: #001a26;
   mix-blend-mode: normal;
   height: 80px;
   padding: 0;
@@ -32,7 +32,7 @@ mat-toolbar {
 }
 
 .mat-form-field {
-  background: linear-gradient(180deg, #eb2228 0%, #dc1a5e 100%);
+  background: linear-gradient(180deg, #ff8f00 0%, #feb817 100%);
   border-radius: 0px 0px 10px 10px;
   width: 75px;
   height: 62px;
@@ -42,5 +42,5 @@ mat-toolbar {
   padding: 10px;
 }
 :host ::ng-deep .mat-select .mat-select-value-text {
-  color: #ffffff !important;
+  color: #000000 !important;
 }

@@ -72,7 +72,7 @@ export const environment = {
     putById: 'user/',
     deleteById: 'user/',
     updateStatusById: 'user/changestatus/',
-    accesstoproject: 'users/accesstoproject',
+    postCreate: 'user/createuser',
   },
   roles: {
     getAll: 'roles',
@@ -80,10 +80,7 @@ export const environment = {
     post: 'roles',
     postWithProjects: 'projectRoles/createrolprojapps',
     putByIdWithProjects: 'projectRoles/updaterolprojapps/',
-<<<<<<< HEAD
     putById: 'roles/',
-=======
->>>>>>> developer_1
     deleteById: 'roles/',
     updateStatusById: 'roles/changestatus/',
   },

@@ -1,10 +1,6 @@
 <app-header></app-header>
 <section class="container">
   <div *ngFor="let dashboard of elementProps">
-    <iframe
-      id="inlineFrameExample"
-      title="Inline Frame Example"
-      [src]="getSafeUrl(dashboard.url)"
-    ></iframe>
+    <iframe id="inlineFrame" title="Inline Frame" [src]="cur_url"></iframe>
   </div>
 </section>

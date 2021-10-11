@@ -16,7 +16,7 @@ h3 {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #397eb7;
+  background: #e21d47;
   border-radius: 8px;
   background-clip: padding-box;
 }
@@ -50,11 +50,11 @@ h3 {
     font-weight: normal;
     font-size: 18px;
     line-height: 30px;
-    color: #397eb7;
-    border-bottom: 3px solid #397eb7;
+    color: rgba(226, 29, 71, 0.4);
+    border-bottom: 3px solid rgba(226, 29, 71, 0.41);
   }
   .mat-tab-label-active {
-    color: #397eb7;
+    color: #e21d47;
     opacity: 1;
   }
   .mat-ink-bar {

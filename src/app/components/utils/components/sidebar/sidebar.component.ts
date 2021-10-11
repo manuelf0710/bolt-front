@@ -1,14 +1,16 @@
-import { Component, OnInit, ElementRef, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatAccordion } from '@angular/material/expansion';
 import { Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 
 import { AppList } from 'src/app/model/AppList';
+import { AppsService } from 'src/app/services/apps.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { FavoritesService } from 'src/app/services/favorites.service';
 import { ProjectsService } from 'src/app/services/projects.service';
+import { SidebarToggleService } from 'src/app/services/sidebar-toggle.service';
 import { UiService } from 'src/app/services/ui.service';
-import { ModalConfirmationComponent } from '../../pop up/modal-confirmation/modal-confirmation.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -16,8 +18,10 @@ import { ModalConfirmationComponent } from '../../pop up/modal-confirmation/moda
   styleUrls: ['./sidebar.component.scss'],
 })
 export class SidebarComponent implements OnInit {
+  @ViewChild(MatAccordion) accordion: MatAccordion;
   public favList: AppList[] = [];
   public prop: any[] = [];
+  public appsData: any[] = [];
 
   public arrowType: string = 'arrow_forward_ios';
   public lang: string;
@@ -29,21 +33,6 @@ export class SidebarComponent implements OnInit {
   public isAuth: boolean = false;
   public sideStatus: boolean = false;
   public collapseAll: boolean = false;
-  public btnClose: boolean = false;
-
-  @HostListener('document:click', ['$event'])
-  clickout(event) {
-    if (this.eRef.nativeElement.contains(event.target)) {
-      this.openSide();
-    } else {
-      let panel = document.querySelector('.mat-menu-panel');
-      let tutorial = localStorage.getItem('tutorial');
-
-      if (this.collapseAll == true && !panel && tutorial) {
-        this.closeSide();
-      }
-    }
-  }
 
   constructor(
     private router: Router,
@@ -52,7 +41,8 @@ export class SidebarComponent implements OnInit {
     private authService: AuthService,
     private favoriteService: FavoritesService,
     private projectService: ProjectsService,
-    private eRef: ElementRef
+    private appService: AppsService,
+    public sideToggleService: SidebarToggleService
   ) {}
 
   ngOnInit(): void {
@@ -63,41 +53,50 @@ export class SidebarComponent implements OnInit {
     this.sideMemory = sessionStorage.getItem('sidebarStatus') || 'open';
 
     if (this.sideMemory == 'close') {
-      this.sideStatus = false;
-      this.closeSide();
+      this.sideToggleService.sideStatus = false;
+      this.sideToggleService.closeSide();
     } else {
-      this.sideStatus = true;
-      this.openSide();
+      this.sideToggleService.sideStatus = true;
+      this.sideToggleService.openSide();
     }
     this.getData();
   }
 
   getData() {
     let favSubs = this.favoriteService.getObservableData(this.userId);
+    let appsSubs = this.appService.getObservableData();
     let projSubs = this.projectService.getProjectsAssignByUserRol();
 
-    forkJoin({ projects: projSubs, favorites: favSubs }).subscribe(
-      (res: any) => {
-        this.favList = res.favorites.body;
-        this.prop = res.projects;
-      }
-    );
+    forkJoin({
+      projects: projSubs,
+      favorites: favSubs,
+      apps: appsSubs,
+    }).subscribe((res: any) => {
+      this.favList = res.favorites.body;
+      this.prop = res.projects;
+      this.appsData = res.apps.body.items;
+    });
   }
 
   menuOpened(item) {
     let menu = document.getElementById(item);
+    let division = document.getElementById('bg-' + item);
     let overlay = document.getElementsByClassName(
       'cdk-overlay-connected-position-bounding-box'
     );
+
+    division.classList.add('background-black');
     menu.classList.add('highlight-item');
     overlay[0].setAttribute(
       'style',
-      'transform: translateX(211px) translateY(-36px) ;left: 0 !important;'
+      'transform: translateX(211px) translateY(-40px) ;left: 0 !important;'
     );
   }
 
   menuClosed(item) {
     let menu = document.getElementById(item);
+    let division = document.getElementById('bg-' + item);
+    division.classList.remove('background-black');
     menu.classList.remove('highlight-item');
   }
 
@@ -116,24 +115,24 @@ export class SidebarComponent implements OnInit {
         extArrow.classList.add('arrowDown');
         extArrow.classList.remove('arrowUp');
         extHeader.classList.add('bg-black-panel');
-        extIcon.classList.remove('menu-icon-lola');
+        extIcon.classList.remove('menu-icon');
       } else {
         extArrow.classList.add('arrowUp');
         extArrow.classList.remove('arrowDown');
         extHeader.classList.remove('bg-black-panel');
-        extIcon.classList.add('menu-icon-lola');
+        extIcon.classList.add('menu-icon');
       }
     } else {
       if (state) {
         actArrow.classList.add('arrowDown');
         actArrow.classList.remove('arrowUp');
         actHeader.classList.add('bg-black-panel');
-        actIcon.classList.remove('menu-icon-lola');
+        actIcon.classList.remove('menu-icon');
       } else {
         actArrow.classList.add('arrowUp');
         actArrow.classList.remove('arrowDown');
         actHeader.classList.remove('bg-black-panel');
-        actIcon.classList.add('menu-icon-lola');
+        actIcon.classList.add('menu-icon');
       }
     }
   }
@@ -178,53 +177,41 @@ export class SidebarComponent implements OnInit {
           }
         });
       }
-      console.log(element);
-
       this.favoriteService.delete(app_table_id);
     }
   }
 
-  openSide() {
-    let innerArrow = document.querySelector('#arrowSide');
-    let sidebar = document.querySelector('#sidebar');
-    let separator = document.querySelector('#separatorsidebar');
-    this.sideStatus = false;
-    this.collapseAll = true;
-    sessionStorage.setItem('sidebarStatus', 'open');
-    sidebar.setAttribute('style', 'width: 267px !important');
-    innerArrow.setAttribute('style', 'transform: rotate(180deg)');
-    separator.setAttribute('style', 'width: 85% !important');
-  }
-
-  closeSide() {
-    let innerArrow = document.querySelector('#arrowSide');
-    let sidebar = document.querySelector('#sidebar');
-    let separator = document.querySelector('#separatorsidebar');
-    let panel = document.querySelector('.mat-menu-panel');
-
-    this.sideStatus = true;
-    this.collapseAll = false;
-    sessionStorage.setItem('sidebarStatus', 'close');
-    sidebar.setAttribute('style', 'width: 80px !important');
-    innerArrow.setAttribute('style', 'transform: rotate(0deg) ');
-    separator.setAttribute('style', 'width: 65% !important');
-
-    if (panel) {
-      panel.setAttribute('style', 'display:none');
-    }
+  getClassName(Id: string) {
+    let className = '';
+    this.appsData.forEach((app) => {
+      if (app.id == Id) {
+        className = app.type.name.split(' ')[0].toLowerCase();
+      }
+    });
+    return className;
   }
 
   openApp(dashboard: string) {
-    this.closeSide();
+    this.collapseEvent();
+    this.sideToggleService.closeSide();
     this.router.navigate([`app-view/${dashboard}`], {
       queryParamsHandling: 'preserve',
     });
   }
 
   adminRedirect(route: string) {
-    this.closeSide();
+    this.collapseEvent();
+    this.sideToggleService.closeSide();
     this.router.navigate([`admin/${route}`], {
       queryParamsHandling: 'preserve',
     });
+  }
+
+  collapseEvent() {
+    this.accordion.multi = true;
+    this.accordion.closeAll();
+    setTimeout(() => {
+      this.accordion.multi = false;
+    }, 100);
   }
 }

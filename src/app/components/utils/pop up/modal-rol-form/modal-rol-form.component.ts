@@ -23,6 +23,7 @@ export class ModalRolFormComponent implements OnInit {
   public hide: boolean;
   public password: string;
   public lang: string;
+  public project_name: string;
   public projects: any = [];
   private errorMessage: any = {
     es: {
@@ -87,24 +88,33 @@ export class ModalRolFormComponent implements OnInit {
       country: new FormControl('', [Validators.required]),
     });
   }
-  loginUser(): void {
+  madeRequest(): void {
     if (this.userRolForm.invalid) {
       (<any>Object).values(this.userRolForm.controls).forEach((control) => {
         control.markAsTouched();
       });
       return;
     }
+
     // TO DO :: create endpoint and aim it
+
+    this.projects.forEach((project) => {
+      if (project.id == this.userRolForm.controls.project.value) {
+        this.project_name = project.name_es;
+      }
+    });
     let requestData = {
-      user: this.userRolForm.controls.user.value,
-      id: this.userRolForm.controls.id.value,
-      project: this.userRolForm.controls.project.value,
+      name_en: this.project_name,
+      project_id: this.userRolForm.controls.project.value,
       country: this.userRolForm.controls.country.value,
     };
     console.log(requestData);
 
     this.httpService
-      .post(environment.serverUrl + environment.users, requestData)
+      .post(
+        environment.serverUrl + environment.request.accesstoproject,
+        requestData
+      )
       .subscribe(
         (response: any) => {
           this.ui.showLoading();

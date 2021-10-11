@@ -80,7 +80,7 @@
                     [id]="activeItem.id"
                     class="enable-toogle"
                     (change)="projectStatus(activeItem, $event, 'disable')"
-                    [checked]="!activeItem.status"
+                    [checked]="activeItem.status"
                   ></mat-slide-toggle>
                   <p class="toggle-text" *ngSwitchCase="'Esp'">Deshabilitar</p>
                   <p class="toggle-text" *ngSwitchCase="'Eng'">Disable</p>
@@ -358,7 +358,7 @@
                   <mat-slide-toggle
                     [id]="submenu.id"
                     class="sub-toogle"
-                    (change)="subMenuDisable(submenu.name_es, $event)"
+                    (change)="subMenuDisable(submenu, $event)"
                     [checked]="submenu.state"
                   ></mat-slide-toggle>
                   <a class="submenu-link" (click)="editSubMenu(submenu.id)">

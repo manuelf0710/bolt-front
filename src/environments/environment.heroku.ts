@@ -4,6 +4,7 @@ export const environment = {
 
   auth: {
     get: 'auth/saml',
+    registerlogout: 'auth/registerlog',
   },
 
   types: {
@@ -17,6 +18,10 @@ export const environment = {
   logout: {
     resource: '/user/logout',
     get: 'auth/logout',
+  },
+
+  request: {
+    accesstoproject: 'mail',
   },
 
   banners: {
@@ -67,12 +72,14 @@ export const environment = {
     putById: 'user/',
     deleteById: 'user/',
     updateStatusById: 'user/changestatus/',
+    accesstoproject: 'users/accesstoproject',
   },
   roles: {
     getAll: 'roles',
     getById: 'roles/',
     post: 'roles',
     postWithProjects: 'projectRoles/createrolprojapps',
+    putByIdWithProjects: 'projectRoles/updaterolprojapps/',
     putById: 'roles/',
     deleteById: 'roles/',
     updateStatusById: 'roles/changestatus/',

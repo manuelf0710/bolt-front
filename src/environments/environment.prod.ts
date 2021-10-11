@@ -1,9 +1,9 @@
 export const environment = {
   production: true,
   serverUrl: 'https://boltmaz.azurewebsites.net/api/v1/',
-
   auth: {
     get: 'auth/saml',
+    registerlogout: 'auth/registerlog',
   },
 
   types: {
@@ -16,7 +16,12 @@ export const environment = {
 
   logout: {
     resource: '/user/logout',
-    get: 'auth/logout',
+    //get: 'auth/logout',
+    get: 'https://login.microsoftonline.com/common/wsfederation?wa=wsignout1.0',
+  },
+
+  request: {
+    accesstoproject: 'mail',
   },
 
   banners: {
@@ -30,7 +35,7 @@ export const environment = {
 
   projects: {
     get: 'projects',
-    getAll: 'projects/menu',
+    getAll: 'projects/menu/',
     menuByUser: 'projects/menubyuser',
     menuByRole: 'projects/menubyrole',
     post: 'projects',
@@ -67,6 +72,7 @@ export const environment = {
     putById: 'user/',
     deleteById: 'user/',
     updateStatusById: 'user/changestatus/',
+    accesstoproject: 'users/accesstoproject',
   },
   roles: {
     getAll: 'roles',
@@ -74,7 +80,10 @@ export const environment = {
     post: 'roles',
     postWithProjects: 'projectRoles/createrolprojapps',
     putByIdWithProjects: 'projectRoles/updaterolprojapps/',
+<<<<<<< HEAD
     putById: 'roles/',
+=======
+>>>>>>> developer_1
     deleteById: 'roles/',
     updateStatusById: 'roles/changestatus/',
   },

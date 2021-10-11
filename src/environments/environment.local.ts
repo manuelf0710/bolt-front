@@ -19,6 +19,10 @@ export const environment = {
     get: 'auth/logout',
   },
 
+  request: {
+    accesstoproject: 'mail',
+  },
+
   banners: {
     getAll: 'banners',
     post: 'banners',
@@ -73,6 +77,7 @@ export const environment = {
     getById: 'roles/',
     post: 'roles',
     postWithProjects: 'projectRoles/createrolprojapps',
+    putByIdWithProjects: 'projectRoles/updaterolprojapps/',
     putById: 'roles/',
     deleteById: 'roles/',
     updateStatusById: 'roles/changestatus/',

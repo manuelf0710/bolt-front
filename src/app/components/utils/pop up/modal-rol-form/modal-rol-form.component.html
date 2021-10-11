@@ -65,10 +65,7 @@
 
       <span matPrefix class="material-icons"> vpn_key </span>
       <mat-select [formControl]="userRolForm.controls.project">
-        <mat-option
-          *ngFor="let project of projects"
-          [value]="lang == 'Esp' ? project.name_es : project.name_en"
-        >
+        <mat-option *ngFor="let project of projects" [value]="project.id">
           {{ lang == "Esp" ? project.name_es : project.name_en }}
         </mat-option>
       </mat-select>
@@ -104,7 +101,7 @@
     <button
       class="btn-submit-rol"
       style="margin-top: 20px"
-      (click)="loginUser()"
+      (click)="madeRequest()"
       block="block"
       [ngClass]="{ 'button-disabled': userRolForm.invalid }"
     >

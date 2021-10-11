@@ -12,6 +12,4 @@ export class Projects {
   name_es: string;
   status: number;
   submenus?: SubMenu[];
-  access?: number;
-  checked?: number;
 }

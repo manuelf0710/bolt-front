@@ -128,7 +128,7 @@ export class HomeComponent implements OnInit {
 
   redirectTo(slide: any) {
     let extUrl = slide.url_redirect;
-    if (slide.pdf != 'null') {
+    if (slide.pdf != null) {
       extUrl = slide.pdf_info.full_path;
     }
     window.open(extUrl);

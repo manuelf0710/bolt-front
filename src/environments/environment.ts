@@ -5,11 +5,12 @@
 export const environment = {
   production: false,
   // serverUrl: 'https://boltmaz.azurewebsites.net/api/v1/',
-   serverUrl: 'http://localhost:3000/api/v1/',
+  serverUrl: 'http://localhost:3000/api/v1/',
   //serverUrl: 'https://bolt-back.herokuapp.com/api/v1/',
 
   auth: {
     get: 'auth/saml',
+    registerlogout: 'auth/registerlog',
   },
 
   types: {
@@ -22,7 +23,11 @@ export const environment = {
 
   logout: {
     resource: '/user/logout',
-    get: 'auth/logout',
+    get: 'https://login.microsoftonline.com/common/wsfederation?wa=wsignout1.0',
+  },
+
+  request: {
+    accesstoproject: 'mail',
   },
 
   banners: {
@@ -73,6 +78,7 @@ export const environment = {
     putById: 'user/',
     deleteById: 'user/',
     updateStatusById: 'user/changestatus/',
+    postCreate: 'user/createuser',
   },
   roles: {
     getAll: 'roles',

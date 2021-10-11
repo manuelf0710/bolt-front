@@ -1,13 +1,13 @@
-import { Injectable } from '@angular/core'
-import { MatDialog, MatDialogRef } from '@angular/material/dialog'
-import { MatSnackBar } from '@angular/material/snack-bar'
-import { LoadingComponent } from '../components/utils/components/loading/loading.component'
+import { Injectable } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { LoadingComponent } from '../components/utils/components/loading/loading.component';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UiService {
-  public loading: any
+  public loading: any;
   constructor(public dialog: MatDialog, private snackBar: MatSnackBar) {}
 
   showLoading() {
@@ -16,19 +16,19 @@ export class UiService {
         disableClose: true,
         panelClass: 'loading-modal',
         backdropClass: 'backdrop',
-      })
+      });
     } catch (e) {
-      console.error('showLoading', e)
+      console.error('showLoading', e);
     }
   }
 
   dismissLoading() {
     try {
       if (this.loading) {
-        this.loading.close()
+        this.loading.close();
       }
     } catch (e) {
-      console.error('dismissLoading', e)
+      console.error('dismissLoading', e);
     }
   }
 
@@ -43,23 +43,23 @@ export class UiService {
         width: width,
         height: height,
         data: data,
-      })
+      });
     } catch (e) {
-      console.error('showModal', e)
+      console.error('showModal', e);
     }
   }
 
   dismissModal(reference: any) {
     try {
       if (reference) {
-        this.dialog.getDialogById(reference).close()
+        this.dialog.getDialogById(reference).close();
       }
     } catch (e) {
-      console.error('dismissModal', e)
+      console.error('dismissModal', e);
     }
   }
 
   createSnackbar(message: string, action: string, config: object) {
-    this.snackBar.open(message, action, config)
+    this.snackBar.open(message, action, config);
   }
 }

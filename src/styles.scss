@@ -6,16 +6,16 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 .mat-pseudo-checkbox::after {
   color: white !important;
 }
-/* Becks Theme */
-@import './theme/material.scss';
-@import './theme/variables.scss';
-@import './theme/buttons.scss';
-@import './theme/content.scss';
-@import './theme/fonts.scss';
-@import './theme/inputs.scss';
-@import './theme/images.scss';
+/* Bolt Theme */
+@import "./theme/material.scss";
+@import "./theme/variables.scss";
+@import "./theme/buttons.scss";
+@import "./theme/content.scss";
+@import "./theme/fonts.scss";
+@import "./theme/inputs.scss";
+@import "./theme/images.scss";

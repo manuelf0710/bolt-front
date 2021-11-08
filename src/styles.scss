@@ -11,6 +11,13 @@ body {
 .mat-pseudo-checkbox::after {
   color: white !important;
 }
+/*
+.mat-error{
+  color:#397eb7 !important;
+}
+.mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick {
+  color: #397eb7 !important;
+} */
 /* Bolt Theme */
 @import "./theme/material.scss";
 @import "./theme/variables.scss";

@@ -236,9 +236,23 @@
   );
 }
 
+.empty-fav {
+  @include img-background(
+    url("/assets/images/empty-fav.png"),
+    195px,
+    147px,
+    relative
+  );
+  margin-top: 101px;
+}
+
 // footer
 .bolt-icon {
-  @include img-background(url("/assets/icon/bolt.svg"), 215px, 79px, relative);
+  @include img-background(url("/assets/icon/Logo.png"), 112px, 44px, relative);  margin-left: 66px;
+}
+
+.lola-brain {
+  @include img-background(url("/assets/icon/Group.png"), 18px, 19px, relative);  margin-right: 8px;
 }
 
 .brew-icon {

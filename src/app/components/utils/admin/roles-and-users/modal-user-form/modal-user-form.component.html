@@ -110,6 +110,33 @@
       </mat-error>
     </mat-form-field>
 
+    <mat-form-field
+    appearance="outline"
+    hideRequiredMarker="true"
+    floatLabel="auto"
+    class="fullInput"
+  >
+    <mat-label *ngSwitchCase="'Esp'">Perfil</mat-label>
+    <mat-label *ngSwitchCase="'Eng'">Profile</mat-label>
+
+    <mat-select [formControl]="createUserForm.controls.profile">
+      <mat-option
+        *ngFor="
+        let option of [
+          'administrador',
+          'user',
+        ]
+      "
+        [value]="option"
+      >
+        {{ option }}
+      </mat-option>
+    </mat-select>
+<mat-error *ngIf="createUserForm.controls.profile.errors">
+  {{ getMessageform('profile') }}
+</mat-error>          
+  </mat-form-field>    
+
         <mat-form-field
           appearance="outline"
           hideRequiredMarker="true"

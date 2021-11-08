@@ -3,15 +3,11 @@
   <span class="separator"></span>
   <div class="back-nav__options">
     <p *ngSwitchCase="'Esp'" class="greeting title-header">
-      <span class="material-icons menu-icon">
-        bolt
-      </span>
+      <span class="lola-brain"></span>
       Hola {{ this.userName }}!
     </p>
     <p *ngSwitchCase="'Eng'" class="greeting title-header">
-      <span class="material-icons menu-icon">
-        bolt
-      </span>
+      <span class="lola-brain"></span>
       Hi {{ this.userName }}!
     </p>
     <button mat-button [disableRipple]="true" (click)="logout()">

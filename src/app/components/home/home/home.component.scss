@@ -54,7 +54,7 @@
   margin: 13px;
 }
 ::ng-deep .mat-mini-fab.mat-warn {
-  background-color: #e51f3d;
+  background-color: #f9d904;
 }
 
 .favorites {
@@ -64,6 +64,9 @@
     .icon-lg {
       margin-right: 20px;
     }
+  }
+  .menu-star_fav{
+    color:#f9d904;
   }
   &__cards {
     margin: 11px 0;

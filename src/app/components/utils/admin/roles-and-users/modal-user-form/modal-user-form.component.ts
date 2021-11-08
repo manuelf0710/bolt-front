@@ -80,6 +80,7 @@ export class ModalUserFormComponent implements OnInit {
       lastname: 'Ingrese el apellido',
       networkid: 'Ingrese el id de red',
       country: 'Ingrese el país',
+      profile: 'ingrese el perfil',
     },
     en: {
       email: 'Enter email',
@@ -87,6 +88,7 @@ export class ModalUserFormComponent implements OnInit {
       lastname: 'Enter last name',
       networkid: 'enter network id',
       country: 'Select a country',
+      profile: 'Select a profile',
     },
   };
 
@@ -126,6 +128,7 @@ export class ModalUserFormComponent implements OnInit {
         Validators.minLength(3),
         Validators.maxLength(45),
       ]),
+      profile: new FormControl('', [Validators.required]),
       country: new FormControl('', [Validators.required]),
     });
   }
@@ -142,6 +145,7 @@ export class ModalUserFormComponent implements OnInit {
         name: this.createUserForm.controls.name.value,
         last_name: this.createUserForm.controls.lastname.value,
         employee_code: this.createUserForm.controls.networkid.value,
+        profile: this.createUserForm.controls.profile.value,
         country: this.createUserForm.controls.country.value,
         status: 1,
       };
@@ -203,6 +207,7 @@ export class ModalUserFormComponent implements OnInit {
         name: this.data.user['name'],
         lastname: this.data.user['last_name'],
         networkid: this.data.user['employee_code'],
+        profile: this.data.user['profile'],
         country: this.data.user['country'],
       });
       this.createUserForm.controls['networkid'].disable();

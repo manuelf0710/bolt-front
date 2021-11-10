@@ -69,7 +69,7 @@
 }
 
 .title-description {
-  @include title('Gotham', 14px, 13px, $quinary-red);
+  @include title('Gotham', 14px, 13px, $primary-blue-dark);
   font-weight: bold;
   margin-bottom: 10px !important;
 }

@@ -84,17 +84,17 @@
     86px,
     33px,
     transparent,
-    #e21d47,
+    #4E88D2,
     "Gotham",
     14px,
     13px !important
   );
 
-  border: 2px solid #e21d47 !important;
+  border: 2px solid #4E88D2 !important;
   box-sizing: border-box !important;
   text-transform: capitalize;
   &:active {
-    background-color: $septenary-red;
+    background-color: $primary-red;
     color: $primary-white;
   }
 }
@@ -116,7 +116,7 @@
     192px,
     30px,
     transparent,
-    #e31e44,
+    $primary-red,
     "Gotham",
     18px,
     17px !important
@@ -238,5 +238,5 @@
 }
 
 .button-disabled {
-  color: $nonary-grey;
+  color: $denary-white;
 }

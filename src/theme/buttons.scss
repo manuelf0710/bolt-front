@@ -222,7 +222,7 @@
   height: 15px !important;
 }
 .mat-radio-outer-circle {
-  border-color: #e21d47;
+  border-color: $primary-red;
   width: 15px !important;
   height: 15px !important;
 }
@@ -231,10 +231,10 @@
   height: 15px !important;
 }
 .mat-radio-button.mat-accent .mat-radio-inner-circle {
-  background: #e21d47;
+  background: $primary-red;
 }
 .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
-  border-color: #e21d47;
+  border-color: $primary-red;
 }
 
 .button-disabled {

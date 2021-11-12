@@ -137,7 +137,7 @@ mat-divider {
   background: $primary-white;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px !important;
-  border-left: 10px solid $senary-red;
+  border-left: 10px solid $primary-red;
 
   span {
     font-family: 'Gotham';
@@ -168,7 +168,7 @@ mat-divider {
   .mat-button-wrapper {
     font-size: 25px;
     font-family: 'Gotham';
-    color: $senary-red;
+    color: $primary-red;
   }
 }
 

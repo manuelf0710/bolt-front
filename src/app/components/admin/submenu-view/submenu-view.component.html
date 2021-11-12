@@ -7,7 +7,8 @@
   </button>
   <!-- sub menu data -->
   <div class="inner-section section__1">
-    <h1 class="underline-title">Sub menú - {{ submenu_data_name }}</h1>
+    <h1 class="underline-title" *ngSwitchCase="'Esp'">Sub menú - {{ submenu_data_name }}</h1>
+    <h1 class="underline-title" *ngSwitchCase="'Eng'">Sub menu - {{ submenu_data_name }}</h1>
 
     <form
       [formGroup]="createSubmenuForm"
@@ -246,7 +247,7 @@
             <p
               [title]="app.url"
               class="grid-content__description"
-              style="color: #e21d47"
+              style="color: #397EB7"
             >
               {{ app.url }}
             </p>

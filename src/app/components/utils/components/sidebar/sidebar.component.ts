@@ -73,10 +73,104 @@ export class SidebarComponent implements OnInit {
       apps: appsSubs,
     }).subscribe((res: any) => {
       this.favList = res.favorites.body;
-      this.prop = res.projects;
+      //this.prop = res.projects;
+      let uniqueProj = this.filterUniqueProjects(res.projects);
+      //this.prop = uniqueProj.uniques;
+      let dataProj = this.getAllProjectSubmenuApps(res.projects);
+
+      this.prop = this.finalProjects(uniqueProj.uniques, dataProj);
       this.appsData = res.apps.body.items;
     });
   }
+
+  finalProjects(arr, submenus){
+      for (let i = 0; i < arr.length; i++) {
+        arr[i].submenus= [];
+        for (let j = 0; j < submenus.length; j++) {
+          if(arr[i].id == submenus[j].project_id){
+            arr[i].submenus.push(submenus[j]);
+          }         
+        }
+      }
+      return arr;
+  }
+
+  getAllProjectSubmenuApps(arr){
+      let submenus = [];
+      let apps = [];
+
+      for(let i = 0; i < arr.length; i++){
+          for (let j = 0; j < arr[i].submenus.length; j++) {
+            submenus.push(arr[i].submenus[j]);  
+          }
+      }
+
+      for(let k = 0; k < submenus.length; k++){
+        for (let m = 0; m < submenus[k].apps.length; m++) {
+          apps.push(submenus[k].apps[m]); 
+          //submenus[k].apps = [] ;  
+        }
+    }   
+    
+    submenus = this.filterUniques(submenus);
+    apps     = this.filterUniques(apps);
+
+    for (let i = 0; i < submenus.length; i++) {
+     submenus[i].apps = [];
+    }
+
+    for (let m = 0; m < submenus.length; m++) {
+      for (let n = 0; n < apps.length; n++) {
+        if(apps[n].submenu_id == submenus[m].id){
+          submenus[m].apps.push(apps[n]);
+        }
+      }   
+    } 
+    return submenus;
+  }
+
+  
+
+  filterUniqueProjects(arr){
+    let uniques = [];
+    let repeats = [];
+    for(let i = 0; i < arr.length; i++ ){
+         let found = 0;
+        for(let j = 0; j < uniques.length; j++){
+          if(arr[i].id == uniques[j].id){
+            found = 1;
+          }
+        }
+        if(found == 0){
+          uniques.push(arr[i]);
+        }else{
+          repeats.push(arr[i]);
+        }
+    }
+    return {uniques,repeats};
+  }
+
+  filterUniques(arr){
+    let uniques = [];
+    let repeats = [];
+    for(let i = 0; i < arr.length; i++ ){
+         let found = 0;
+        for(let j = 0; j < uniques.length; j++){
+          if(arr[i].id == uniques[j].id){
+            found = 1;
+          }
+        }
+        if(found == 0){
+          uniques.push(arr[i]);
+        }else{
+          repeats.push(arr[i]);
+        }
+    }
+    //const uniques = arr.filter((el, index) => arr.indexOf(el) === index)
+
+    return uniques;
+  }
+ 
 
   menuOpened(item) {
     let menu = document.getElementById(item);

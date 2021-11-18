@@ -175,7 +175,7 @@ mat-divider {
 /* admin styles */
 // projects
 .container {
-  width: 94%;
+  width: calc(100vw - 98px);
   height: 100vh;
   margin-left: 80px;
   box-sizing: border-box;

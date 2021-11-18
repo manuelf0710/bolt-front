@@ -14,7 +14,8 @@
   @media (min-width: 1024px) {
     grid-template-columns: auto auto auto auto;
     grid-gap: 20px;
-    padding: 20px 80px;
+    padding: 10px 80px;
+    min-height: 70px;
   }
 
   ul {
@@ -49,7 +50,7 @@
 .redSpace {
   height: 15px;
   width: 100%;
-  background: linear-gradient(90deg, #ffaa00 0%, #fac65e  100%);
+  background: #ffaa00;
 }
 .vertical-divider {
   height: 42px;

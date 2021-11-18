@@ -2,12 +2,12 @@
 <div class="container" [ngSwitch]="lang" id="container">
   <!-- role form -->
   <div class="inner-section section__1" *ngIf="showForm">
-    <h1 class="underline-title" *ngSwitchCase="'Esp'">Crear rol</h1>
-    <h1 class="underline-title" *ngSwitchCase="'Eng'">Create rol</h1>
+    <h1 class="underline-title" *ngSwitchCase="'Esp'">Crear perfil</h1>
+    <h1 class="underline-title" *ngSwitchCase="'Eng'">Create profile</h1>
 
     <form [formGroup]="createRolForm" class="form-section" autocomplete="off">
-      <h2 class="form-title" *ngSwitchCase="'Esp'">Crear un nuevo rol</h2>
-      <h2 class="form-title" *ngSwitchCase="'Eng'">Create a new rol</h2>
+      <h2 class="form-title" *ngSwitchCase="'Esp'">Crear un nuevo perfil</h2>
+      <h2 class="form-title" *ngSwitchCase="'Eng'">Create a new profile</h2>
 
       <div class="row row__1">
         <div class="col">
@@ -194,11 +194,12 @@
   <!-- roles table -->
   <div class="inner-section section__2">
     <div class="row">
-      <h2 class="form-title">Roles</h2>
+      <h2 *ngSwitchCase="'Esp'" class="form-title">Perfiles</h2>
+      <h2 *ngSwitchCase="'Eng'" class="form-title">Profiles</h2>
 
       <button class="bolt-btn-filled" (click)="openForm(true)">
-        <span *ngSwitchCase="'Esp'">Crear nuevo rol</span>
-        <span *ngSwitchCase="'Eng'">Create new rol</span>
+        <span *ngSwitchCase="'Esp'">Crear nuevo perfil</span>
+        <span *ngSwitchCase="'Eng'">Create new profile</span>
       </button>
     </div>
 

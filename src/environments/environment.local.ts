@@ -4,6 +4,7 @@ export const environment = {
 
   auth: {
     get: 'auth/saml',
+    registerlogout: 'auth/registerlog',
   },
 
   types: {
@@ -71,6 +72,7 @@ export const environment = {
     putById: 'user/',
     deleteById: 'user/',
     updateStatusById: 'user/changestatus/',
+    postCreate: 'user/createuser',
   },
   roles: {
     getAll: 'roles',

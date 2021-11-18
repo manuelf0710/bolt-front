@@ -134,7 +134,7 @@
       </mat-error>
     </mat-form-field>
 
-    <div class="form-advice" *ngIf="data && selectedValue == 'Power BI'">
+    <div class="form-advice" *ngIf="data && selectedValue == 'PowerBie'">
       <div class="separator"></div>
       <h2 class="form-title">
         {{ lang == 'Esp' ? 'Usuario y contraseña' : 'User and password' }}
@@ -156,7 +156,7 @@
       appearance="outline"
       floatLabel="auto"
       class="fullInput input-bolt"
-      *ngIf="selectedValue == 'Power BI' ? true : false"
+      *ngIf="selectedValue == 'PowerBie' ? true : false"
     >
       <mat-label *ngSwitchCase="'Esp'">Usuario</mat-label>
       <mat-label *ngSwitchCase="'Eng'">User</mat-label>
@@ -166,7 +166,7 @@
         id="user"
         formControlName="user"
         type="text"
-        [required]="selectedValue == 'Power BI' ? true : false"
+        [required]="selectedValue == 'PowerBie' ? true : false"
         maxlength="30"
       />
 
@@ -178,7 +178,7 @@
     <form
       [formGroup]="passwordsForm"
       autocomplete="off"
-      *ngIf="selectedValue == 'Power BI' ? true : false"
+      *ngIf="selectedValue == 'PowerBie' ? true : false"
     >
       <mat-form-field
         hideRequiredMarker="true"
@@ -194,7 +194,7 @@
           id="password"
           formControlName="password"
           [type]="!hide ? 'password' : 'text'"
-          [required]="selectedValue == 'Power BI' ? true : false"
+          [required]="selectedValue == 'PowerBie' ? true : false"
           maxlength="30"
         />
         <span matSuffix class="material-icons menu-icon" (click)="hide = !hide">
@@ -220,7 +220,7 @@
           id="password_confirm"
           formControlName="password_confirm"
           [type]="!hide2 ? 'password' : 'text'"
-          [required]="selectedValue == 'Power BI' ? true : false"
+          [required]="selectedValue == 'PowerBie' ? true : false"
           maxlength="30"
           [errorStateMatcher]="matcher"
         />

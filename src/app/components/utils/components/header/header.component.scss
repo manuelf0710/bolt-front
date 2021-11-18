@@ -11,6 +11,8 @@ mat-toolbar {
   mix-blend-mode: normal;
   height: 60px;
   padding: 0;
+  z-index: 99;
+  position: fixed;
 
   &__options {
     display: inline-flex;

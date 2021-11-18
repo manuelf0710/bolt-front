@@ -31,10 +31,10 @@
   <div *ngSwitchCase="2" class="step-2">
     <span class="arrow-pointer"></span>
     <p class="tutorial__content" *ngIf="lang == 'Esp'">
-      Ajuste el idioma dando clic en el botón rojo
+      Ajuste el idioma dando clic en el botón amarillo
     </p>
     <p class="tutorial__content" *ngIf="lang == 'Eng'">
-      Adjust the language by clicking the red button
+      Adjust the language by clicking the yellow button
     </p>
     <button mat-button class="transparent-btn" (click)="next()">
       <span *ngIf="lang == 'Esp'">siguiente</span>
@@ -46,7 +46,7 @@
   <div *ngSwitchCase="3" class="step-3">
     <span class="arrow-pointer"></span>
     <p class="tutorial__content" *ngIf="lang == 'Esp'">
-      En esta opción encontrarás la lista de tus dashboards favoritos
+      En esta opción encontrará la lista de sus dashboards favoritos
     </p>
     <p class="tutorial__content" *ngIf="lang == 'Eng'">
       In this option you will find the list of your favorite dashboards
@@ -61,7 +61,7 @@
   <div *ngSwitchCase="4" class="step-4">
     <span class="arrow-pointer"></span>
     <p class="tutorial__content" *ngIf="lang == 'Esp'">
-      En barra encontrarás las opciones del menú que se te han asignado
+      En barra encontrará las opciones del menú que se le han asignado
     </p>
     <p class="tutorial__content" *ngIf="lang == 'Eng'">
       In bar you will find the menu options that have been assigned to you
@@ -77,7 +77,7 @@
     <div *ngSwitchCase="5" class="step-5">
       <span class="arrow-pointer"></span>
       <p class="tutorial__content" *ngIf="lang == 'Esp'">
-        Ya que eres administrador podrás ver las opciones de este rol reflejadas
+        Ya que eres administrador podrá ver las opciones de este rol reflejadas
         en esta opción
       </p>
       <p class="tutorial__content" *ngIf="lang == 'Eng'">
@@ -95,14 +95,12 @@
   <div *ngSwitchCase="6" class="step-6">
     <span class="arrow-pointer"></span>
     <p class="tutorial__content" *ngIf="lang == 'Esp'">
-      Para desplegar / replegar el menú basta con dar clic dentro del mismo y
-      este se desplegará, para replegarlo debes hacer clic en el botón ubicado
-      en la parte superior del menú y este se replegará
+      Para desplegar el menú a la derecha basta con dar click en una de
+      las opciones y esta aparecerá automáticamente
     </p>
     <p class="tutorial__content" *ngIf="lang == 'Eng'">
-      To display / replicate the menu just click on it and it will unfold, to
-      replicate it you must click on the button located at the top of the menu
-      and this will be folded
+      To display the menu on the right, just click on one of the options and
+      it will appear automatically
     </p>
     <button mat-button class="transparent-btn" (click)="next()">
       <span *ngIf="lang == 'Esp'">siguiente</span>
@@ -114,7 +112,7 @@
   <div *ngSwitchCase="7" class="step-7">
     <span class="arrow-pointer"></span>
     <p class="tutorial__content" *ngIf="lang == 'Esp'">
-      Si deseas agregar un dashboard en tus favoritos puedes dar click en la
+      Si deseas agregar un dashboard en sus favoritos puedes dar click en la
       estrella que aparece en la parte derecha del título de la aplicación y
       automáticamente será guardada
     </p>
@@ -133,15 +131,15 @@
   <div *ngSwitchCase="8" class="step-8">
     <span class="arrow-pointer"></span>
     <p class="tutorial__content" *ngIf="lang == 'Esp'">
-      En el home podrás encontrar una sección de favoritos para acceder de forma
+      En el home podrá encontrar una sección de favoritos para acceder de forma
       rápida
     </p>
     <p class="tutorial__content" *ngIf="lang == 'Eng'">
       In the home you will find a section of favorites to access quickly
     </p>
     <button mat-button class="bolt-btn-filled" (click)="save()">
-      <span *ngIf="lang == 'Esp'">terminar</span>
-      <span *ngIf="lang == 'Eng'">finish</span>
+      <span *ngIf="lang == 'Esp'">Terminar</span>
+      <span *ngIf="lang == 'Eng'">Finish</span>
     </button>
   </div>
 </div>

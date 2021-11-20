@@ -2,7 +2,7 @@
   overflow: hidden;
   padding: 0;
   @media screen and (min-width: 1600px) {
-    width: 96.5%;
+    width: calc(100vw - 100px);
   }
   iframe {
     width: 100%;

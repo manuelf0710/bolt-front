@@ -84,7 +84,7 @@
   @include title('Roboto', 12px, 14px, $primary-red);
   position: sticky;
   z-index: 10;
-  width:calc(100vw - 17px);
+  width:calc(100vw);
   &__title {
     width: fit-content;
     margin: 5px auto;

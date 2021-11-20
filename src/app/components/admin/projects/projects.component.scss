@@ -4,6 +4,10 @@ h2,
 h3 {
   margin: 0;
 }
+
+body > .flex-column{
+  height: calc(100vh) !important;
+}
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -19,6 +23,19 @@ h3 {
   background: #397eb7;
   border-radius: 8px;
   background-clip: padding-box;
+}
+
+.flex-column[_ngcontent-wwh-c173] {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  width: 267px;
+  height: calc(100vh);
+  box-sizing: border-box;
+  background-color: #e3e3e3;
+  transition: all 0.4s;
+  z-index: 9;
+  overflow: auto !important;
 }
 
 .container {

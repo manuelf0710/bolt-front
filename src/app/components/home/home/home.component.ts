@@ -57,8 +57,15 @@ export class HomeComponent implements OnInit {
         if (!results[2]) return '';
         return decodeURIComponent(results[2].replace(/\+/g, ' '));
       }
+
+      function b64DecodeUnicode(str) {
+        return decodeURIComponent(Array.prototype.map.call(atob(str), function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+        }).join(''))
+    }
       var authData = getParameterByName('SamlReq');
-      var decodedAuthData = JSON.parse(atob(authData));
+      //var decodedAuthData = JSON.parse(atob(authData));
+      var decodedAuthData = JSON.parse(b64DecodeUnicode(authData));
       // create user auth data
       token = decodedAuthData.access_token;
       const userId = decodedAuthData.user.id;

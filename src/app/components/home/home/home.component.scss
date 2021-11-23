@@ -11,6 +11,9 @@
   /*@media only screen and (min-width: 1600px) {
     height: 800px;
   }*/
+  @media only screen and (max-height: 700px) {
+    height: 800px;
+  }  
 }
 
 ::ng-deep .carousel-slide-content {
@@ -20,20 +23,21 @@
   }
 }
 ::ng-deep .carousel {
-  height: 100% !important;
+  height: calc(100% - 60px) !important;
   width: 100% !important;
   background: rgba(0, 0, 0, 0.7);
   opacity: 0.91;
   box-shadow: 1px 6px 4px rgba(0, 0, 0, 0.25) inset;
   -webkit-box-shadow: 1px 6px 4px rgba(0, 0, 0, 0.25) inset;
   -moz-box-shadow: 1px 6px 4px rgba(0, 0, 0, 0.25) inset;
+  margin-top:60px;
   ul,
   li {
     height: 100% !important;
   }
 }
 .content {
-  height: 82%;
+  height: calc(100vh - 30%);
   @media only screen and (max-width: 1366px) {
     height: 80%;
   }

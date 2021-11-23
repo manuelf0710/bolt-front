@@ -10,6 +10,9 @@
 .aside-content{
   background:#e3e3e3;;
   height: calc(100vh);
+  @media only screen and (max-height: 700px) {
+    height: 800px;
+  } 
   width: 80px;
   position: absolute;
   transition:all 0.4s;

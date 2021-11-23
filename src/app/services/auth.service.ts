@@ -30,7 +30,7 @@ export class AuthService {
     if(userProfile == null){
       this.login();
     }    
-    console.log("userProfile",userProfile);
+    //console.log("userProfile",userProfile);
     if (userProfile['profile'] != 'user') {
       this.isAdmin = true;
     }

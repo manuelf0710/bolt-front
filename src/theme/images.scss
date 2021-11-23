@@ -263,6 +263,15 @@
     relative
   );
 }
+
+.request-icon {
+  @include img-background(
+    url("/assets/icon/icono2request.svg"),
+    12px,
+    12px,
+    relative
+  );
+}
 .abinbev-icon {
   @include img-background(
     url("/assets/icon/abinbev.svg"),

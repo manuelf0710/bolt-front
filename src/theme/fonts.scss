@@ -83,6 +83,10 @@
 .footer {
   @include title('Roboto', 12px, 14px, $primary-red);
   position: sticky;
+  @media only screen and (max-height: 700px) {
+    position: fixed;
+    bottom: 0;
+  }
   z-index: 10;
   width:calc(100vw);
   &__title {

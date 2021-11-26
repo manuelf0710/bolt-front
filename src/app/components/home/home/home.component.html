@@ -57,8 +57,8 @@
 
   <div class="favorites">
     <div [ngSwitch]="lang" class="row title">
-      <span class="material-icons icon-lg menu-star_fav"> star </span>
-      <h2 *ngSwitchCase="'Esp'" class="favorites-banner-title">Favoritos</h2>
+      
+      <h2 *ngSwitchCase="'Esp'" class="favorites-banner-title"><span class="material-icons icon-lg menu-star_fav"> star </span>Favoritos</h2>
       <h2 *ngSwitchCase="'Eng'" class="favorites-banner-title">Favorites</h2>
     </div>
     <div *ngIf="favList.length > 0">

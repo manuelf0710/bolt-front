@@ -115,8 +115,8 @@ export class UsersService {
               '',
               'backdrop',
               {
-                message_es: `Los roles del usuario con nombre ${username} fueron actualizados con éxito`,
-                message_en: `The roles of the user ${username} were updated successfully`,
+                message_es: `Los perfiles del usuario ${username} fueron actualizados con éxito`,
+                message_en: `The profiles of the user ${username} were updated successfully`,
               }
             );
             setTimeout(() => {
@@ -146,8 +146,8 @@ export class UsersService {
               '',
               'backdrop',
               {
-                message_es: `Los roles del usuario con nombre ${username} fueron actualizados con éxito`,
-                message_en: `The roles of the user ${username} were updated successfully`,
+                message_es: `Los perfiles del usuario  ${username} fueron actualizados con éxito`,
+                message_en: `The profiles of the user ${username} were updated successfully`,
               }
             );
             setTimeout(() => {

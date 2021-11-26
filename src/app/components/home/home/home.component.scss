@@ -23,8 +23,14 @@
   }
 }
 ::ng-deep .carousel {
-  height: calc(100% - 60px) !important;
+  /*height: 100% !important;*/
   width: 100% !important;
+  @media only screen and (max-height: 700px) {
+    height: 84% !important;
+  } 
+  @media only screen and (min-height: 701px) {
+    height: 98% !important;
+  }   
   background: rgba(0, 0, 0, 0.7);
   opacity: 0.91;
   box-shadow: 1px 6px 4px rgba(0, 0, 0, 0.25) inset;
@@ -93,6 +99,7 @@
   }  
   .title {
     justify-content: flex-start;
+    margin-top:20px;
     .icon-lg {
       margin-right: 20px;
     }

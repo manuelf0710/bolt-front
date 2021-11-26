@@ -9,8 +9,8 @@
   </div>
 
   <div style="width: 100%;">
-    <h2 class="form-title" *ngSwitchCase="'Esp'">Añadir nuevo rol</h2>
-    <h2 class="form-title" *ngSwitchCase="'Eng'">Add new rol</h2>
+    <h2 class="form-title" *ngSwitchCase="'Esp'">Añadir nuevo perfil</h2>
+    <h2 class="form-title" *ngSwitchCase="'Eng'">Add new profile</h2>
   </div>
 
   <form [formGroup]="addNewRolForm" class="form-section" autocomplete="off">
@@ -86,8 +86,8 @@
     </mat-form-field>
 
     <button class="btn-submit-rol" (click)="saveRoles()">
-      <span *ngSwitchCase="'Esp'">Actualizar roles</span>
-      <span *ngSwitchCase="'Eng'">Update roles</span>
+      <span *ngSwitchCase="'Esp'">Actualizar perfiles</span>
+      <span *ngSwitchCase="'Eng'">Update profiles</span>
     </button>
   </form>
 </div>

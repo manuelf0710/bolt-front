@@ -1,5 +1,5 @@
 <footer [ngSwitch]="lang" class="footer">
-  <div class="row">
+<!--  <div class="row">
     <div class="custom-col">
       <div class="brew-icon"></div>
     </div>
@@ -47,19 +47,6 @@
             lola.analytics@ab-inbev.com
           </a>
         </li>
-        <!-- <li>
-          <span class="material-icons icon">
-            call
-          </span>
-          <a
-            href="tel:+57316467987"
-            class="footer__text"
-            rel="noreferrer noopener"
-            style="text-decoration: none;"
-          >
-            +57 316-467 987
-          </a>
-        </li> -->
       </ul>
     </div>
     <div class="custom-col">
@@ -70,5 +57,65 @@
       </div>
     </div>
   </div>
+-->
+  <mat-toolbar class="footer-lola row-footer" style="left:0; bottom: 0; position: fixed;">
+    <div class="brew-icon"></div>
+  <div class="custom-col">
+    <p *ngSwitchCase="'Esp'"class="footer__title" style="padding-bottom: 0;">
+      Solicitud acceso nuevo proyecto
+    </p>
+    <p *ngSwitchCase="'Eng'" class="footer__title" style="padding-bottom: 0;">
+      Request new project access
+    </p>
+    <div class="container-footer-logo">
+      <ul>
+        <li>
+          <span class="request-icon icon-footer">  </span>
+          <span
+            *ngSwitchCase="'Esp'"
+            (click)="openForm()"
+            class="footer__text"
+          >
+          Generar solicitud
+        </span>               
+          <span
+          *ngSwitchCase="'Eng'"
+          (click)="openForm()"
+          class="footer__text"
+          >
+            Generate request
+        </span>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+  <div class="custom-col">
+    <p *ngSwitchCase="'Esp'" class="footer__title" style="padding-bottom: 0;">Contactar a soporte</p>
+    <p *ngSwitchCase="'Eng'" class="footer__title" style="padding-bottom: 0;">Support contact</p>
+    <div class="container-footer-logo">
+      <ul>
+        <li>
+          <span class="material-icons icon-footer"> mail </span>
+          <a
+            href="mailto:lola.analytics@ab-inbev.com"
+            class="footer__text"
+            rel="noreferrer noopener"
+            style="text-decoration: none"
+          >
+            lola.analytics@ab-inbev.com
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="custom-col">
+    <div class="row">
+      <div class="abinbev-icon"></div>
+      <div class="vertical-divider"></div>
+      <div class="analytics-icon"></div>
+    </div>
+  </div>  
+  </mat-toolbar>
   <div class="redSpace"></div>
 </footer>

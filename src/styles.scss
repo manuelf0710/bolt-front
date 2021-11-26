@@ -12,6 +12,34 @@ body {
 .mat-pseudo-checkbox::after {
   color: white !important;
 }
+.row-footer{
+  background-color: #001a26;
+  display: grid;
+  font-size: 11px;
+  justify-content: space-around;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 20px;
+  padding: 10px 80px;
+  min-height: 70px;
+}
+.container-footer-logo ul{
+margin: 0;
+padding: 0;
+}
+.container-footer-logo li{
+align-items: center;
+display: flex;
+list-style-type: none;
+}
+.container-footer-logo li:hover{
+  cursor: pointer;
+}
+
+.icon-footer{
+  font-size: 12px;
+  line-height: 18px;
+  margin:0 6px 0 0;
+}
 /*
 .mat-error{
   color:#397eb7 !important;

@@ -48,9 +48,13 @@
   }
 }
 .redSpace {
-  height: 15px;
+  height: 5px;
   width: 100%;
   background: #ffaa00;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 .vertical-divider {
   height: 42px;

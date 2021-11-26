@@ -242,7 +242,7 @@ export class SidebarComponent implements OnInit {
       if (event) {
         this.ui.createSnackbar(
           this.lang == 'Esp'
-            ? 'Excedió el número de favoritos, para poder asignar un nuevo tablero debes eliminar uno de los que tienes en la sección'
+            ? 'Excedió el número de favoritos, para poder asignar un nuevo tablero debe eliminar uno de los que tiene en la sección'
             : 'Exceeded the number of favorites, in order to assign a new board you must remove one of those you have in the section',
           'x',
           {

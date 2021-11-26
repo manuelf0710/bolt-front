@@ -63,9 +63,14 @@
 }
 
 .favorites-banner-title {
-  @include title('Gotham', 36px, 43px, $quinary-black);
   font-weight: bold;
   text-align: left;
+  @media only screen and (max-width: 1366) {
+    @include title('Gotham', 25px, 43px, $quinary-black);
+  }
+  @media only screen and (min-width: 1366) {
+    @include title('Gotham', 36px, 43px, $quinary-black);
+  }
 }
 
 .title-description {

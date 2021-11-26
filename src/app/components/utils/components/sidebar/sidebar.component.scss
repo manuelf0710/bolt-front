@@ -20,6 +20,11 @@
 
 }
 
+.flex-column {
+  scrollbar-color: #e3e3e3 #e3e3e3 !important;
+  scrollbar-width: thin !important;
+}
+
 .flex-column::-webkit-scrollbar-track {
   background: #e3e3e3;
   border-radius: 1px;
@@ -33,11 +38,11 @@
 }
 
 .flex-column {
-  position: absolute;
+  position: fixed;
   top: 60px;
   left: 0;
   width: 267px;
-  height:calc(100vh - 175px);
+  height:calc(100vh - 150px);
   /*@media only screen and (max-width: 1366px) {
     height: 100%;
   }*/

@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core'
+import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core'
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { UiService } from 'src/app/services/ui.service'
 
@@ -14,6 +14,7 @@ export interface DialogData {
   selector: 'app-modal-project-form',
   templateUrl: './modal-project-form.component.html',
   styleUrls: ['./modal-project-form.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ModalProjectFormComponent implements OnInit {
   public createProjectForm: FormGroup
@@ -23,49 +24,8 @@ export class ModalProjectFormComponent implements OnInit {
   public operation_es: string = 'creado'
   public operation_en: string = 'created'
 
-  public icons = [
-    'assessment',
-    'emoji_objects',
-    'pie_chart',
-    'business',
-    'apartment',
-    'table_view',
-    'theaters',
-    'mediation',
-    'anchor',
-    'data_exploration',
-    'maps_home_work',
-    'science',
-    'whatshot',
-    'deck',
-    'view_compact',
-    'dashboard',
-    'storefront',
-    'fitness_center',
-    'spa',
-    'business_center',
-    'meeting_room',
-    'ac_unit',
-    'airport_shuttle',
-    'sports_bar',
-    'casino',
-    'pets',
-    'code',
-    'explore',
-    'view_in_ar',
-    'dns',
-    'space_dashboard',
-    'sticky_note_2',
-    'track_changes',
-    'card_membership',
-    'integration_instructions',
-    'tour',
-    'request_page',
-    'payment',
-    'account_balance',
-    'savings',
-    'account_balance_wallet',
-    'receipt',
+  public icons = ['done_all','verified','visibility',
+    'assessment','emoji_objects','pie_chart','business','apartment','table_view','theaters','mediation','anchor','data_exploration','maps_home_work','science','whatshot','deck', 'view_compact','dashboard', 'storefront', 'fitness_center','spa', 'business_center', 'meeting_room', 'ac_unit','airport_shuttle','sports_bar','casino','pets','code','explore','view_in_ar','dns','space_dashboard','sticky_note_2','track_changes','card_membership','integration_instructions','tour','request_page','payment','account_balance','savings','account_balance_wallet','receipt',
   ]
 
   private errorMessage: any = {

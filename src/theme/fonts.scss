@@ -65,6 +65,7 @@
 .favorites-banner-title {
   font-weight: bold;
   text-align: left;
+  letter-spacing: 3px;
   @media only screen and (max-width: 1366) {
     @include title('Gotham', 25px, 43px, $quinary-black);
   }

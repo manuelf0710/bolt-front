@@ -5,3 +5,16 @@
     transform: translateY(5px);
   }
 }
+
+.toppings-panel.mat-select-panel {
+  width: 150px;
+  max-width: 150px;
+  display: flex;
+  flex-wrap: wrap;
+
+  max-height: 240px; /* 240px - for 5 items / column */
+}
+
+.toppings-panel.mat-select-panel .mat-option {
+  min-width: 15% !important;
+}

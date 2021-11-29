@@ -118,7 +118,7 @@
       <mat-label *ngSwitchCase="'Esp'">Icono</mat-label>
       <mat-label *ngSwitchCase="'Eng'">Icon</mat-label>
 
-      <mat-select [formControl]="createProjectForm.controls.icon">
+      <mat-select [formControl]="createProjectForm.controls.icon" panelClass="toppings-panel">
         <mat-select-trigger>
           <span class="material-icons">
             {{ this.createProjectForm.controls.icon.value }}

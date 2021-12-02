@@ -60,7 +60,7 @@
 -->
   <mat-toolbar class="footer-lola row-footer" style="left:0; bottom: 0; position: fixed;">
     <div class="brew-icon"></div>
-  <div class="custom-col">
+  <div class="custom-col" style="margin-top:5px">
     <span *ngSwitchCase="'Esp'"class="footer__title" style="padding-bottom: 0;">
       Solicitud acceso nuevo proyecto
     </span>
@@ -70,7 +70,8 @@
     <div class="container-footer-logo">
       <ul>
         <li>
-          <span class="request-icon icon-footer">  </span>
+          <!--<span class="request-icon icon-footer">  </span>-->
+          <span class="material-icons icon-footer"> dashboard_customize </span>
           <span
             *ngSwitchCase="'Esp'"
             (click)="openForm()"
@@ -90,7 +91,7 @@
     </div>
 
   </div>
-  <div class="custom-col">
+  <div class="custom-col" style="margin-top:5px">
     <span *ngSwitchCase="'Esp'" class="footer__title" style="padding-bottom: 0;">Contactar a soporte</span>
     <span *ngSwitchCase="'Eng'" class="footer__title" style="padding-bottom: 0;">Support contact</span>
     <div class="container-footer-logo">

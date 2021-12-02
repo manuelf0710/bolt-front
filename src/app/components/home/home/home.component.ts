@@ -97,7 +97,7 @@ export class HomeComponent implements OnInit {
     forkJoin({ favorites: favSubs, banners: bannerSubs }).subscribe(
       (res: any) => {
         this.ui.dismissLoading();
-        let favorites = res.favorites.body;
+        let favorites = res.favorites.body; console.log("favorites");
         // cambiar validacion de usuario a role de usuario
         if (this.user_id && this.user_id.length > 0) {
           this.favList = favorites;

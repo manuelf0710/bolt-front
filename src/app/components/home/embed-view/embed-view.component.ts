@@ -54,6 +54,7 @@ export class EmbedViewComponent implements OnInit, AfterViewInit, OnDestroy {
     this.appSbc = this.appService
       .getDataById(this.ext_id)
       .subscribe((res: any[]) => {
+        this.elementProps = [];
         this.elementProps.push(res);
         this.elementProps.forEach((dash) => {
           this.getSafeUrl(dash['url']);

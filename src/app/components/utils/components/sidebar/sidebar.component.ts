@@ -72,7 +72,7 @@ export class SidebarComponent implements OnInit {
       favorites: favSubs,
       apps: appsSubs,
     }).subscribe((res: any) => {
-      this.favList = res.favorites.body;
+      this.favList = res.favorites.body; console.log("in the sidebar");
       //this.prop = res.projects;
       const uniqueProj = this.filterUniqueProjects(res.projects);
       const dataProj = this.getAllProjectSubmenuApps(res.projects);

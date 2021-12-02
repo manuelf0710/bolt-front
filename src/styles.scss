@@ -40,6 +40,13 @@ list-style-type: none;
   line-height: 18px;
   margin:0 6px 0 0;
 }
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: #397eb7;
+}
+
+.mat-toolbar .mat-form-field-label, .mat-toolbar .mat-focused .mat-form-field-label, .mat-toolbar .mat-select-value, .mat-toolbar .mat-select-arrow, .mat-toolbar .mat-form-field.mat-focused .mat-select-arrow {
+  color: #000;
+}
 /*
 .mat-error{
   color:#397eb7 !important;

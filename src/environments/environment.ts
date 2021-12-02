@@ -98,6 +98,7 @@ export const environment = {
     post: 'favorites',
     putById: 'favorites/',
     deleteById: 'favorites/',
+    deleteFromArray: 'favorites/arrayfav/',
   },
 };
 

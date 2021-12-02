@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { ModalNotificationComponent } from '../components/utils/pop up/modal-notification/modal-notification.component';
 import { AppList } from '../model/AppList';
@@ -104,4 +105,16 @@ export class FavoritesService {
         }
       );
   }
+
+  deleteFromArray(favData: any) {
+    return this.httpService
+      .post(environment.serverUrl + environment.favorites.deleteFromArray, favData)
+      .pipe(
+        map((lista: any) => {
+         
+          return lista;
+        })
+      );
+  }
+
 }

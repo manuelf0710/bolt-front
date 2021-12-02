@@ -72,13 +72,50 @@ export class SidebarComponent implements OnInit {
       favorites: favSubs,
       apps: appsSubs,
     }).subscribe((res: any) => {
-      this.favList = res.favorites.body; console.log("in the sidebar");
+      //this.favList = res.favorites.body;
       //this.prop = res.projects;
       const uniqueProj = this.filterUniqueProjects(res.projects);
       const dataProj = this.getAllProjectSubmenuApps(res.projects);
-      this.prop = this.finalProjects(uniqueProj.uniques, dataProj);
+      this.prop = this.finalProjects(uniqueProj.uniques, dataProj.submenus);
+      const getFavoritos = this.validFavorites(res.favorites.body, dataProj.apps);
+      if(getFavoritos.favToRemove.length > 0){
+        this.deleteFavoritesFromArray(getFavoritos.favToRemove);
+      }
+      this.favList = getFavoritos.favorites;
+
       this.appsData = res.apps.body.items;
     });
+  }
+
+  
+  deleteFavoritesFromArray(array:any) {
+    this.favoriteService.deleteFromArray(array).subscribe(
+      (res: any[]) => {
+         window.location.reload();
+      },
+      (error: any) => {
+        
+      },
+      () => {}
+    );
+  }
+
+  validFavorites(fav, apps){
+    let favorites = [];
+    let favToRemove = [];
+    for(let i = 0; i < fav.length; i++){
+      let found = 0;
+      for (let j = 0; j < apps.length; j++) {
+        if(fav[i].app_id == apps[j].id  && found == 0){ 
+          favorites.push(fav[i]);
+          found =1;
+        }
+       }
+      if(found == 0){
+        favToRemove.push({id:fav[i].id, app_id: fav[i].app_id, user_id: fav[i].user_id});
+      }      
+    }
+    return { favorites, favToRemove };
   }
 
   finalProjects(arr, submenus){
@@ -124,7 +161,7 @@ export class SidebarComponent implements OnInit {
         }
       }   
     } 
-    return submenus;
+    return { submenus, apps};
   }
 
   

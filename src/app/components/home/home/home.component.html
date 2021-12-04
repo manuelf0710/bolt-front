@@ -1,6 +1,6 @@
 <app-header></app-header>
 
-<section [ngSwitch]="lang" class="main-content box-shadow">
+<section [ngSwitch]="lang" class="main-content box-shadow2">
   <mat-carousel
     timings="250ms ease-in"
     [autoplay]="true"
@@ -57,9 +57,9 @@
 
   <div class="favorites">
     <div [ngSwitch]="lang" class="row title">
-      
-      <h2 *ngSwitchCase="'Esp'" class="favorites-banner-title"><span class="material-icons icon-lg menu-star_fav"> star </span>Favoritos</h2>
-      <h2 *ngSwitchCase="'Eng'" class="favorites-banner-title">Favorites</h2>
+        <span class="material-icons icon-lg menu-star_fav"> star </span>
+        <h2 *ngSwitchCase="'Esp'" class="favorites-banner-title">Favoritos</h2>
+        <h2 *ngSwitchCase="'Eng'" class="favorites-banner-title">Favorites</h2>
     </div>
     <div *ngIf="favList.length > 0">
       <button

@@ -47,6 +47,74 @@ list-style-type: none;
 .mat-toolbar .mat-form-field-label, .mat-toolbar .mat-focused .mat-form-field-label, .mat-toolbar .mat-select-value, .mat-toolbar .mat-select-arrow, .mat-toolbar .mat-form-field.mat-focused .mat-select-arrow {
   color: #000;
 }
+
+// mat-icon-stepper selected color change 
+ .mat-step-header .mat-step-icon-selected, .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
+  background-color: orange!important;
+}
+
+/*
+//input outline color
+ .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: red!important;
+}*/
+
+//mat-input focused color
+ .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: #397eb7!important;
+}
+
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick .mat-select-arrow {
+  color: #397eb7!important;
+}
+
+// mat-input error outline color
+ .mat-form-field-appearance-outline.mat-form-field-invalid.mat-form-field-invalid .mat-form-field-outline-thick{
+  color: rgb(109, 107, 107)!important;
+  opacity: 0.8!important;
+}
+
+// mat-input carent color
+ .mat-input-element {
+  caret-color: #777!important;
+}
+
+// mat-input error carent color
+ .mat-form-field-invalid .mat-input-element, .mat-warn .mat-input-element {
+  caret-color:rgb(109, 107, 107)!important;
+}
+
+.mat-form-field .mat-select.mat-select-invalid .mat-select-arrow {
+  color: rgb(109, 107, 107)!important;
+}
+
+// mat-label normal state style
+ .mat-form-field-label {
+  color: rgba(0,0,0,.6)!important;
+  // color: $mainColor!important;
+}
+
+// mat-label focused style
+ .mat-form-field.mat-focused .mat-form-field-label {
+  color: #397eb7!important;
+}
+
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+  color: #397eb7;
+}
+.mat-select:focus .mat-select-trigger .mat-select-arrow {
+  color: #397eb7;
+}
+
+.mat-primary .mat-pseudo-checkbox-checked, .mat-primary .mat-pseudo-checkbox-indeterminate {
+  background: #397eb7;
+}
+
+// mat-label error style
+/*
+.mat-form-field.mat-form-field-invalid .mat-form-field-label {
+  color: red!important;
+}*/
 /*
 .mat-error{
   color:#397eb7 !important;

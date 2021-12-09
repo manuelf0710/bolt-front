@@ -39,7 +39,17 @@
   }
 }
 .footer-lola{
-  height:60px !important;
+  /*height:60px !important;*/
+  width: calc(100vw - 18px) !important;
+  display: grid;
+  @media only screen and (min-width: 1367px) {
+    position: fixed !important;
+    bottom: 0 !important;
+    height: 60px !important;
+  }
+  @media only screen and (max-width: 1024px) {
+  height: 100% !important;
+  }
 }
 .custom-col {
   align-self: flex-start;
@@ -54,7 +64,11 @@
   height: 5px;
   width: 100%;
   background: #ffaa00;
-  position: fixed;
+  @media only screen and (min-width: 1367px) {
+    position: fixed !important;
+    bottom: 0 !important;
+    position: fixed;
+  }  
   bottom: 0;
   left: 0;
   right: 0;

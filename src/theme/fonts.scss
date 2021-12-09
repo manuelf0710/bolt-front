@@ -92,11 +92,13 @@
   @include title('Roboto', 12px, 14px, $primary-red);
   position: sticky;
   @media only screen and (max-height: 700px) {
-    position: fixed;
+    position: relative;
     bottom: 0;
   }
+  @media only screen and (min-width: 1367px) {
+    width:calc(100vw);
+  }
   z-index: 10;
-  width:calc(100vw);
   &__title {
     width: fit-content;
     margin: 5px auto;

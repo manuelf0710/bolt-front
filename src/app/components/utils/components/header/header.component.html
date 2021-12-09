@@ -10,19 +10,18 @@
       <span class="lola-brain"></span>
       Hi {{ this.userName }}!
     </div>
-    <button mat-button [disableRipple]="true" (click)="logout()" class="title-header">
-      <span class="material-icons">
-        logout
-      </span>
+    <button
+      mat-button
+      [disableRipple]="true"
+      (click)="logout()"
+      class="title-header"
+    >
+      <span class="material-icons"> logout </span>
     </button>
     <mat-form-field appearance="outlined">
       <mat-select (selectionChange)="changeLang($event)" [value]="lang">
-        <mat-option value="Esp">
-          Esp
-        </mat-option>
-        <mat-option value="Eng">
-          Eng
-        </mat-option>
+        <mat-option value="Esp"> Esp </mat-option>
+        <mat-option value="Eng"> Eng </mat-option>
       </mat-select>
     </mat-form-field>
   </div>

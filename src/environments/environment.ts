@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   // serverUrl: 'https://boltmaz.azurewebsites.net/api/v1/',
-  serverUrl: 'http://localhost:3000/api/v1/',
+  serverUrl: 'http://192.168.0.107:3000/api/v1/',
   //serverUrl: 'https://bolt-back.herokuapp.com/api/v1/',
 
   auth: {

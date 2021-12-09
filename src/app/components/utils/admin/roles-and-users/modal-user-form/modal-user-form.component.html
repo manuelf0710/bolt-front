@@ -1,21 +1,15 @@
 <div class="dialog-form" [ngSwitch]="lang">
   <div mat-dialog-actions class="dialog-form__header">
-    <span
-      mat-button
-      mat-dialog-close
-      class="x-icon"
-      (click)="closeModal()"
-    ></span>
+    <span mat-button mat-dialog-close class="x-icon" (click)="closeModal()"></span>
   </div>
-  <div style="width: 100%;" *ngIf="!this.data">
+  <div style="width: 100%" *ngIf="!this.data">
     <h2 class="form-title" *ngSwitchCase="'Esp'">Crear un nuevo usuario</h2>
     <h2 class="form-title" *ngSwitchCase="'Eng'">Create a new user</h2>
   </div>
-  <div style="width: 100%;" *ngIf="this.data">
+  <div style="width: 100%" *ngIf="this.data">
     <h2 class="form-title" *ngSwitchCase="'Esp'">Editar usuario</h2>
     <h2 class="form-title" *ngSwitchCase="'Eng'">Edit user</h2>
-  </div>  
-
+  </div>
 
   <form [formGroup]="createUserForm" class="form-section" autocomplete="off">
     <mat-form-field
@@ -31,13 +25,13 @@
         matInput
         id="email"
         formControlName="email"
-        type="text"
+        type="email"
         required
         maxlength="200"
       />
 
       <mat-error *ngIf="createUserForm.controls.email.errors">
-        {{ getMessageform('email') }}
+        {{ getMessageform("email") }}
       </mat-error>
     </mat-form-field>
 
@@ -60,7 +54,7 @@
       />
 
       <mat-error *ngIf="createUserForm.controls.name.errors">
-        {{ getMessageform('name') }}
+        {{ getMessageform("name") }}
       </mat-error>
     </mat-form-field>
 
@@ -70,20 +64,13 @@
       floatLabel="auto"
       class="fullInput"
     >
-      <mat-label *ngSwitchCase="'Esp'">
-        Apellido
-      </mat-label>
+      <mat-label *ngSwitchCase="'Esp'"> Apellido </mat-label>
       <mat-label *ngSwitchCase="'Eng'">Lastname</mat-label>
 
-      <input
-        matInput
-        formControlName="lastname"
-        minlength="6"
-        maxlength="100"
-      />
+      <input matInput formControlName="lastname" minlength="6" maxlength="100" />
 
       <mat-error *ngIf="createUserForm.controls.lastname.errors">
-        {{ getMessageform('lastname') }}
+        {{ getMessageform("lastname") }}
       </mat-error>
     </mat-form-field>
 
@@ -93,88 +80,73 @@
       floatLabel="auto"
       class="fullInput"
     >
-      <mat-label *ngSwitchCase="'Esp'">
-       Id de red
-      </mat-label>
+      <mat-label *ngSwitchCase="'Esp'"> Id de red </mat-label>
       <mat-label *ngSwitchCase="'Eng'">Network id</mat-label>
 
-      <input
-        matInput
-        formControlName="networkid"
-        minlength="3"
-        maxlength="45"
-      />
+      <input matInput formControlName="networkid" minlength="3" maxlength="45" />
 
       <mat-error *ngIf="createUserForm.controls.networkid.errors">
-        {{ getMessageform('networkid') }}
+        {{ getMessageform("networkid") }}
       </mat-error>
     </mat-form-field>
 
     <mat-form-field
-    appearance="outline"
-    hideRequiredMarker="true"
-    floatLabel="auto"
-    class="fullInput"
-  >
-    <mat-label *ngSwitchCase="'Esp'">Rol</mat-label>
-    <mat-label *ngSwitchCase="'Eng'">Role</mat-label>
+      appearance="outline"
+      hideRequiredMarker="true"
+      floatLabel="auto"
+      class="fullInput"
+    >
+      <mat-label *ngSwitchCase="'Esp'">Rol</mat-label>
+      <mat-label *ngSwitchCase="'Eng'">Role</mat-label>
 
-    <mat-select [formControl]="createUserForm.controls.profile">
-      <mat-option
-        *ngFor="
-        let option of [
-          'admin',
-          'user',
-        ]
-      "
-        [value]="option"
-      >
-        {{ option }}
-      </mat-option>
-    </mat-select>
-<mat-error *ngIf="createUserForm.controls.profile.errors">
-  {{ getMessageform('profile') }}
-</mat-error>          
-  </mat-form-field>    
+      <mat-select [formControl]="createUserForm.controls.profile">
+        <mat-option *ngFor="let option of ['admin', 'user']" [value]="option">
+          {{ option }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="createUserForm.controls.profile.errors">
+        {{ getMessageform("profile") }}
+      </mat-error>
+    </mat-form-field>
 
-        <mat-form-field
-          appearance="outline"
-          hideRequiredMarker="true"
-          floatLabel="auto"
-          class="fullInput"
+    <mat-form-field
+      appearance="outline"
+      hideRequiredMarker="true"
+      floatLabel="auto"
+      class="fullInput"
+    >
+      <mat-label *ngSwitchCase="'Esp'">País</mat-label>
+      <mat-label *ngSwitchCase="'Eng'">Country</mat-label>
+
+      <mat-select [formControl]="createUserForm.controls.country">
+        <mat-option
+          *ngFor="
+            let option of [
+              'Colombia',
+              'México',
+              'Ecuador',
+              'Peru',
+              'Argentina',
+              'Chile',
+              'Brasil'
+            ]
+          "
+          [value]="option"
         >
-          <mat-label *ngSwitchCase="'Esp'">País</mat-label>
-          <mat-label *ngSwitchCase="'Eng'">Country</mat-label>
-
-          <mat-select [formControl]="createUserForm.controls.country">
-            <mat-option
-              *ngFor="
-              let option of [
-                'Colombia',
-                'México',
-                'Ecuador',
-                'Peru',
-                'Argentina',
-                'Chile',
-                'Brasil',
-              ]
-            "
-              [value]="option"
-            >
-              {{ option }}
-            </mat-option>
-          </mat-select>
+          {{ option }}
+        </mat-option>
+      </mat-select>
       <mat-error *ngIf="createUserForm.controls.country.errors">
-        {{ getMessageform('country') }}
-      </mat-error>          
-        </mat-form-field>    
+        {{ getMessageform("country") }}
+      </mat-error>
+    </mat-form-field>
 
     <button class="btn-submit-rol" (click)="saveUser()">
       <span *ngSwitchCase="'Esp'">
-        {{ !this.data ? 'Crear usuario' : 'Guardar cambios' }}
+        {{ !this.data ? "Crear usuario" : "Guardar cambios" }}
       </span>
       <span *ngSwitchCase="'Eng'">
-        {{ !this.data ? 'Create user' : 'Save changes' }}
+        {{ !this.data ? "Create user" : "Save changes" }}
       </span>
     </button>
   </form>

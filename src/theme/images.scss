@@ -248,18 +248,20 @@
 
 // footer
 .bolt-icon {
-  @include img-background(url("/assets/icon/Logo.png"), 112px, 44px, relative);  margin-left: 66px;
+  @include img-background(url("/assets/icon/Logo.png"), 112px, 44px, relative);
+  margin-left: 66px;
 }
 
 .lola-brain {
-  @include img-background(url("/assets/icon/Group.png"), 18px, 19px, relative);  margin-right: 8px;
+  @include img-background(url("/assets/icon/Group.png"), 18px, 19px, relative);
+  margin-right: 8px;
 }
 
 .brew-icon {
   @include img-background(
     url("/assets/icon/logo-brewtech.svg"),
     75px,
-    79px,
+    70px,
     relative
   );
 }

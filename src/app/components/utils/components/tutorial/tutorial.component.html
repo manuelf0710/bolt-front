@@ -11,10 +11,26 @@
       Bienvenido, a continuación encontrará información importante para la
       navegación en Lola
     </p>
+    <div class="row" *ngIf="lang == 'Esp'">
+      <span class="set-language" (click)="languageTutorial('Esp')"
+        >Continuar en Español
+      </span>
+      <span class="set-language" (click)="languageTutorial('Eng')">
+        Continuar en Ingles</span
+      >
+    </div>
     <p class="tutorial__content" *ngIf="lang == 'Eng'">
       Welcome, below you will find important information for the navigation in
       Lola
     </p>
+    <div class="row" *ngIf="lang == 'Eng'">
+      <span class="set-language" (click)="languageTutorial('Esp')"
+        >Continue in spanish
+      </span>
+      <span class="set-language" (click)="languageTutorial('Eng')">
+        Continue in english</span
+      >
+    </div>
 
     <div class="row">
       <button mat-button class="bolt-btn-outline" (click)="save()">
@@ -77,8 +93,8 @@
     <div *ngSwitchCase="5" class="step-5">
       <span class="arrow-pointer"></span>
       <p class="tutorial__content" *ngIf="lang == 'Esp'">
-        Ya que es administrador podrá ver las opciones de este rol reflejadas
-        en esta opción
+        Ya que es administrador podrá ver las opciones de este rol reflejadas en
+        esta opción
       </p>
       <p class="tutorial__content" *ngIf="lang == 'Eng'">
         Since you are administrator you will see the options of this role

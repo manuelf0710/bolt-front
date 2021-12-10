@@ -7,8 +7,8 @@
   padding: 20px 40px;
   justify-content: space-around;
 
-  .generar-solicitud:hover{
-    cursor:pointer;
+  .generar-solicitud:hover {
+    cursor: pointer;
   }
 
   @media (min-width: 1024px) {
@@ -38,7 +38,7 @@
     }
   }
 }
-.footer-lola{
+.footer-lola {
   /*height:60px !important;*/
   width: calc(100vw - 18px) !important;
   display: grid;
@@ -48,7 +48,8 @@
     height: 60px !important;
   }
   @media only screen and (max-width: 1024px) {
-  height: 100% !important;
+    height: 100% !important;
+    min-width: 1024px;
   }
 }
 .custom-col {
@@ -62,13 +63,13 @@
 }
 .redSpace {
   height: 5px;
-  width: 100%;
+  /*width: 100%;*/
   background: #ffaa00;
   @media only screen and (min-width: 1367px) {
     position: fixed !important;
     bottom: 0 !important;
     position: fixed;
-  }  
+  }
   bottom: 0;
   left: 0;
   right: 0;

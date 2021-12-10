@@ -27,7 +27,7 @@
 .step {
   &-1 {
     @include step-container(496px, auto);
-    top: 40%;
+    top: 30%;
     left: 33%;
     .row {
       justify-content: space-around;

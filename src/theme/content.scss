@@ -140,7 +140,7 @@ mat-divider {
   border-left: 10px solid $primary-red;
 
   span {
-    font-family: "Gotham";
+    font-family: "Roboto";
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
@@ -167,7 +167,7 @@ mat-divider {
 
   .mat-button-wrapper {
     font-size: 25px;
-    font-family: "Gotham";
+    font-family: "Roboto";
     color: $primary-red;
   }
 }
@@ -184,13 +184,14 @@ mat-divider {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  min-height: 1280px;
 }
 
 .inner-section {
   width: 100%;
   height: auto;
   box-sizing: border-box;
-  padding: 20px;
+  padding: 40px 20px;
   background: $primary-white;
   box-shadow: 4px 4px 10px 1px rgba(0, 0, 0, 0.25);
   border-radius: 10px;

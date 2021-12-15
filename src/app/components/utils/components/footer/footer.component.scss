@@ -40,12 +40,15 @@
 }
 .footer-lola {
   /*height:60px !important;*/
-  width: calc(100vw - 18px) !important;
+  /*width: calc(100vw - 18px) !important;*/
+  min-width: 1348px;
   display: grid;
   @media only screen and (min-width: 1367px) {
     position: fixed !important;
     bottom: 0 !important;
     height: 60px !important;
+    overflow-x: hidden;
+    /*width: calc(100vw) !important;*/
   }
   @media only screen and (max-width: 1024px) {
     height: 100% !important;

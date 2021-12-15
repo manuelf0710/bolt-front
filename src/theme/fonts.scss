@@ -8,7 +8,7 @@
 @mixin title($ffamily, $fsize, $lineh, $color) {
   font-family: $ffamily;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 500;
   font-size: $fsize;
   line-height: $lineh;
   color: $color;
@@ -24,7 +24,7 @@
 }
 
 .select-font {
-  @include title("Gotham", 20px, 22px, $primary-white);
+  @include title("Roboto", 20px, 22px, $primary-white);
 }
 // sidebar
 .sidebar-title {
@@ -37,10 +37,10 @@
 
 // pop ups
 .dialog-alert__content {
-  @include title("Gotham", 20px, 30px, $senary-grey);
+  @include title("Roboto", 20px, 30px, $senary-grey);
 }
 .form-title {
-  @include title("Gotham", 24px, 30px, $senary-grey);
+  @include title("Roboto", 24px, 30px, $senary-grey);
   margin: 0 auto 10px 28px;
   align-self: flex-start;
   border-bottom: 2px solid $underline-yellow;
@@ -67,20 +67,20 @@
 
 .favorites-banner-title {
   font-weight: bold;
-  font-family: "Gotham";
+  font-family: "Roboto";
   text-align: left;
   letter-spacing: 3px;
 
   @media only screen and (max-width: 1366) {
-    @include title("Gotham", 25px, 43px, $quinary-black);
+    @include title("Roboto", 25px, 43px, $quinary-black);
   }
   @media only screen and (min-width: 1366) {
-    @include title("Gotham", 36px, 43px, $quinary-black);
+    @include title("Roboto", 36px, 43px, $quinary-black);
   }
 }
 
 .title-description {
-  @include title("Gotham", 14px, 13px, $primary-blue-dark);
+  @include title("Roboto", 14px, 13px, $primary-blue-dark);
   font-weight: bold;
   margin-bottom: 10px !important;
 }
@@ -128,7 +128,7 @@
 
 .tutorial {
   &__content {
-    @include title("Gotham", 20px, 30px, $quinary-grey);
+    @include title("Roboto", 20px, 30px, $quinary-grey);
     text-align: center;
   }
 }
@@ -136,7 +136,7 @@
 /* admin styles */
 // projects
 .underline-title {
-  @include title("Gotham", 30px, 40px, $senary-grey);
+  @include title("Roboto", 30px, 30px, $senary-grey);
   text-transform: capitalize;
   border-bottom: 2px solid $primary-red;
   width: fit-content;
@@ -144,7 +144,7 @@
 .grid {
   &-header {
     &__title {
-      @include title("Gotham", 14px, 30px, $senary-black);
+      @include title("Roboto", 14px, 30px, $senary-black);
       text-align: left;
       font-weight: bold;
     }
@@ -174,7 +174,7 @@
     &__action {
       .action-text,
       .toggle-text {
-        @include title("Gotham", 10px, 15px, $primary-red);
+        @include title("Roboto", 10px, 15px, $primary-red);
         text-transform: capitalize;
         margin-top: 0;
       }

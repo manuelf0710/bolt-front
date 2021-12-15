@@ -14,11 +14,9 @@
           appearance="outline"
           floatLabel="auto"
           class="fullInput input-bolt"
-          style="margin-left: 0;"
+          style="margin-left: 0"
         >
-          <mat-label *ngSwitchCase="'Esp'">
-            Nombre
-          </mat-label>
+          <mat-label *ngSwitchCase="'Esp'"> Nombre </mat-label>
           <mat-label *ngSwitchCase="'Eng'">Name</mat-label>
 
           <input
@@ -59,16 +57,16 @@
           <mat-select [formControl]="searchForm.controls.country">
             <mat-option
               *ngFor="
-              let option of [
-                'Colombia',
-                'México',
-                'Ecuador',
-                'Peru',
-                'Argentina',
-                'Chile',
-                'Brasil',
-              ]
-            "
+                let option of [
+                  'Colombia',
+                  'México',
+                  'Ecuador',
+                  'Peru',
+                  'Argentina',
+                  'Chile',
+                  'Brasil'
+                ]
+              "
               [value]="option"
             >
               {{ option }}
@@ -89,41 +87,41 @@
     <div class="row">
       <h2 *ngSwitchCase="'Esp'" class="form-title">Resúltados de busqueda</h2>
       <h2 *ngSwitchCase="'Eng'" class="form-title">Search results</h2>
-    <button class="bolt-btn-filled" (click)="createUser()">
-      <span *ngSwitchCase="'Esp'"> Crear nuevo usuario </span>
-      <span *ngSwitchCase="'Eng'"> Create new user </span>
-    </button>      
+      <button class="bolt-btn-filled" (click)="createUser()">
+        <span *ngSwitchCase="'Esp'"> Crear nuevo usuario </span>
+        <span *ngSwitchCase="'Eng'"> Create new user </span>
+      </button>
     </div>
 
     <div class="grid">
       <div class="grid-header">
-        <div class="grid-header__title" style="margin-left: 30px;">
-          <span>{{ lang == 'Esp' ? 'Usuario' : 'User' }}</span>
+        <div class="grid-header__title" style="margin-left: 30px">
+          <span>{{ lang == "Esp" ? "Usuario" : "User" }}</span>
         </div>
         <div class="grid-header__title">
           <span>ID</span>
         </div>
         <div class="grid-header__title">
           <span>
-            {{ lang == 'Esp' ? 'Perfiles registrados' : 'Assigned profiles' }}
+            {{ lang == "Esp" ? "Perfiles registrados" : "Assigned profiles" }}
           </span>
         </div>
         <div class="grid-header__title">
-          <span>{{ lang == 'Esp' ? 'Creado' : 'Created' }}</span>
+          <span>{{ lang == "Esp" ? "Creado" : "Created" }}</span>
         </div>
         <div class="grid-header__title">
           <span>
-            {{ lang == 'Esp' ? 'Última modificación' : 'Last modification' }}
+            {{ lang == "Esp" ? "Última modificación" : "Last modification" }}
           </span>
         </div>
-        <div class="grid-header__title" style="text-align: center;">
-          <span>{{ lang == 'Esp' ? 'Acciones' : 'Actions' }}</span>
+        <div class="grid-header__title" style="text-align: center">
+          <span>{{ lang == "Esp" ? "Acciones" : "Actions" }}</span>
         </div>
       </div>
 
       <p *ngIf="users.length == 0" class="grid-content__name">
         {{
-          lang == 'Esp' ? 'No se encontraron resultados' : 'No results found'
+          lang == "Esp" ? "No se encontraron resultados" : "No results found"
         }}
       </p>
 
@@ -131,41 +129,41 @@
         <div class="grid-content">
           <p
             class="grid-content__name"
-            style="padding-left: 30px; text-align: left;"
+            style="padding-left: 30px; text-align: left"
           >
-            {{ user.name + ' ' + user.last_name }}
+            {{ user.name + " " + user.last_name }}
           </p>
           <p class="grid-content__name">{{ user.employee_code }}</p>
           <div class="col">
             <p class="grid-content__description">
               <i *ngFor="let rol of user.roles">
-                {{ lang == 'Esp' ? rol.name_es : rol.name_en }}/
+                {{ lang == "Esp" ? rol.name_es : rol.name_en }}/
               </i>
             </p>
           </div>
 
           <div class="col">
-            <p class="grid-content__name"  *ngIf="user.user_created != null">
-              {{ user.user_created.name + ' ' + user.user_created.last_name }}
+            <p class="grid-content__name" *ngIf="user.user_created != null">
+              {{ user.user_created.name + " " + user.user_created.last_name }}
             </p>
-            <p class="grid-content__name"  *ngIf="user.user_created != null">
+            <p class="grid-content__name" *ngIf="user.user_created != null">
               ID: {{ user.user_created.employee_code }}
             </p>
             <p class="grid-content__name">
-              {{ user.created_at | date: 'shortDate' }}
-              {{ user.created_at | date: 'mediumTime' }}
+              {{ user.created_at | date: "shortDate" }}
+              {{ user.created_at | date: "mediumTime" }}
             </p>
           </div>
           <div class="col">
             <p class="grid-content__name" *ngIf="user.user_update != null">
-              {{ user.user_update.name + ' ' + user.user_update.last_name }}
+              {{ user.user_update.name + " " + user.user_update.last_name }}
             </p>
-            <p class="grid-content__name"  *ngIf="user.user_update != null">
+            <p class="grid-content__name" *ngIf="user.user_update != null">
               ID: {{ user.user_update.employee_code }}
             </p>
             <p class="grid-content__name">
-              {{ user.updated_at | date: 'shortDate' }}-
-              {{ user.updated_at | date: 'mediumTime' }}
+              {{ user.updated_at | date: "shortDate" }}-
+              {{ user.updated_at | date: "mediumTime" }}
             </p>
           </div>
 
@@ -178,41 +176,35 @@
                 [checked]="user.status == 1"
               ></mat-slide-toggle>
               <p class="toggle-text" *ngSwitchCase="'Esp'">
-                {{ user.status == 1 ? 'Deshabilitar' : 'Habilitar' }}
+                {{ user.status == 1 ? "Deshabilitar" : "Habilitar" }}
               </p>
               <p class="toggle-text" *ngSwitchCase="'Eng'">
-                {{ user.status == 1 ? 'Disable' : 'Enable' }}
+                {{ user.status == 1 ? "Disable" : "Enable" }}
               </p>
-              
             </div>
-                <button
-                  mat-button
-                  class="action-btn"
-                  (click)="createUser(user)"
-                >
-                  <span class="material-icons menu-icon"> edit </span>
-                  <span class="action-text" *ngSwitchCase="'Esp'">
-                    editar
-                  </span>
-                  <span class="action-text" *ngSwitchCase="'Eng'"> edit </span>
-                </button>
+            <button mat-button class="action-btn" (click)="createUser(user)">
+              <span class="material-icons menu-icon"> edit </span>
+              <span class="action-text" *ngSwitchCase="'Esp'"> editar </span>
+              <span class="action-text" *ngSwitchCase="'Eng'"> edit </span>
+            </button>
 
             <button mat-button class="action-btn" (click)="addNewRol(user)">
               <span class="plus-icon"></span>
 
               <span
                 class="action-text"
-                style="margin-top: 5px;"
+                style="margin-top: 5px"
                 *ngSwitchCase="'Esp'"
               >
-                Añadir nuevo perfil
+                Añadir <br />
+                perfil
               </span>
               <span
                 class="action-text"
-                style="margin-top: 5px;"
+                style="margin-top: 5px"
                 *ngSwitchCase="'Eng'"
               >
-                add new profile
+                add <br />profile
               </span>
             </button>
           </div>
@@ -227,7 +219,7 @@
         (click)="updatePage('start', true)"
         [disabled]="active_count == 1"
       >
-        <span style="transform: rotate(180deg);" class="material-icons">
+        <span style="transform: rotate(180deg)" class="material-icons">
           double_arrow
         </span>
       </button>
@@ -237,7 +229,7 @@
         (click)="updatePage('prev', true)"
         [disabled]="active_count == 1"
       >
-        <span style="transform: rotate(180deg);" class="material-icons">
+        <span style="transform: rotate(180deg)" class="material-icons">
           play_arrow
         </span>
       </button>
@@ -253,9 +245,7 @@
         (click)="updatePage('next', true)"
         [disabled]="active_count == pages"
       >
-        <span class="material-icons">
-          play_arrow
-        </span>
+        <span class="material-icons"> play_arrow </span>
       </button>
       <button
         mat-button
@@ -263,9 +253,7 @@
         (click)="updatePage('last', true)"
         [disabled]="active_count == pages"
       >
-        <span class="material-icons">
-          double_arrow
-        </span>
+        <span class="material-icons"> double_arrow </span>
       </button>
     </div>
   </div>

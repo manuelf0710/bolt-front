@@ -1,9 +1,10 @@
-p,
+/*p,
 h1,
 h2,
 h3 {
   margin: 0;
-}
+} 
+*/
 
 body > .flex-column {
   height: calc(100vh) !important;
@@ -25,12 +26,16 @@ body > .flex-column {
   background-clip: padding-box;
 }
 
-.flex-column[_ngcontent-wwh-c173] {
+.flex-column[_ngcontent-wwh-c177] {
   position: absolute;
   top: 60px;
   left: 0;
   width: 267px;
   height: calc(100vh);
+  @media only screen and (max-width: 1366px) {
+    height: 1044px !important;
+    position: absolute;
+  }
   box-sizing: border-box;
   background-color: #e3e3e3;
   transition: all 0.4s;

@@ -17,7 +17,10 @@
         </ng-template>
         <div class="grid">
           <div class="grid-header">
-            <div class="grid-header__title" style="margin-left: 40px">
+            <div
+              class="grid-header__title"
+              style="margin-left: 40px; margin-top: 20px"
+            >
               {{ this.lang == "Esp" ? "Proyecto" : "Project" }}
             </div>
             <div class="grid-header__title">
@@ -62,13 +65,15 @@
                   {{ lang == "Esp" ? activeItem.name_es : activeItem.name_en }}
                 </span>
               </button>
-              <p class="grid-content__description">
-                {{
-                  lang == "Esp"
-                    ? activeItem.description_es
-                    : activeItem.description_en
-                }}
-              </p>
+              <div class="col">
+                <p class="grid-content__description">
+                  {{
+                    lang == "Esp"
+                      ? activeItem.description_es
+                      : activeItem.description_en
+                  }}
+                </p>
+              </div>
               <div class="grid-content__icon">
                 <span class="material-icons menu-icon">
                   {{ activeItem.icon }}

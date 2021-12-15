@@ -125,7 +125,9 @@
           <div class="last-seen">
             <h4 *ngSwitchCase="'Esp'">Última visita</h4>
             <h4 *ngSwitchCase="'Eng'">Last visit</h4>
-            <p class="text-muted">{{ date }}</p>
+            <p class="text-muted">
+              {{ card.last_access | date: "dd/MM/yyyy" }}
+            </p>
           </div>
         </mat-card>
       </button>

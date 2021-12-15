@@ -77,8 +77,11 @@ export class SidebarComponent implements OnInit {
       const uniqueProj = this.filterUniqueProjects(res.projects);
       const dataProj = this.getAllProjectSubmenuApps(res.projects);
       this.prop = this.finalProjects(uniqueProj.uniques, dataProj.submenus);
-      const getFavoritos = this.validFavorites(res.favorites.body, dataProj.apps);
-      if(getFavoritos.favToRemove.length > 0){
+      const getFavoritos = this.validFavorites(
+        res.favorites.body,
+        dataProj.apps
+      );
+      if (getFavoritos.favToRemove.length > 0) {
         this.deleteFavoritesFromArray(getFavoritos.favToRemove);
       }
       this.favList = getFavoritos.favorites;
@@ -87,125 +90,123 @@ export class SidebarComponent implements OnInit {
     });
   }
 
-  
-  deleteFavoritesFromArray(array:any) {
+  deleteFavoritesFromArray(array: any) {
     this.favoriteService.deleteFromArray(array).subscribe(
       (res: any[]) => {
-         window.location.reload();
+        window.location.reload();
       },
-      (error: any) => {
-        
-      },
+      (error: any) => {},
       () => {}
     );
   }
 
-  validFavorites(fav, apps){
+  validFavorites(fav, apps) {
     let favorites = [];
     let favToRemove = [];
-    for(let i = 0; i < fav.length; i++){
+    for (let i = 0; i < fav.length; i++) {
       let found = 0;
       for (let j = 0; j < apps.length; j++) {
-        if(fav[i].app_id == apps[j].id  && found == 0){ 
+        if (fav[i].app_id == apps[j].id && found == 0) {
           favorites.push(fav[i]);
-          found =1;
+          found = 1;
         }
-       }
-      if(found == 0){
-        favToRemove.push({id:fav[i].id, app_id: fav[i].app_id, user_id: fav[i].user_id});
-      }      
+      }
+      if (found == 0) {
+        favToRemove.push({
+          id: fav[i].id,
+          app_id: fav[i].app_id,
+          user_id: fav[i].user_id,
+        });
+      }
     }
     return { favorites, favToRemove };
   }
 
-  finalProjects(arr, submenus){
-      for (let i = 0; i < arr.length; i++) {
-        arr[i].submenus= [];
-        for (let j = 0; j < submenus.length; j++) {
-          if(arr[i].id == submenus[j].project_id){
-            arr[i].submenus.push(submenus[j]);
-          }         
+  finalProjects(arr, submenus) {
+    for (let i = 0; i < arr.length; i++) {
+      arr[i].submenus = [];
+      for (let j = 0; j < submenus.length; j++) {
+        if (arr[i].id == submenus[j].project_id) {
+          arr[i].submenus.push(submenus[j]);
         }
       }
-      return arr;
+    }
+    return arr;
   }
 
-  getAllProjectSubmenuApps(arr){
-      let submenus = [];
-      let apps = [];
+  getAllProjectSubmenuApps(arr) {
+    let submenus = [];
+    let apps = [];
 
-      for(let i = 0; i < arr.length; i++){
-          for (let j = 0; j < arr[i].submenus.length; j++) {
-            submenus.push(arr[i].submenus[j]);  
-          }
+    for (let i = 0; i < arr.length; i++) {
+      for (let j = 0; j < arr[i].submenus.length; j++) {
+        submenus.push(arr[i].submenus[j]);
       }
+    }
 
-      for(let k = 0; k < submenus.length; k++){
-        for (let m = 0; m < submenus[k].apps.length; m++) {
-          apps.push(submenus[k].apps[m]); 
-          //submenus[k].apps = [] ;  
-        }
-    }   
-    
+    for (let k = 0; k < submenus.length; k++) {
+      for (let m = 0; m < submenus[k].apps.length; m++) {
+        apps.push(submenus[k].apps[m]);
+        //submenus[k].apps = [] ;
+      }
+    }
+
     submenus = this.filterUniques(submenus);
-    apps     = this.filterUniques(apps);
+    apps = this.filterUniques(apps);
 
     for (let i = 0; i < submenus.length; i++) {
-     submenus[i].apps = [];
+      submenus[i].apps = [];
     }
 
     for (let m = 0; m < submenus.length; m++) {
       for (let n = 0; n < apps.length; n++) {
-        if(apps[n].submenu_id == submenus[m].id){
+        if (apps[n].submenu_id == submenus[m].id) {
           submenus[m].apps.push(apps[n]);
         }
-      }   
-    } 
-    return { submenus, apps};
-  }
-
-  
-
-  filterUniqueProjects(arr){
-    let uniques = [];
-    let repeats = [];
-    for(let i = 0; i < arr.length; i++ ){
-         let found = 0;
-        for(let j = 0; j < uniques.length; j++){
-          if(arr[i].id == uniques[j].id){
-            found = 1;
-          }
-        }
-        if(found == 0){
-          uniques.push(arr[i]);
-        }else{
-          repeats.push(arr[i]);
-        }
+      }
     }
-    return {uniques,repeats};
+    return { submenus, apps };
   }
 
-  filterUniques(arr){
+  filterUniqueProjects(arr) {
     let uniques = [];
     let repeats = [];
-    for(let i = 0; i < arr.length; i++ ){
-         let found = 0;
-        for(let j = 0; j < uniques.length; j++){
-          if(arr[i].id == uniques[j].id){
-            found = 1;
-          }
+    for (let i = 0; i < arr.length; i++) {
+      let found = 0;
+      for (let j = 0; j < uniques.length; j++) {
+        if (arr[i].id == uniques[j].id) {
+          found = 1;
         }
-        if(found == 0){
-          uniques.push(arr[i]);
-        }else{
-          repeats.push(arr[i]);
+      }
+      if (found == 0) {
+        uniques.push(arr[i]);
+      } else {
+        repeats.push(arr[i]);
+      }
+    }
+    return { uniques, repeats };
+  }
+
+  filterUniques(arr) {
+    let uniques = [];
+    let repeats = [];
+    for (let i = 0; i < arr.length; i++) {
+      let found = 0;
+      for (let j = 0; j < uniques.length; j++) {
+        if (arr[i].id == uniques[j].id) {
+          found = 1;
         }
+      }
+      if (found == 0) {
+        uniques.push(arr[i]);
+      } else {
+        repeats.push(arr[i]);
+      }
     }
     //const uniques = arr.filter((el, index) => arr.indexOf(el) === index)
 
     return uniques;
   }
- 
 
   menuOpened(item) {
     let menu = document.getElementById(item);

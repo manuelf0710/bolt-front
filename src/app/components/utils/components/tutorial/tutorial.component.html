@@ -11,35 +11,46 @@
       Bienvenido, a continuación encontrará información importante para la
       navegación en Lola
     </p>
-    <div class="row" *ngIf="lang == 'Esp'">
-      <span class="set-language" (click)="languageTutorial('Esp')"
-        >Continuar en Español
-      </span>
-      <span class="set-language" (click)="languageTutorial('Eng')">
-        Continuar en Ingles</span
-      >
-    </div>
+
     <p class="tutorial__content" *ngIf="lang == 'Eng'">
       Welcome, below you will find important information for the navigation in
       Lola
     </p>
-    <div class="row" *ngIf="lang == 'Eng'">
-      <span class="set-language" (click)="languageTutorial('Esp')"
-        >Continue in spanish
-      </span>
-      <span class="set-language" (click)="languageTutorial('Eng')">
-        Continue in english</span
-      >
-    </div>
 
     <div class="row">
-      <button mat-button class="bolt-btn-outline" (click)="save()">
+      <button
+        mat-button
+        class="bolt-btn-outline btn-auto-width"
+        (click)="save()"
+      >
         <span *ngIf="lang == 'Esp'">Omitir</span>
         <span *ngIf="lang == 'Eng'">Skip</span>
       </button>
-      <button mat-button class="bolt-btn-filled" (click)="next()">
+      <button
+        mat-button
+        class="bolt-btn-filled btn-auto-width"
+        (click)="next()"
+      >
         <span *ngIf="lang == 'Esp'">Continuar</span>
         <span *ngIf="lang == 'Eng'">Continue</span>
+      </button>
+      <button
+        mat-button
+        class="bolt-btn-filled btn-auto-width"
+        *ngIf="lang == 'Esp'"
+        (click)="languageTutorial('Eng')"
+        style="width: auto !important"
+      >
+        <span>Continue in english</span>
+      </button>
+      <button
+        mat-button
+        class="bolt-btn-filled"
+        *ngIf="lang == 'Eng'"
+        (click)="languageTutorial('Esp')"
+        style="width: auto"
+      >
+        <span>Continuar es español</span>
       </button>
     </div>
   </div>
@@ -47,7 +58,7 @@
   <div *ngSwitchCase="2" class="step-2">
     <span class="arrow-pointer"></span>
     <p class="tutorial__content" *ngIf="lang == 'Esp'">
-      Ajuste el idioma dando clic en el botón amarillo
+      Ajuste el idioma dando click en el botón amarillo
     </p>
     <p class="tutorial__content" *ngIf="lang == 'Eng'">
       Adjust the language by clicking the yellow button

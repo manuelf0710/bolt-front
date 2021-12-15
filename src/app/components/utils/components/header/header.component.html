@@ -2,13 +2,21 @@
   <span class="bolt-icon" (click)="routerHome()"></span>
   <span class="separator"></span>
   <div class="back-nav__options">
-    <div *ngSwitchCase="'Esp'" class="greeting title-header">
+    <div
+      *ngSwitchCase="'Esp'"
+      class="greeting title-header"
+      style="font-size: 1.1rem"
+    >
       <span class="lola-brain"></span>
       Hola {{ this.userName }}!
     </div>
-    <div *ngSwitchCase="'Eng'" class="greeting title-header">
-      <span class="lola-brain"></span>
-      Hi {{ this.userName }}!
+    <div
+      *ngSwitchCase="'Eng'"
+      class="greeting title-header"
+      style="font-size: 1.1rem"
+    >
+      <div class="lola-brain" style="vertical-align: middle"></div>
+      <div style="vertical-align: middle">Hi {{ this.userName }}!</div>
     </div>
     <button
       mat-button

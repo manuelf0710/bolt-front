@@ -1,5 +1,5 @@
 /*import colors*/
-@import './variables.scss';
+@import "./variables.scss";
 
 /* flex styles */
 .flex-column {
@@ -140,7 +140,7 @@ mat-divider {
   border-left: 10px solid $primary-red;
 
   span {
-    font-family: 'Gotham';
+    font-family: "Gotham";
     font-style: normal;
     font-weight: normal;
     font-size: 14px;
@@ -167,7 +167,7 @@ mat-divider {
 
   .mat-button-wrapper {
     font-size: 25px;
-    font-family: 'Gotham';
+    font-family: "Gotham";
     color: $primary-red;
   }
 }
@@ -179,7 +179,7 @@ mat-divider {
   height: calc(100% + 70px);
   margin-left: 80px;
   box-sizing: border-box;
-  padding: 40px 20px;
+  padding: 50px 20px;
   background-color: $quaternary-white;
   display: flex;
   flex-direction: column;

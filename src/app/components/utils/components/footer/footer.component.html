@@ -1,63 +1,82 @@
 <footer [ngSwitch]="lang" class="footer">
   <mat-toolbar class="footer-lola row-footer">
     <div class="brew-icon"></div>
-  <div class="custom-col" style="margin-top:5px">
-    <span *ngSwitchCase="'Esp'"class="footer__title" style="padding-bottom: 0;">
-      Solicitud acceso nuevo proyecto
-    </span>
-    <span *ngSwitchCase="'Eng'" class="footer__title" style="padding-bottom: 0;">
-      Request new project access
-    </span>
-    <div class="container-footer-logo">
-      <ul>
-        <li>
-          <!--<span class="request-icon icon-footer">  </span>-->
-          <span class="material-icons icon-footer"> dashboard_customize </span>
-          <span
-            *ngSwitchCase="'Esp'"
-            (click)="openForm()"
-            class="footer__text"
-          >
-          Generar solicitud
-        </span>               
-          <span
-          *ngSwitchCase="'Eng'"
-          (click)="openForm()"
-          class="footer__text"
-          >
-            Generate request
-        </span>
-        </li>
-      </ul>
+    <div class="custom-col" style="margin-top: 5px">
+      <span
+        *ngSwitchCase="'Esp'"
+        class="footer__title"
+        style="padding-bottom: 0"
+      >
+        Solicitud acceso nuevo proyecto
+      </span>
+      <span
+        *ngSwitchCase="'Eng'"
+        class="footer__title"
+        style="padding-bottom: 0"
+      >
+        Request new project access
+      </span>
+      <div class="container-footer-logo">
+        <ul>
+          <li>
+            <!--<span class="request-icon icon-footer">  </span>-->
+            <span class="material-icons icon-footer">
+              dashboard_customize
+            </span>
+            <span
+              *ngSwitchCase="'Esp'"
+              (click)="openForm()"
+              class="footer__text"
+            >
+              Generar solicitud
+            </span>
+            <span
+              *ngSwitchCase="'Eng'"
+              (click)="openForm()"
+              class="footer__text"
+            >
+              Generate request
+            </span>
+          </li>
+        </ul>
+      </div>
     </div>
-
-  </div>
-  <div class="custom-col" style="margin-top:5px">
-    <span *ngSwitchCase="'Esp'" class="footer__title" style="padding-bottom: 0;">Contactar a soporte</span>
-    <span *ngSwitchCase="'Eng'" class="footer__title" style="padding-bottom: 0;">Support contact</span>
-    <div class="container-footer-logo">
-      <ul>
-        <li>
-          <span class="material-icons icon-footer"> mail </span>
-          <a
-            href="mailto:lola.analytics@ab-inbev.com"
-            class="footer__text"
-            rel="noreferrer noopener"
-            style="text-decoration: none"
-          >
-            lola.analytics@ab-inbev.com
-          </a>
-        </li>
-      </ul>
+    <div class="custom-col" style="margin-top: 5px">
+      <span
+        *ngSwitchCase="'Esp'"
+        class="footer__title"
+        style="padding-bottom: 0"
+        >Contactar a soporte</span
+      >
+      <span
+        *ngSwitchCase="'Eng'"
+        class="footer__title"
+        style="padding-bottom: 0"
+        >Support contact</span
+      >
+      <div class="container-footer-logo">
+        <ul>
+          <li>
+            <span class="material-icons icon-footer"> mail </span>
+            <a
+              href="mailto:lola.analytics@ab-inbev.com"
+              class="footer__text"
+              rel="noreferrer noopener"
+              style="text-decoration: none"
+            >
+              lola.analytics@ab-inbev.com
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-  <div class="custom-col">
-    <div class="row">
-      <div class="abinbev-icon"></div>
-      <div class="vertical-divider"></div>
-      <div class="analytics-icon"></div>
+    <div class="custom-col">
+      <div class="row">
+        <div class="abinbev-icon"></div>
+        <div class="abinbev-analytics-icon"></div>
+        <!--<div class="analytics-icon"></div>-->
+      </div>
     </div>
-  </div>  
   </mat-toolbar>
   <div class="redSpace"></div>
 </footer>

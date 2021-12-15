@@ -35,17 +35,30 @@
             {{ text }}
           </h2>
 
-          <button mat-button class="banner__btn" (click)="redirectTo(slide)">
+          <button
+            mat-button
+            class="banner__btn"
+            (click)="redirectTo(slide)"
+            style="width: auto"
+          >
             {{ slide.button_es }}
           </button>
         </div>
 
         <div *ngSwitchCase="'Eng'" class="col">
-          <h2 class="banner__text">
-            {{ slide.name_en }}
+          <h2
+            class="banner__text"
+            *ngFor="let text of slide.name_en.split(' ')"
+          >
+            {{ text }}
           </h2>
 
-          <button mat-button class="banner__btn" (click)="redirectTo(slide)">
+          <button
+            mat-button
+            class="banner__btn"
+            (click)="redirectTo(slide)"
+            style="width: auto"
+          >
             {{ slide.button_en }}
           </button>
         </div>
@@ -57,9 +70,23 @@
 
   <div class="favorites">
     <div [ngSwitch]="lang" class="row title">
-      <span class="material-icons icon-lg menu-star_fav"> star </span>
-      <h2 *ngSwitchCase="'Esp'" class="favorites-banner-title">Favoritos</h2>
-      <h2 *ngSwitchCase="'Eng'" class="favorites-banner-title">Favorites</h2>
+      <h2 *ngSwitchCase="'Esp'" class="favorites-banner-title">
+        <span
+          class="material-icons icon-lg menu-star_fav"
+          style="position: relative; vertical-align: middle"
+        >
+          star
+        </span>
+        Favoritos
+      </h2>
+      <h2 *ngSwitchCase="'Eng'" class="favorites-banner-title">
+        <span
+          class="material-icons icon-lg menu-star_fav"
+          style="position: relative; vertical-align: middle"
+        >
+          star </span
+        >Favorites
+      </h2>
     </div>
     <!--<div [ngSwitch]="lang" class="row title" style="height: 35px">
       <span class="material-icons icon-lg menu-star_fav"> star </span>

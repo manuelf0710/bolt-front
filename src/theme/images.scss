@@ -266,6 +266,16 @@
   );
 }
 
+.abinbev-analytics-icon {
+  @include img-background(
+    url("/assets/icon/Grupo2549.svg"),
+    150px,
+    47px,
+    relative
+  );
+  margin-left: -1.5em;
+}
+
 .request-icon {
   @include img-background(
     url("/assets/icon/icono2request.svg"),

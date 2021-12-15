@@ -16,7 +16,9 @@
 
 /* titles */
 .title-header {
-  @include title("Gotham", 18px, 26px, $primary-white);
+  /*@include title("Gotham", 18px, 26px, $primary-white);*/
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 14px;
   font-weight: bold;
   letter-spacing: 2px;
 }
@@ -47,7 +49,7 @@
 // home banner
 .banner {
   &__text {
-    @include title("Gotham", 50px, 60px, $quaternary-black);
+    @include title("Roboto", 50px, 60px, $quaternary-black);
     font-weight: bold;
     font-size: 50px;
     line-height: 60px;
@@ -56,6 +58,7 @@
     margin: 1.5px 0;
     box-sizing: border-box;
     padding: 0 7px;
+    letter-spacing: 0.1rem;
   }
   &__btn {
     @include title("Arial", 14px, 16px, $primary-white);
@@ -83,7 +86,13 @@
 }
 
 .text-muted {
-  @include title("Gotham", 10px, 10px, $quinary-grey);
+  /*@include title("Roboto", 10px, 10px, $quinary-grey);*/
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 10px;
+  line-height: 10px;
+  color: #393939;
   text-transform: uppercase;
 }
 

@@ -5,7 +5,7 @@ h3 {
   margin: 0;
 }
 
-body > .flex-column{
+body > .flex-column {
   height: calc(100vh) !important;
 }
 ::-webkit-scrollbar {
@@ -62,9 +62,9 @@ body > .flex-column{
   width: 100%;
   .mat-tab-label {
     width: 50%;
-    font-family: "Gotham";
+    /*font-family: "Gotham";*/
     font-style: normal;
-    font-weight: normal;
+    font-weight: 500;
     font-size: 18px;
     line-height: 30px;
     color: #397eb7;

@@ -1,5 +1,10 @@
 <app-header></app-header>
-<div class="container" [ngSwitch]="lang" id="container" style="margin-top:60px">
+<div
+  class="container"
+  [ngSwitch]="lang"
+  id="container"
+  style="margin-top: 60px"
+>
   <div class="row row__1">
     <h1 class="underline-title" id="title">Banners</h1>
     <button
@@ -14,7 +19,11 @@
 
   <div style="width: 100%; max-width: 1440px; margin-top: 10px">
     <div class="banners-container row">
-      <mat-card class="card" *ngFor="let banner of banner_list; let id = index">
+      <mat-card
+        class="card"
+        *ngFor="let banner of banner_list; let id = index"
+        style="min-height: 450px"
+      >
         <img
           [src]="assetUrl + '' + banner.image_info?.full_path"
           [alt]="banner.name_en"

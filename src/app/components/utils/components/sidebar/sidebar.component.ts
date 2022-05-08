@@ -62,6 +62,16 @@ export class SidebarComponent implements OnInit {
     this.getData();
   }
 
+  SortArrayProjects(x, y) {
+    if (x.name_es < y.name_es) {
+      return -1;
+    }
+    if (x.name_es > y.name_es) {
+      return 1;
+    }
+    return 0;
+  }
+
   getData() {
     let favSubs = this.favoriteService.getObservableData(this.userId);
     let appsSubs = this.appService.getObservableData();
@@ -76,7 +86,17 @@ export class SidebarComponent implements OnInit {
       //this.prop = res.projects;
       const uniqueProj = this.filterUniqueProjects(res.projects);
       const dataProj = this.getAllProjectSubmenuApps(res.projects);
-      this.prop = this.finalProjects(uniqueProj.uniques, dataProj.submenus);
+      const dataFinal = this.finalProjects(
+        uniqueProj.uniques,
+        dataProj.submenus
+      );
+      if (this.lang == 'Esp') {
+        console.log('entra', dataFinal);
+        this.prop = dataFinal.sort(this.SortArrayProjects);
+      } else {
+        this.prop = dataFinal;
+      }
+
       const getFavoritos = this.validFavorites(
         res.favorites.body,
         dataProj.apps

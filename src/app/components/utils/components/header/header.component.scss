@@ -13,6 +13,7 @@ mat-toolbar {
   padding: 0;
   z-index: 99;
   position: fixed;
+  top: 0;
 
   &__options {
     display: inline-flex;
@@ -38,7 +39,7 @@ mat-toolbar {
   border-radius: 0px 0px 10px 10px;
   width: 75px;
   height: 50px;
-  margin:0px 77px 0px 0px;
+  margin: 0px 77px 0px 0px;
 }
 :host ::ng-deep .mat-form-field-wrapper {
   padding: 10px;

@@ -11,7 +11,7 @@
   /*@media only screen and (min-width: 1600px) {
     height: 800px;
   }*/
-  @media only screen and (max-width: 1366px) {
+  @media only screen and (max-width: 1367px) {
     height: 800px;
   }
   /*
@@ -33,7 +33,7 @@
     height: calc(100% - 60px) !important;
   }
   @media only screen and (min-height: 701px) {
-    height: 99% !important;
+    height: 100% !important;
   }
   background: #f5f5f5;
   opacity: 0.91;
@@ -48,7 +48,7 @@
 }
 .content {
   height: calc(100vh - 30%);
-  @media only screen and (max-width: 1366px) {
+  @media only screen and (max-width: 1367px) {
     height: 80%;
   }
   position: relative;
@@ -79,7 +79,7 @@
   bottom: 0 !important;
 }
 
-@media only screen and (max-width: 1366px) {
+@media only screen and (max-width: 1367px) {
   .favorites {
     padding: 30px 20px !important;
     &__cards {
@@ -88,8 +88,8 @@
         transform: scale(1.02);
       }
       &__logo {
-        width: 46px !important;
-        height: 40px !important;
+        width: 55px !important;
+        height: 55px !important;
       }
     }
   }

@@ -1,12 +1,18 @@
 <app-header></app-header>
-<div class="container" [ngSwitch]="lang">
+<div class="container" [ngSwitch]="lang" style="min-height: 1184px">
   <div class="tabs inner-section">
-    <h1 class="underline-title" *ngSwitchCase="'Esp'">proyectos</h1>
-    <h1 class="underline-title" *ngSwitchCase="'Eng'">projects</h1>
-    <button class="bolt-btn-filled" (click)="createProject()">
-      <span *ngSwitchCase="'Esp'"> Crear nuevo proyecto </span>
-      <span *ngSwitchCase="'Eng'"> Create new project </span>
-    </button>
+    <div class="flexbox-container row">
+      <div>
+        <h2 class="underline-title" *ngSwitchCase="'Esp'">proyectos</h2>
+        <h2 class="underline-title" *ngSwitchCase="'Eng'">projects</h2>
+      </div>
+      <div style="display: flex; flex-direction: column">
+        <button class="bolt-btn-filled" (click)="createProject()">
+          <span *ngSwitchCase="'Esp'"> Crear nuevo proyecto </span>
+          <span *ngSwitchCase="'Eng'"> Create new project </span>
+        </button>
+      </div>
+    </div>
 
     <mat-tab-group>
       <!-- active project -->
@@ -17,10 +23,7 @@
         </ng-template>
         <div class="grid">
           <div class="grid-header">
-            <div
-              class="grid-header__title"
-              style="margin-left: 40px; margin-top: 20px"
-            >
+            <div class="grid-header__title" style="margin-left: 40px">
               {{ this.lang == "Esp" ? "Proyecto" : "Project" }}
             </div>
             <div class="grid-header__title">
@@ -136,7 +139,7 @@
                     style="margin-top: 5px"
                     *ngSwitchCase="'Eng'"
                   >
-                    add sub menu
+                    add <br />sub menu
                   </span>
                 </button>
               </div>
@@ -335,14 +338,16 @@
                     style="margin-top: 5px"
                     *ngSwitchCase="'Esp'"
                   >
-                    Añadir sub menú
+                    Añadir <br />
+                    sub menú
                   </span>
                   <span
                     class="action-text"
                     style="margin-top: 5px"
                     *ngSwitchCase="'Eng'"
                   >
-                    add sub menu
+                    add <br />
+                    sub menu
                   </span>
                 </button>
               </div>
